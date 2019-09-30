@@ -1,6 +1,6 @@
 {
-    "host" : "ec2-13-235-205-22.ap-south-1.compute.amazonaws.com",
-    "user" : "root",
-    "password" : "root123",
-    "database" : "crm"
+    "host" : "HYTSP00068",
+    "user" : "crpuser",
+    "password" : "User%853",
+    "database" : "devc4c"
 }
