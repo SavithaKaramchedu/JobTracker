@@ -1277,25 +1277,66 @@ exports.accowner = function (req, res) {
 
 };
 exports.getServiceoffering = function (req, res) {
-
-
-
     let query = 'call procListAllServiceOfferings ()'
-
     db.query(query, (err, result) => {
-
         if (err) {
             return res.status(500).send(err);
         }
         res.status(200).json(result);
-
     });
-
 };
 
 
-   
-   
+
+exports.updatecontphone = function (req, res) {
+       
+    let iPhoneID = req.body.iPhoneID;
+    let iSourceID = req.body.iSourceID;
+    let iSourceType = req.body.iSourceType;
+    let iCountryID = req.body.iCountryID;
+    let iPhoneType = req.body.iPhoneType;
+    let iCompleteNumber = req.body.iCompleteNumber;
+    let iUpdateBy = req.body.iUpdateBy;
+    
+    
+let query = "CALL `procUpdatePhone`('" + iPhoneID + "', '" + iSourceID + "', '" + iSourceType + "','" +iCountryID + "','"
+ + iPhoneType + "','" + iCompleteNumber + "','" + iUpdateBy + "')";
+console.log(query);
+db.query(query, (err, result) => {
+        if (err) {
+           // console.log(err);
+            return res.status(500).send(err);
+        }
+        else {
+            res.status(200).json(result);
+            
+        }
+    });
+};  
+
+
+exports.updatecontemail = function (req, res) {
+       
+    let iEmailID = req.body.iEmailID;
+    let iSourceID = req.body.iSourceID;
+    let iSourceType = req.body.iSourceType;
+    let iEmail = req.body.iEmail;
+    let iUpdateBy = req.body.iUpdateBy;
+    
+    
+let query = "CALL `procUpdateEmail`('" + iEmailID + "', '" + iSourceID + "', '" + iSourceType + "','" +iEmail + "','" + iUpdateBy + "')";
+// console.log(query);
+db.query(query, (err, result) => {
+        if (err) {
+           // console.log(err);
+            return res.status(500).send(err);
+        }
+        else {
+            res.status(200).json(result);
+            
+        }
+    });
+};   
    
 
 

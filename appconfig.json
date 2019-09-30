@@ -1,5 +1,4 @@
 {
-
   "servicename": "sampleservice",
   "routes": [
     {
@@ -41,8 +40,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "getHomePage",
-
-
       "description": "Routes to the main page of the web application",
       "examples": [
         {
@@ -50,7 +47,6 @@
         }
       ]
     },
-   
     {
       "route": "/logout",
       "type": "get",
@@ -64,7 +60,6 @@
         }
       ]
     },
- 
     {
       "route": "/leads",
       "type": "get",
@@ -84,8 +79,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "recorddisplaylead",
-
-
       "description": "Routes to display record value in leadmodal",
       "examples": [
         {
@@ -99,8 +92,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "statusdropdownfun",
-
-
       "description": "Routes to get the dropdown value in leadmodal",
       "examples": [
         {
@@ -114,8 +105,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "qualidropdownfun",
-
-
       "description": "Routes to get the dropdown value in leadmodal",
       "examples": [
         {
@@ -129,8 +118,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "priodropdownfun",
-
-
       "description": "Routes to get the dropdownss value in leadmodal",
       "examples": [
         {
@@ -144,8 +131,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "catdropdownfun",
-
-
       "description": "Routes to get the dropdown value in leadmodal",
       "examples": [
         {
@@ -159,8 +144,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "sourdropdownfun",
-
-
       "description": "Routes to get the source dropdown value in leadmodal",
       "examples": [
         {
@@ -168,15 +151,12 @@
         }
       ]
     },
-    
     {
       "route": "/leads/:i",
       "type": "put",
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "updateleadrecord",
-
-
       "description": "Routes to update record value in table",
       "examples": [
         {
@@ -203,15 +183,13 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "deleteleaddisplay",
-
       "description": "Routes to delete recordin leadmodal",
       "examples": [
         {
           "param": "/deleteleaddisplay/:i"
         }
       ]
-    },	
-
+    },
     {
       "route": "/employees",
       "type": "get",
@@ -238,7 +216,6 @@
         }
       ]
     },
-
     {
       "route": "/contact/:i",
       "type": "get",
@@ -251,22 +228,20 @@
           "param": "/contact/:i"
         }
       ]
-    }, 
-     
-     {
-       "route": "/contact/:i",
-       "type": "put",
-       "configured": true,
-       "routeclass": "./sampleservice.js",
-       "routefunction": "updatereccontact",
-       "description": "Route to update record value in table",
-       "examples": [
-      {
-       "param": "/contact/:i"
-      }
-    ]
     },
-
+    {
+      "route": "/contact/:i",
+      "type": "put",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "updatereccontact",
+      "description": "Route to update record value in table",
+      "examples": [
+        {
+          "param": "/contact/:i"
+        }
+      ]
+    },
     {
       "route": "/contact/:i",
       "type": "delete",
@@ -280,7 +255,6 @@
         }
       ]
     },
-
     {
       "route": "/delete/:i",
       "type": "get",
@@ -293,7 +267,7 @@
           "param": "/contact/:i"
         }
       ]
-    }, 
+    },
     {
       "route": "/account",
       "type": "get",
@@ -313,8 +287,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "recorddisplay",
-
-
       "description": "Routes to display record value in modal",
       "examples": [
         {
@@ -328,8 +300,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "updateaccount",
-
-
       "description": "Routes to update record value in table",
       "examples": [
         {
@@ -343,8 +313,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "deleteaccount",
-
-
       "description": "Routes to delete record value in table",
       "examples": [
         {
@@ -358,8 +326,6 @@
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "deletedisplayaccount",
-
-
       "description": "Routes to display id of an record in hidden",
       "examples": [
         {
@@ -367,9 +333,6 @@
         }
       ]
     },
-
-   
-
     {
       "route": "/opportunity",
       "type": "get",
@@ -396,7 +359,6 @@
         }
       ]
     },
-   
     {
       "route": "/opportunity/:i",
       "type": "put",
@@ -436,7 +398,6 @@
         }
       ]
     },
-
     {
       "route": "/sourceopp",
       "type": "get",
@@ -450,7 +411,6 @@
         }
       ]
     },
-
     {
       "route": "/SalesCycle",
       "type": "get",
@@ -464,8 +424,6 @@
         }
       ]
     },
-
-
     {
       "route": "/Salesphase",
       "type": "get",
@@ -479,7 +437,6 @@
         }
       ]
     },
-
     {
       "route": "/oppcategory",
       "type": "get",
@@ -493,7 +450,6 @@
         }
       ]
     },
-
     {
       "route": "/OpportunityType",
       "type": "get",
@@ -507,7 +463,6 @@
         }
       ]
     },
-
     {
       "route": "/OpportunityStatus",
       "type": "get",
@@ -521,7 +476,6 @@
         }
       ]
     },
-
     {
       "route": "/SalesOrganization",
       "type": "get",
@@ -535,7 +489,6 @@
         }
       ]
     },
-
     {
       "route": "/Salesunit",
       "type": "get",
@@ -545,11 +498,10 @@
       "description": "Salesunit dropdown dynamically",
       "examples": [
         {
-          "param":"/Salesunit"
+          "param": "/Salesunit"
         }
       ]
     },
-
     {
       "route": "/Salesoffice",
       "type": "get",
@@ -563,7 +515,6 @@
         }
       ]
     },
-
     {
       "route": "/CustomCategory",
       "type": "get",
@@ -573,11 +524,10 @@
       "description": "CustomCategory : dropdown dynamically",
       "examples": [
         {
-          "param":"/CustomCategory"
+          "param": "/CustomCategory"
         }
       ]
     },
-
     {
       "route": "/contact",
       "type": "post",
@@ -585,27 +535,25 @@
       "routeclass": "./sampleservice.js",
       "routefunction": "addContactPage",
       "description": "Route for creation of new contact",
-     
       "examples": [
         {
           "param": "/contact",
           "payload": {
-            "firstname":"savitha",
-            "lastname":"karamchedu",
-            "account":"accountname",
-            "jobtitle":"software developer",
-            "function1":"function1_name",
-            "department":"department1",
-            "phone":"(123)456-1234",
-            "city":"Bangalore",
-            "fax":"(123)456-1234",
-            "mobile":"(123)456-1234",
-            "email":"savitha.karamchedu@ltts.com"
+            "firstname": "savitha",
+            "lastname": "karamchedu",
+            "account": "accountname",
+            "jobtitle": "software developer",
+            "function1": "function1_name",
+            "department": "department1",
+            "phone": "(123)456-1234",
+            "city": "Bangalore",
+            "fax": "(123)456-1234",
+            "mobile": "(123)456-1234",
+            "email": "savitha.karamchedu@ltts.com"
           }
         }
       ]
     },
-    
     {
       "route": "/account",
       "type": "post",
@@ -655,7 +603,7 @@
           "country": {
             "description": "Country",
             "type": "string",
-            "minLength":3
+            "minLength": 3
           },
           "city": {
             "description": "City",
@@ -664,7 +612,7 @@
           "state": {
             "description": "Fax number",
             "type": "string",
-            "minLength":3
+            "minLength": 3
           },
           "owner": {
             "description": "Owner of the Account",
@@ -676,21 +624,20 @@
         {
           "param": "/account",
           "payload": {
-              "name":"Google india",
-              "prospect":"yes",
-              "parentaccount":"Goolge",
-              "website":"www.google.com",
-              "accountcategory":"Paltinum",
-              "vertical":"ISV",
-              "country":"India",
-              "city":"Hyderabad",
-              "state":"Telangana",
-              "owner":"Arpit Bhaderia"
-            }
+            "name": "Google india",
+            "prospect": "yes",
+            "parentaccount": "Goolge",
+            "website": "www.google.com",
+            "accountcategory": "Paltinum",
+            "vertical": "ISV",
+            "country": "India",
+            "city": "Hyderabad",
+            "state": "Telangana",
+            "owner": "Arpit Bhaderia"
+          }
         }
       ]
     },
-    
     {
       "route": "/addopportunity",
       "type": "post",
@@ -698,15 +645,12 @@
       "routeclass": "./sampleservice.js",
       "routefunction": "addOpportunity",
       "description": "Route for creation of new opportunity",
-     
       "examples": [
         {
           "param": "/opportunity"
-          
         }
       ]
     },
-   
     {
       "route": "/leads",
       "type": "post",
@@ -717,34 +661,33 @@
       "bodyschema": {
         "type": "object",
         "required": [
-                "title",
-                "company",
-                "leadcontid",
-                "status",
-                "qul",
-                "source",
-                "category",
-                "priority",
-                "owner",
-                "leadnotes"
+          "title",
+          "company",
+          "leadcontid",
+          "status",
+          "qul",
+          "source",
+          "category",
+          "priority",
+          "owner",
+          "leadnotes"
         ]
-       
       },
       "examples": [
         {
           "param": "/leads",
           "payload": {
-            "title":"Lead 1",
-            "company":"LTTS",
-            "firstname":"Arpit",
-            "lastname":"Bhaderia",
-            "status":"Accepted",
-            "qul":"Cold",
-            "source":"Campaign",
-            "category":"Consulting",
-            "priority":"Immedaite",
-            "owner":"Arpit"
-            }
+            "title": "Lead 1",
+            "company": "LTTS",
+            "firstname": "Arpit",
+            "lastname": "Bhaderia",
+            "status": "Accepted",
+            "qul": "Cold",
+            "source": "Campaign",
+            "category": "Consulting",
+            "priority": "Immedaite",
+            "owner": "Arpit"
+          }
         }
       ]
     },
@@ -961,7 +904,6 @@
         }
       ]
     },
-
     {
       "route": "/contactaccounts",
       "type": "get",
@@ -975,7 +917,6 @@
         }
       ]
     },
-    
     {
       "route": "/acccat",
       "type": "get",
@@ -1092,10 +1033,10 @@
           "param": "/insertcontactaccount"
         }
       ]
-    },    
+    },
     {
       "route": "/contactphone",
-      "type": "post",
+      "type": "get",
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "contactphone",
@@ -1104,8 +1045,36 @@
         {
           "param": "/contactphone"
         }
-        ]  },
+      ]
+    },
+    
+    {
+      "route": "/updatecontphone",
+      "type": "post",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "updatecontphone",
+      "description": "Route to update phone",
+      "examples": [
         {
+          "param": "/updatecontphone"
+        }
+      ]
+    },
+    {
+      "route": "/updatecontemail",
+      "type": "post",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "updatecontemail",
+      "description": "Route to update email in contact",
+      "examples": [
+        {
+          "param": "/updatecontemail"
+        }
+      ]
+    },
+    {
       "route": "/addleadcompany",
       "type": "post",
       "configured": true,
@@ -1114,8 +1083,8 @@
       "description": "Route for creation of new lead",
       "bodyschema": {
         "type": "object",
-        "required": [ 
-                "company"       
+        "required": [
+          "company"
         ],
         "properties": {
           "company": {
@@ -1127,9 +1096,9 @@
       "examples": [
         {
           "param": "/addleadcompany",
-          "payload": {      
-            "company":"LTTS"          
-            }
+          "payload": {
+            "company": "LTTS"
+          }
         }
       ]
     },
@@ -1146,7 +1115,6 @@
         }
       ]
     },
-    
     {
       "route": "/business",
       "type": "get",
@@ -1182,10 +1150,9 @@
       "description": "Route for creation of new lead",
       "bodyschema": {
         "type": "object",
-        "required": [ 
-                "contfname",
-                "contlname"
-                    
+        "required": [
+          "contfname",
+          "contlname"
         ],
         "properties": {
           "company": {
@@ -1197,11 +1164,11 @@
       "examples": [
         {
           "param": "/addcontactinfo",
-          "payload": {      
-            "company":"LTTS"          
-            }
+          "payload": {
+            "company": "LTTS"
+          }
         }
       ]
-    }    
+    }
   ]
 }
