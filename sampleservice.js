@@ -425,12 +425,12 @@ exports.addContactPage = function (req, res) {
     let title = req.body.jobtitle;
     let function1 = req.body.functionname;
     let department = req.body.department;
-    let createdby = req.body.admin;
+    let createdby = req.body.createdby;
     let query = "CALL `procInsertContact` ('" +
         fname + "', '" + lname + "', '" + title + "','" + function1 + "','" +
         department + "','" + createdby + "',@output)";
 
-
+console.log(query);
         db.query(query, (err, result2) => {
             if (err) {
                

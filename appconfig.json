@@ -1036,7 +1036,7 @@
     },
     {
       "route": "/contactphone",
-      "type": "get",
+      "type": "post",
       "configured": true,
       "routeclass": "./sampleservice.js",
       "routefunction": "contactphone",

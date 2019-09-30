@@ -1442,7 +1442,7 @@
             }
 
             data = JSON.stringify(data);
-            //console.log(data);
+           // console.log(data);
             if (lname != "" && account != "" && mobile != "") {
 
                 $.ajax({
@@ -1453,9 +1453,9 @@
                     contentType: "application/json",
                     dataType: "json",
                     success: function (data) {
-
-                        contactLoad();
+                        
                         insertaccountcontact(data[0].contaccid);
+                        contactLoad();
                     },
 
                     error: function () {
@@ -1464,8 +1464,6 @@
                 });
 
             }
-          
-
         }
 
 
