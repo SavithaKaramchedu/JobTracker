@@ -158,7 +158,7 @@
 
         function searchbarchange(moduleClicked) {
             searchbar = moduleClicked;
-          
+
             $('#_globalSearch').val('');
         }
         $(document).ready(function () {
@@ -885,7 +885,9 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
+
                     opportunityLoad();
+
                 },
                 error: function () {
                     // console.log("error");
@@ -942,12 +944,12 @@
                         leadLoad();
                     },
                     error: function () {
-                      
+
                     }
                 });
             } else {
                 console.log("enter required feilds");
-              
+
             }
 
         }
@@ -1002,7 +1004,7 @@
                     }
                 });
             } else {
-              
+
             }
             leadLoad();
         }
@@ -1038,7 +1040,7 @@
                         addcontactinfo(result[0].oAcctID);
                     }
                     else {
-                     
+
                     }
 
 
@@ -1113,9 +1115,9 @@
 
 
         function addleadaccaddr(j, k) {
-            var iCity = $("#leadcity").val();         
-            var iCountryID = $("#leadcountry").val();        
-            var iStateID = $("#leadstate").val();       
+            var iCity = $("#leadcity").val();
+            var iCountryID = $("#leadcountry").val();
+            var iStateID = $("#leadstate").val();
             var data = {
                 "iSourceID": j,
                 "iSourceType": "Lead",
@@ -1133,7 +1135,7 @@
             }
 
             data = JSON.stringify(data);
-      
+
             $.ajax({
                 url: "https://localhost:9090/accaddress ",
                 type: "POST",
@@ -1334,14 +1336,17 @@
                     dataType: "json",
                     success: function (result) {
 
-                        $("#accountModal").modal("hide");
+                        $('#accountModal').modal('hide');
+                        $('.modal-backdrop').remove()
+                        $(document.body).removeClass("modal-open");
+
                         AccountLoad();
                         var outputid = result[0].msg;
                         if (outputid == null) {
                             addAccountAddress(result[0].id);
                         }
                         else {
-                         
+
                         }
 
                     },
@@ -1351,7 +1356,7 @@
                     }
                 });
             }
-           
+
 
 
 
@@ -1442,7 +1447,7 @@
             }
 
             data = JSON.stringify(data);
-           // console.log(data);
+            // console.log(data);
             if (lname != "" && account != "" && mobile != "") {
 
                 $.ajax({
@@ -1453,7 +1458,7 @@
                     contentType: "application/json",
                     dataType: "json",
                     success: function (data) {
-                        
+
                         insertaccountcontact(data[0].contaccid);
                         contactLoad();
                     },
@@ -2411,7 +2416,7 @@
             var city = $("#cit").val();
             var phoneid = $("#editcphnhidden").val();
             var emailid = $("#editcemailhidden").val();
-         //   var mobileid = $("#editcmobilehidden").val();
+            //   var mobileid = $("#editcmobilehidden").val();
             var fax = $("#fa").val();
             var bestReachedByID = $("#bestreachedby").children("option:selected").val();
             var contactPermissionID = $("#contpermission").children("option:selected").val();
@@ -2435,7 +2440,7 @@
                 "accountcontactId": accountcontactId,
                 "phoneid": phoneid,
                 "emailid": emailid,
-               // "MobileID": mobileid,
+                // "MobileID": mobileid,
                 "iUpdatedBy": 'admin'
             }
             data = JSON.stringify(data);
@@ -2930,168 +2935,185 @@
 
         }
 
-            function insertcontemail(i) {
-                var email = $("#email").val();
-                var data = {
-                    "iSourceID": i,
-                    "iAddressId": '',
-                    "iSourceType": 'contact',
-                    "iEmail": email,
-                    "iIsDefault": 'Y',
-                    "createdby": 'admin',
-                }
-
-                data = JSON.stringify(data);
-
-                if (email != "") {
-
-                    $.ajax({
-                        url: "https://localhost:9090/contactemail",
-                        type: "post",
-                        async: false,
-                        data: data,
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (result) {
-
-                        },
-
-                        error: function () {
-
-                        }
-                    });
-                }
-
+        function insertcontemail(i) {
+            var email = $("#email").val();
+            var data = {
+                "iSourceID": i,
+                "iAddressId": '',
+                "iSourceType": 'contact',
+                "iEmail": email,
+                "iIsDefault": 'Y',
+                "createdby": 'admin',
             }
 
-            function updatecontphone(i) {
-                console.log("entered");
-                var phoneID = $("#editcphnhidden").val();
-             
-                var phone = $("#phn").val();
-                var data = {
-                    "iPhoneID": phoneID,
-                    "iSourceID": i,
-                    "iSourceType": 'contact',
-                    "iCountryID": '',
-                    "iPhoneType": phone,
-                    "iCompleteNumber": phone,
-                    "iUpdateBy": 'admin',
-                }
-                data = JSON.stringify(data);
-                console.log(data);
-                if (phone != "") {
-                    $.ajax({
-                        url: "https://localhost:9090/updatecontphone",
-                        type: "post",
-                        async: false,
-                        data: data,
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (result) {
-                            updatecontmobile(i);
-                        },
-                        error: function () {
-                        }
-                    });
-                }
+            data = JSON.stringify(data);
+
+            if (email != "") {
+
+                $.ajax({
+                    url: "https://localhost:9090/contactemail",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+
+                        $('#contactModal').modal('hide');
+                        $('.modal-backdrop').remove()
+                        $(document.body).removeClass("modal-open");
+                       
+
+                    },
+
+                    error: function () {
+
+                    }
+                });
             }
 
-            function updatecontmobile(i) {
-                var mobileID = $("#editcmobilehidden").val();
-                var mobile = $("#mob").val();
-                var data = {
+        }
 
-                    "iSourceID": i,
-                    "iPhoneID": mobileID,
-                    "iSourceType": 'contact',
-                    "iCountryID": '',
-                    "iPhoneType": mobile,
-                    "iCompleteNumber": mobile,
-                    "iUpdateBy": 'admin',
-                }
-                data = JSON.stringify(data);
-                if (mobile != "") {
-                    $.ajax({
-                        url: "https://localhost:9090/updatecontphone",
-                        type: "post",
-                        async: false,
-                        data: data,
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (result) {
-                            updatecontemail(i);
-                        },
-                        error: function () {
-                        }
-                    });
-                }
+        function updatecontphone(i) {
+            var phoneID = $("#editcphnhidden").val();
+            var phone = $("#phn").val();
+            
+            var data = {
+               
+                "iPhoneID": phoneID,
+                "iSourceID": i,
+                "iSourceType": 'contact',
+                "iCountryID": '',
+                "iPhoneType": phone,
+                "iCompleteNumber": phone,
+                "iUpdateBy": 'admin',
+           
+            }
+            data = JSON.stringify(data);
+           
+            if (phone != "") {
+                $.ajax({
+                    url: "https://localhost:9090/updatecontphone",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+
+                        updatecontmobile(i);
+
+                    },
+
+                    error: function () {
+
+                    }
+                });
+            }
+        }
+
+        function updatecontmobile(i) {
+            var mobileID = $("#editcmobilehidden").val();
+            var mobile = $("#mob").val();
+            var data = {
+
+                "iSourceID": i,
+                "iPhoneID": mobileID,
+                "iSourceType": 'contact',
+                "iCountryID": '',
+                "iPhoneType": mobile,
+                "iCompleteNumber": mobile,
+                "iUpdateBy": 'admin',
+            }
+            data = JSON.stringify(data);
+            if (mobile != "") {
+                $.ajax({
+                    url: "https://localhost:9090/updatecontphone",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                       
+                        updatecontemail(i);
+                   
+                    },
+                   
+                    error: function () {
+                   
+                    }
+               
+                });
+            }
+        }
+
+        /* function updatecontfax(i) {
+                     var faxID = $("#editcfaxhidden").val();    
+                   // var phoneID = $("#editcphnhidden").val();
+                     var fax = $("#fa").val();
+                     var data = {
+                         "iSourceID": i,
+                         "iPhoneID": faxID,
+                         "iSourceType": 'contact',
+                         "iCountryID": '',
+                         "iPhoneType": fax,
+                         "iCompleteNumber": fax,
+                         "iUpdateBy": 'admin',               
+                     }
+                     data = JSON.stringify(data);
+                     if (phone != "") {
+                         $.ajax({
+                             url: "https://localhost:9090/updatecontphone",
+                             type: "post",
+                             async: false,
+                             data: data,
+                             contentType: "application/json",
+                             dataType: "json",
+                             success: function (result) {
+                                 updatecontemail(i);
+                             },
+                             error: function () {
+                             }
+                         });
+                     }
+                 }*/
+
+        function updatecontemail(i) {
+
+            var emailID = $("#editcemailhidden").val();
+            var email = $("#eml").val();
+            var data = {
+                "iSourceID": i,
+                "iEmailID": emailID,
+                "iSourceType": 'contact',
+                "iEmail": email,
+                "iUpdateBy": 'admin',
             }
 
-            /* function updatecontfax(i) {
-                         var faxID = $("#editcfaxhidden").val();    
-                       // var phoneID = $("#editcphnhidden").val();
-                         var fax = $("#fa").val();
-                         var data = {
-                             "iSourceID": i,
-                             "iPhoneID": faxID,
-                             "iSourceType": 'contact',
-                             "iCountryID": '',
-                             "iPhoneType": fax,
-                             "iCompleteNumber": fax,
-                             "iUpdateBy": 'admin',               
-                         }
-                         data = JSON.stringify(data);
-                         if (phone != "") {
-                             $.ajax({
-                                 url: "https://localhost:9090/updatecontphone",
-                                 type: "post",
-                                 async: false,
-                                 data: data,
-                                 contentType: "application/json",
-                                 dataType: "json",
-                                 success: function (result) {
-                                     updatecontemail(i);
-                                 },
-                                 error: function () {
-                                 }
-                             });
-                         }
-                     }*/
+            data = JSON.stringify(data);
 
-            function updatecontemail(i) {
+            if (email != "") {
 
-                var emailID = $("#editcemailhidden").val();
-                var email = $("#eml").val();
-                var data = {
-                    "iSourceID": i,
-                    "iEmailID": emailID,
-                    "iSourceType": 'contact',
-                    "iEmail": email,
-                    "iUpdateBy": 'admin',
-                }
+                $.ajax({
+                    url: "https://localhost:9090/updatecontemail",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
 
-                data = JSON.stringify(data);
+                     contactLoad();
 
-                if (email != "") {
-
-                    $.ajax({
-                        url: "https://localhost:9090/updatecontemail",
-                        type: "post",
-                        async: false,
-                        data: data,
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (result) {
-
-                        },
-                        error: function () {
-                        }
-                    });
-                }
+                    },
+                    error: function () {
+                    }
+                });
             }
+        }
 
-    
+
         function businessLoad() {
 
             var tableData;
@@ -4844,9 +4866,9 @@ background-size: 8%;'>
                         <!-- Modal Header -->
                         <div class="modal-header"
                             style="background-color: rgb(51, 122, 183); color:rgb(255, 255, 255);">
-                            <h6 class="modal-title">New Contact</h1>
-                                <button type="button" class="close" data-dismiss="modal" onclick="clearFormContact()"
-                                    style="color: rgb(255, 255, 255); opacity:1;">×</button>
+                            <h5 class="modal-title" style="font-size: 16px;">Contact Details:</h5>
+                            <button type="button" class="close" data-dismiss="modal" onclick="clearFormContact()"
+                                style="color: rgb(255, 255, 255); opacity:1;">×</button>
                         </div>
 
                         <!-- Modal body -->
@@ -4953,7 +4975,7 @@ background-size: 8%;'>
                                 <div class="col-sm-2">Fax:</div>
 
                                 <div class="col-sm-3">
-                                        <input type="text" disabled required class="form-control" name="mobile"
+                                    <input type="text" disabled required class="form-control" name="mobile"
                                         id="editcfaxhidden" style="display: none">
                                     <input type="text" disabled class="form-control" name="fax" id="fa"
                                         style="height: 71%;">
@@ -4969,7 +4991,7 @@ background-size: 8%;'>
 
                                 <div class="col-sm-3">
                                     <input type="text" disabled required class="form-control" name="mobile"
-                                    id="editcmobilehidden" style="display: none">
+                                        id="editcmobilehidden" style="display: none">
                                     <input type="text" disabled required class="form-control" name="mobile" id="mob"
                                         style="height: 71%;">
                                 </div>
@@ -6199,7 +6221,8 @@ background-size: 8%;'>
                                                             style="padding-left: 0;border-bottom: 1px solid #d2c7c7;margin-bottom: 20px;background-color:rgb(51, 122, 183);color:white">
 
                                                             <b class="modal-title"
-                                                                style="font-size:15px;margin-left:9px;">New Account:</b>
+                                                                style="font-size:15px;margin-left:9px;">Account
+                                                                Details:</b>
 
                                                             <button type="button" style="color:white;opacity:1;"
                                                                 class="close" onclick="clearFormAccount()"
@@ -7699,7 +7722,7 @@ background-size: 8%;'>
                 <div class="modal-content">
                     <div class="modal-header" style="padding-left:0;border-bottom: 1px solid #d2c7c7;margin-bottom: 20px;background-color: rgb(51, 122, 183);
     color: rgb(255, 255, 255);">
-                        <b class="modal-title" style="font-size:15px;margin-left:9px;">New Lead :</b>
+                        <b class="modal-title" style="font-size:15px;margin-left:9px;">Lead Details:</b>
                         <button type="button" class="close" data-dismiss="modal" style="opacity: 1;
                     color: white;" onclick="removecheck();">×</button>
                     </div>
@@ -8493,7 +8516,7 @@ background-size: 8%;'>
             <form method="post" id="formContact" onsubmit="return false">
                 <div class="modal-content">
                     <div class="modal-header"
-                        style="padding-left:0;border-bottom: 1px solid #d2c7c7;margin-bottom: 20px;background-color: rgb(0, 63, 118);color: rgb(255, 255, 255);">
+                        style="padding-left:0;border-bottom: 1px solid #d2c7c7;margin-bottom: 20px;background-color: rgb(51, 122, 183);color: rgb(255, 255, 255);">
                         <b class="modal-title" style="font-size:15px;margin-left:9px;">New Contact :</b>
                         <button type="button" class="close" data-dismiss="modal"
                             style="color: rgb(255, 255, 255); opacity:1;" onclick="clearFormContact()">×</button>
@@ -8637,7 +8660,8 @@ background-size: 8%;'>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" onclick="addContact()">Save</button>
+                        <button type="submit" class="btn btn-primary"
+                            onclick="addContact(),clearFormContact()">Save</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal"
                             onclick="clearFormContact()">Cancel</button>
                     </div>

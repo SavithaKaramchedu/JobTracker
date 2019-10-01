@@ -426,11 +426,10 @@ exports.addContactPage = function (req, res) {
     let function1 = req.body.functionname;
     let department = req.body.department;
     let createdby = req.body.createdby;
-    let query = "CALL `procInsertContact` ('" +
-        fname + "', '" + lname + "', '" + title + "','" + function1 + "','" +
+    let query = "CALL `procInsertContact` ('" +fname + "', '" + lname + "', '" + title + "','" + function1 + "','" +
         department + "','" + createdby + "',@output)";
 
-console.log(query);
+//console.log(query);
         db.query(query, (err, result2) => {
             if (err) {
                
@@ -493,7 +492,7 @@ console.log(query);
             }
             else {
                 res.status(200).json(result);
-                
+              //  console.log(result);
             }
         });
     };
