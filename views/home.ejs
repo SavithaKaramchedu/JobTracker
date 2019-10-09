@@ -2984,7 +2984,7 @@
                 "iSourceID": i,
                 "iSourceType": 'contact',
                 "iCountryID": '',
-                "iPhoneType": phone,
+                "iPhoneType": 'Phone',
                 "iCompleteNumber": phone,
                 "iUpdateBy": 'admin',
            
@@ -3021,11 +3021,12 @@
                 "iPhoneID": mobileID,
                 "iSourceType": 'contact',
                 "iCountryID": '',
-                "iPhoneType": mobile,
+                "iPhoneType": 'Mobile',
                 "iCompleteNumber": mobile,
                 "iUpdateBy": 'admin',
             }
             data = JSON.stringify(data);
+            console.log(data);
             if (mobile != "") {
                 $.ajax({
                     url: "https://localhost:9090/updatecontphone",
@@ -3036,7 +3037,7 @@
                     dataType: "json",
                     success: function (result) {
                        
-                        updatecontemail(i);
+                        updatecontfax(i);
                    
                     },
                    
@@ -3048,21 +3049,20 @@
             }
         }
 
-        /* function updatecontfax(i) {
+         function updatecontfax(i) {
                      var faxID = $("#editcfaxhidden").val();    
-                   // var phoneID = $("#editcphnhidden").val();
                      var fax = $("#fa").val();
                      var data = {
                          "iSourceID": i,
                          "iPhoneID": faxID,
                          "iSourceType": 'contact',
                          "iCountryID": '',
-                         "iPhoneType": fax,
+                         "iPhoneType": 'Fax',
                          "iCompleteNumber": fax,
                          "iUpdateBy": 'admin',               
                      }
                      data = JSON.stringify(data);
-                     if (phone != "") {
+                     if (fax != "") {
                          $.ajax({
                              url: "https://localhost:9090/updatecontphone",
                              type: "post",
@@ -3071,13 +3071,14 @@
                              contentType: "application/json",
                              dataType: "json",
                              success: function (result) {
-                                 updatecontemail(i);
+                                
+                                updatecontemail(i);
                              },
                              error: function () {
                              }
                          });
                      }
-                 }*/
+                 }
 
         function updatecontemail(i) {
 
@@ -8023,7 +8024,7 @@ background-size: 8%;'>
 
             <div class="modal-content">
 
-                <div class="modal-header" style="background-color: rgb(0, 63, 118);
+                <div class="modal-header" style="background-color: rgb(51, 122, 183);
                  color: rgb(255, 255, 255);">
 
                     <!-- Modal Header -->
@@ -8105,7 +8106,7 @@ background-size: 8%;'>
 
             <div class="modal-content">
 
-                <div class="modal-header" style="background-color: rgb(0, 63, 118);
+                <div class="modal-header" style="background-color: rgb(51, 122, 183);
                  color: rgb(255, 255, 255);">
 
                     <!-- Modal Header -->
@@ -8675,7 +8676,7 @@ background-size: 8%;'>
 
             <div class="modal-content">
 
-                <div class="modal-header" style="background-color: rgb(0, 63, 118);color: rgb(255, 255, 255);">
+                <div class="modal-header" style="background-color: rgb(51, 122, 183);color: rgb(255, 255, 255);">
 
                     <!-- Modal Header -->
 

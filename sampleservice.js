@@ -745,6 +745,7 @@ exports.updateaccount = function (req, res) {
     var Sid = req.body.id;
     let parentacc = req.body.parentaccount;
     let accountcat = req.body.accountcategory;
+    console.log(accountcat);
     let nam = req.body.name;
     let salesregion = req.body.salesregion;
     let webs = req.body.website;
