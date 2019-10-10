@@ -1702,9 +1702,10 @@
         }
 
         function editAccount() {
-            $("#parentshare").show();
-            $("#ownershare").show();
-
+            //acceditstatedropdown()
+  $("#parentshare").show();
+  $("#ownershare").show();
+  
             $("#faname").prop("disabled", false);
             $("#Prospect").prop("disabled", false);
 
@@ -1833,7 +1834,8 @@
                     $("vertical").val(result[0][0].vertical).attr('selected', 'selected');
                     $("#countryacc").val(result[0][0].countryid).attr('selected', 'selected');
                     $("#city").val(result[0][0].city);
-                    $("#stateacc").val(result[0][0].stateid).attr('selected', 'selected');
+                  var c= $("#stateacc").val(result[0][0].stateid).attr('selected','selected');
+                    console.log(c);
                     $("#owner").val(result[0][0].Owner);
                     $("#accountcode").val(result[0][0].AccountCode);
                     $("#accpipeline").val(result[0][0].ActivePipeline);
@@ -2003,16 +2005,65 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
-
-
-                },
+                    updateAccountAddress(id)
+                  // console.log(JSON.stringify(data));
+                   
+                },              
 
             });
 
             AccountLoad();
 
         }
+        function updateAccountAddress(i){
+            console.log("update address");
+   // var accvertical=$("#accountVertical").val();
+    var updateaccountry=$("#countryacc").val();
+    var updateacccity=$("#city").val();
+    var updateaccstate=$("#stateacc").val();
+    var updateaccaddlineone=$("#accraddrline").val();
+    var updateaccpostalcode=$("#accpostcode").val();
+    
+var data={
+        "iSourceID":i,
+        "iSourceType":"Account",
+        "iAddressType":'',
+        "iAddressLine1":updateaccaddlineone,
+        "iAddressLine2":'',
+        "iPostalCode":updateaccpostalcode,
+        "iBillTo":'Y',
+        "iShipTo":'Y',
+        "iIsDefault":'Y',
+        "iCreatedBy":"Admin",
+        "accountry":updateaccountry,
+        "acccity":updateacccity,
+        "accstate":updateaccstate,
+        
+        }
+        
 
+
+data=JSON.stringify(data); 
+var url="https://localhost:9090/updateaccaddress/" +i;
+console.log(url);
+$.ajax({
+    url:url,
+    type: "put",
+    async: false,
+    data: data,
+    contentType: "application/json",
+    dataType: "json",
+    success: function (data) {
+           
+    },
+
+    error: function () {
+
+    }
+});
+
+}
+       
         function deletehidden(i) {
 
             var url = "https://localhost:9090/deleteacc/" + i;
@@ -2063,6 +2114,7 @@
                     dropdowndata = dropdowndata + "<option style='display:none;'></option>"
                     for (var i = 0; i < result[0].length; i++) {
                         dropdowndata = dropdowndata + '<option value= "' + result[0][i].ACCOUNTCATEGORYID + '" >' + result[0][i].ACCOUNTCATEGORY + '</option>'
+                
 
                     }
                     $("#accountCategory").html(dropdowndata);
@@ -2073,7 +2125,32 @@
                 }
             });
         };
+        function acceditstatedropdown() {
+          
+                    
+          let country=$("#countryacc").find(":selected").val();
+     
+              
+          var dropdowndata = "";
 
+             var url = "https://localhost:9090/accstate/" +country;
+         
+             $.ajax({
+                 url: url,
+                 type: "GET",
+                 success: function (result) {
+                   
+                     for (var i = 0; i < result[0].length; i++) { 
+                        
+                         dropdowndata = dropdowndata  +
+                         '<option value= "' + result[0][i].state + '" >' + result[0][i].state +  '</option>' 
+                 
+                     }
+                    
+                     $("#stateacc").html(dropdowndata);
+                 }
+             });
+         };
         function accvertdropdown() {
 
             var dropdowndata = "";
