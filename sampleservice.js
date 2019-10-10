@@ -583,11 +583,11 @@ exports.updatereccontact = function (req, res) {
      + jobtitle + "','" + funct + "','" + depart + "','" + bestreachid + "','" + contpermid + "','" + phn + "','" + mob +
       "','" + eml + "','" + accountcontactId + "','" + iPhoneID + "','" + iEmailID + "','" + iUpdatedBy + "')";
     
-   // console.log(query);
+  // console.log(query);
      db.query(query, (err, result) => {
 
         if (err) {
-          //  console.log(err);
+           // console.log(err);
             return res.status(500).send(err);
         }
         res.status(200).json(result);
@@ -1301,7 +1301,7 @@ exports.updatecontphone = function (req, res) {
     
 let query = "CALL `procUpdatePhone`('" + iPhoneID + "', '" + iSourceID + "', '" + iSourceType + "','" +iCountryID + "','"
  + iPhoneType + "','" + iCompleteNumber + "','" + iUpdateBy + "')";
-console.log(query);
+// console.log(query);
 db.query(query, (err, result) => {
         if (err) {
            // console.log(err);

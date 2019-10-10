@@ -2314,6 +2314,8 @@
                     $("#mob").val(result[0][0].Mobile);
                     $("#eml").val(result[0][0].email);
                     $("#editcphnhidden").val(result[0][0].phoneid);
+                    $("#editcmobilehidden").val(result[0][0].MobileID);
+                    $("#editcfaxhidden").val(result[0][0].FaxID);
                     $("#editcemailhidden").val(result[0][0].emailid);
                     $("#contstatus").val(result[0][0].Status);
                     $("#conttitle").val(result[0][0].SALUTATIONID).attr('selected', 'selected');
@@ -2397,7 +2399,7 @@
         }
 
         function updatereccontact() {
-            // console.log("entered update contact");
+           
             var id = $("#cid").val();
             var salutationID = $("#conttitle").val();
             var academicTitleID = $("#academictitle").children("option:selected").val();
@@ -2416,7 +2418,7 @@
             var city = $("#cit").val();
             var phoneid = $("#editcphnhidden").val();
             var emailid = $("#editcemailhidden").val();
-            //   var mobileid = $("#editcmobilehidden").val();
+            var mobileid = $("#editcmobilehidden").val();
             var fax = $("#fa").val();
             var bestReachedByID = $("#bestreachedby").children("option:selected").val();
             var contactPermissionID = $("#contpermission").children("option:selected").val();
@@ -2440,7 +2442,7 @@
                 "accountcontactId": accountcontactId,
                 "phoneid": phoneid,
                 "emailid": emailid,
-                // "MobileID": mobileid,
+                "MobileID": mobileid,
                 "iUpdatedBy": 'admin'
             }
             data = JSON.stringify(data);
@@ -2453,11 +2455,154 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
-
-                    updatecontphone(id);
+                   
                 },
 
             });
+            updatecontphone(id);
+            contactLoad();
+        }
+
+        function updatecontphone(i) {
+            var phoneID = $("#editcphnhidden").val();
+            var phone = $("#phn").val();
+            
+            var data = {
+               
+                "iPhoneID": phoneID,
+                "iSourceID": i,
+                "iSourceType": 'contact',
+                "iCountryID": '',
+                "iPhoneType": 'Phone',
+                "iCompleteNumber": phone,
+                "iUpdateBy": 'admin',
+           
+            }
+            data = JSON.stringify(data);
+           
+            if (phone != "") {
+                $.ajax({
+                    url: "https://localhost:9090/updatecontphone",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+
+                    },
+
+                    error: function () {
+
+                    }
+                });
+            }
+
+            updatecontmobile(i);
+        }
+
+        function updatecontmobile(i) {
+            var mobileID = $("#editcmobilehidden").val();
+            var mobile = $("#mob").val();
+           
+            var data = {
+
+                "iSourceID": i,
+                "iPhoneID": mobileID,
+                "iSourceType": 'contact',
+                "iCountryID": '',
+                "iPhoneType": 'Mobile',
+                "iCompleteNumber": mobile,
+                "iUpdateBy": 'admin',
+            }
+            data = JSON.stringify(data);
+           
+            if (mobile != "") {
+                $.ajax({
+                    url: "https://localhost:9090/updatecontphone",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {                     
+                   
+                    },
+                   
+                    error: function () {
+                   
+                    }
+               
+                });
+            }
+
+            updatecontfax(i);
+        }
+
+         function updatecontfax(i) {
+                var faxID = $("#editcfaxhidden").val();    
+                var fax = $("#fa").val();
+                    
+                var data = {
+                         "iSourceID": i,
+                         "iPhoneID": faxID,
+                         "iSourceType": 'contact',
+                         "iCountryID": '',
+                         "iPhoneType": 'Fax',
+                         "iCompleteNumber": fax,
+                         "iUpdateBy": 'admin',               
+                     }
+                     data = JSON.stringify(data);
+                     if (fax != "") {
+                         $.ajax({
+                             url: "https://localhost:9090/updatecontphone",
+                             type: "post",
+                             async: false,
+                             data: data,
+                             contentType: "application/json",
+                             dataType: "json",
+                             success: function (result) {
+                                                              
+                             },
+                             error: function () {
+                             }
+                         });
+                     }
+
+                     updatecontemail(i);
+                 }
+
+        function updatecontemail(i) {
+
+            var emailID = $("#editcemailhidden").val();
+            var email = $("#eml").val();
+           
+            var data = {
+                "iSourceID": i,
+                "iEmailID": emailID,
+                "iSourceType": 'contact',
+                "iEmail": email,
+                "iUpdateBy": 'admin',
+            }
+
+            data = JSON.stringify(data);
+
+            if (email != "") {
+
+                $.ajax({
+                    url: "https://localhost:9090/updatecontemail",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
 
             contactLoad();
         }
@@ -2974,146 +3119,7 @@
 
         }
 
-        function updatecontphone(i) {
-            var phoneID = $("#editcphnhidden").val();
-            var phone = $("#phn").val();
-            
-            var data = {
-               
-                "iPhoneID": phoneID,
-                "iSourceID": i,
-                "iSourceType": 'contact',
-                "iCountryID": '',
-                "iPhoneType": 'Phone',
-                "iCompleteNumber": phone,
-                "iUpdateBy": 'admin',
-           
-            }
-            data = JSON.stringify(data);
-           
-            if (phone != "") {
-                $.ajax({
-                    url: "https://localhost:9090/updatecontphone",
-                    type: "post",
-                    async: false,
-                    data: data,
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-
-                        updatecontmobile(i);
-
-                    },
-
-                    error: function () {
-
-                    }
-                });
-            }
-        }
-
-        function updatecontmobile(i) {
-            var mobileID = $("#editcmobilehidden").val();
-            var mobile = $("#mob").val();
-            var data = {
-
-                "iSourceID": i,
-                "iPhoneID": mobileID,
-                "iSourceType": 'contact',
-                "iCountryID": '',
-                "iPhoneType": 'Mobile',
-                "iCompleteNumber": mobile,
-                "iUpdateBy": 'admin',
-            }
-            data = JSON.stringify(data);
-            console.log(data);
-            if (mobile != "") {
-                $.ajax({
-                    url: "https://localhost:9090/updatecontphone",
-                    type: "post",
-                    async: false,
-                    data: data,
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-                       
-                        updatecontfax(i);
-                   
-                    },
-                   
-                    error: function () {
-                   
-                    }
-               
-                });
-            }
-        }
-
-         function updatecontfax(i) {
-                     var faxID = $("#editcfaxhidden").val();    
-                     var fax = $("#fa").val();
-                     var data = {
-                         "iSourceID": i,
-                         "iPhoneID": faxID,
-                         "iSourceType": 'contact',
-                         "iCountryID": '',
-                         "iPhoneType": 'Fax',
-                         "iCompleteNumber": fax,
-                         "iUpdateBy": 'admin',               
-                     }
-                     data = JSON.stringify(data);
-                     if (fax != "") {
-                         $.ajax({
-                             url: "https://localhost:9090/updatecontphone",
-                             type: "post",
-                             async: false,
-                             data: data,
-                             contentType: "application/json",
-                             dataType: "json",
-                             success: function (result) {
-                                
-                                updatecontemail(i);
-                             },
-                             error: function () {
-                             }
-                         });
-                     }
-                 }
-
-        function updatecontemail(i) {
-
-            var emailID = $("#editcemailhidden").val();
-            var email = $("#eml").val();
-            var data = {
-                "iSourceID": i,
-                "iEmailID": emailID,
-                "iSourceType": 'contact',
-                "iEmail": email,
-                "iUpdateBy": 'admin',
-            }
-
-            data = JSON.stringify(data);
-
-            if (email != "") {
-
-                $.ajax({
-                    url: "https://localhost:9090/updatecontemail",
-                    type: "post",
-                    async: false,
-                    data: data,
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (result) {
-
-                     contactLoad();
-
-                    },
-                    error: function () {
-                    }
-                });
-            }
-        }
-
+       
 
         function businessLoad() {
 
