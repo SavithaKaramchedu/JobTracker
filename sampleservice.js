@@ -723,6 +723,35 @@ exports.accaddress = function (req, res) {
     });
 
 };
+exports.updateaccaddress = function (req, res) {
+    let sourceid=req.body.iSourceID;
+    let source = req.body.iSourceType;
+    let addresstype = req.body.iAddressType;
+    let addressline1 =req.body.iAddressLine1;
+    let addressline2 =req.body.iAddressLine2;
+   
+    let postalcode = req.body.iPostalCode;
+    let country = req.body.accountry;
+    let city = req.body.acccity;
+    let state = req.body.accstate;
+    
+     let billto = req.body.iBillTo;
+    let shipto =req.body.iShipTo;
+    let defaultadd = req.body.iIsDefault;
+    let createdby = req.body.iCreatedBy;
+     let query = "call procUpdateAddress('" +sourceid + "','" +source + "','" +addresstype + "', '" + addressline1 + "','" + addressline2 + "', '" + city + "','" + state + "','" + postalcode + "','" + country + "','" + billto + "','" + shipto + "','" + defaultadd + "','" + createdby + "')";
+
+//console.log(query);
+db.query(query, (err, result) => {
+
+    if (err) {
+        console.log(err);
+        return res.status(500).send(err);
+    }
+    res.status(200).json(result);
+});
+
+};
 exports.getAccountPage = function (req, res) {
 
 
@@ -755,7 +784,7 @@ exports.updateaccount = function (req, res) {
     let updatedby = req.body.updatedby;
     
     let query = "call procUpdateAccount('" + Sid + "',  '" + parentacc + "','" + accountcat + "',  '" + nam + "','" + salesregion + "','" + webs + "', '" + own +"','" + readonly + "','" + prosp + "', '" + updatedby + "')";
-console.log(query);
+//console.log(query);
     db.query(query, (err, result) => {
 
         if (err) {
@@ -763,12 +792,13 @@ console.log(query);
             return res.status(500).send(err);
         }
         res.status(200).json(result);
+        //console.log(result);
     });
 };
 exports.recorddisplay = function (req, res) {
     var Sid = req.params.i;
     let query = 'call procEditAccount("' + Sid + '")';
-  //  console.log(query);
+    //console.log(query);
     db.query(query, (err, result) => {
         if (err) {
         //    console.log(err)

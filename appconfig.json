@@ -334,6 +334,23 @@
       ]
     },
     {
+      "route": "/updateaccaddress/:i",
+      "type": "put",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "updateaccaddress",
+
+
+      "description": "Routes to update address of account",
+      "examples": [
+        {
+          "param": "/updteaccaddress/:i"
+        }
+      ]
+    },
+   
+
+    {
       "route": "/opportunity",
       "type": "get",
       "configured": true,
