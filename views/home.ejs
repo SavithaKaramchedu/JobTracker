@@ -4212,6 +4212,305 @@ $.ajax({
             });
             opportunityLoad();
         }
+        function serviceofferingbunit() {
+                                var sourcedata = "";
+                                var url = "https://localhost:9090/serviceofferingbunit/";
+                                $.ajax({
+                                    url: url,
+                                    type: "GET",
+                                    success: function (result) {
+                                      //  console.log(result);
+                                        for (var i = 0; i < result[0].length; i++) {
+                                            sourcedata = sourcedata +
+                                                '<option value="' + result[0][i].BUSINESSUNITID + '">' + result[0][i].BUSINESSUNIT + '</option>';
+                                        }
+                                        $("#customcategory").html(sourcedata);
+                                     
+                                    }
+                                });
+
+                            }  
+                            function serviceofferinguom() {
+                                var sourcedata = "";
+                                var url = "https://localhost:9090/serviceofferinguom/";
+                                $.ajax({
+                                    url: url,
+                                    type: "GET",
+                                    success: function (result) {
+                                      //  console.log(result);
+                                        for (var i = 0; i < result[0].length; i++) {
+                                            sourcedata = sourcedata +
+                                                '<option value="' + result[0][i].UOMID + '">' + result[0][i].UOMNAME + '</option>';
+                                        }
+                                        $("#customcategory").html(sourcedata);
+                                     
+                                    }
+                                });
+
+                            }
+                            function serviceofferingengagementype() {
+                                var sourcedata = "";
+                                var url = "https://localhost:9090/serviceofferinguom/";
+                                $.ajax({
+                                    url: url,
+                                    type: "GET",
+                                    success: function (result) {
+                                      //  console.log(result);
+                                        for (var i = 0; i < result[0].length; i++) {
+                                            sourcedata = sourcedata +
+                                                '<option value="' + result[0][i].UOMID + '">' + result[0][i].UOMNAME + '</option>';
+                                        }
+                                        $("#customcategory").html(sourcedata);
+                                     
+                                    }
+                                });
+
+                            }
+
+        function deleteopportunity() {
+            var id=$("#cdid").text();
+          var url= "https://localhost:9090/opportunity/"+id;
+           
+            $.ajax({
+                    url: url,
+                    type: "DELETE",
+                    async: true,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                    },
+                });
+                opportunityLoad();           
+            }
+
+            function budropdown() {
+                    
+                    var dropdowndata = "";
+
+                    var url = "https://localhost:9090/bu";
+
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].BUSINESSUNITID + '" >' + result[0][i].BUSINESSUNIT +  '</option>' 
+                                    
+                            }
+
+                            $("#bunitId").html(dropdowndata);
+                            locationdropdown();
+                        }
+                    });
+                };
+                function locationdropdown() {
+                    
+                    var dropdowndata = "";
+
+                    var url = "https://localhost:9090/Location";
+
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].DELIVERYLOCATIONID + '" >' + result[0][i].DELIVERYLOCATION +  '</option>' 
+                                    
+                            }
+
+                            $("#locationId").html(dropdowndata);
+                            engagmentTypedropdown();
+                        }
+                    });
+                };
+                function engagmentTypedropdown() {
+                    
+                    var dropdowndata = "";
+
+                    var url = "https://localhost:9090/engagmentType";
+
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].ENGAGEMENTTYPEID + '" >' + result[0][i].ENGAGEMENTTYPE +  '</option>' 
+                                    
+                            }
+
+                            $("#engagementId").html(dropdowndata);
+                            uomdropdown();
+                        }
+                    });
+                };
+                function uomdropdown() {
+                    
+                    var dropdowndata = "";
+
+                    var url = "https://localhost:9090/UOM";
+
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].UOMID + '" >' + result[0][i].UOMNAME +  '</option>' 
+                                    
+                            }
+
+                            $("#UOM").html(dropdowndata);
+                            
+                        }
+                    });
+                };
+                function verticalbyBUdropdown() {
+                    
+                    var dropdowndata = "";
+                    var buid= $("#bunitId").find(":selected").val();
+                    var url = "https://localhost:9090/VerticalByBu/"+buid;
+                        
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].VerticalID + '" >' + result[0][i].VERTICAL +  '</option>' 
+                                    
+                            }
+
+                            $("#verticalSoId").html(dropdowndata);
+                            portfoliobyBUdropdown();
+                        }
+                    });
+                };
+                function portfoliobyBUdropdown() {
+                    
+                    var dropdowndata = "";
+                    var buid= $("#bunitId").find(":selected").val();
+                    var url = "https://localhost:9090/PortfolioByBu/"+buid;
+                        
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].PORTFOLIOID + '" >' + result[0][i].PORTFOLIO +  '</option>' 
+                                    
+                            }
+
+                            $("#portfolioId").html(dropdowndata);
+                            
+                        }
+                    });
+                };
+                function SOdropdown() {
+                    
+                    var dropdowndata = "";
+                    var pid= $("#portfolioId").find(":selected").val();
+                    var url = "https://localhost:9090/so/"+pid;
+                        
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].OFFERINGID + '" >' + result[0][i].OFFERING +  '</option>' 
+                                    
+                            }
+
+                            $("#seriviceofferingId").html(dropdowndata);
+                            
+                        }
+                    });
+                };
+                function addServiceOffering() {
+ var Buid = $("#bunitId").val();
+ var verticalid = $("#verticalSoId").val();
+ var portfolioid = $("#portfolioId").val();
+ var offeringid = $("#seriviceofferingId").val();
+ var Locationid = $("#locationId").val();
+ var engagementid = $("#engagementId").val();
+ var UOMid = $("#UOM").val();
+ var Bu= $("#bunitId option:selected").text();
+ var offering = $("#seriviceofferingId option:selected").text();
+ var location= $("#locationId option:selected").text();
+ var engagement = $("#engagementId option:selected").text();
+var function1=Bu+"-"+offering+"-"+location+"-"+engagement;
+var data={
+"iBusinessUnitID":Buid,
+"iPortfolioID":portfolioid,
+"iOfferingID":offeringid,
+"iVerticalID":verticalid,
+"iDeliveryLocationID":Locationid,
+"iEngagementTypeID":engagementid,
+"iServiceOffering":function1,
+"iUnitOfMeasureID":UOMid,
+"iNotes":'',
+"iIsAssignmentAllowed":'Y',
+"iCreatedBy":'Admin'
+
+}
+
+data = JSON.stringify(data);
+console.log(data);
+if(Buid !="" && verticalid!="" && portfolioid!=""){
+
+$.ajax({
+    url: "https://localhost:9090/serviceoffering",
+    type: "post",
+    async: false,
+    data: data,
+    contentType: "application/json",
+    dataType: "json",
+    success: function (data) {
+       
+        serviceofferingLoad();
+    },
+
+    error: function () {
+       
+    }
+});
+
+}
+}
+
+
 
 
 
@@ -5943,6 +6242,13 @@ background-size: 8%;'>
                         <div id="content" class="">
                             <header class="head-list">
                                 <div id="default_controls">
+                                        <div class="pull-right" id="AddNewButton">
+                                                <a class="btn in-entity-modal" data-toggle="modal" href="#somodal" onclick="budropdown();"
+                                                    data-entity-type="Contact" data-action="Create">
+                                                    New Service Offering
+                                                </a>
+                                            </div>
+
                                     <div class="pull-right right10">
 
                                         <div class="pull-right right10">
@@ -6033,146 +6339,7 @@ background-size: 8%;'>
                                             </tbody>
 
                                         </table>
-                                        <div class="modal fade docs-example-modal-lg" id="somodal" tabindex="-1"
-                                            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header"
-                                                        style="background-color: #e6e0e094; color:black;">
-                                                        <h6 class="modal-title">Business Partner</h1>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                onclick="" style="color: #000; opacity:1.5;">×</button>
-                                                    </div>
-
-                                                    <!-- Modal body-->
-                                                    <div class="modal-body">
-
-                                                        <form class="form-signin" action="/modal" method="post">
-
-                                                            <div class="row">
-
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">Status</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="status" id="status"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-                                                                <div class="col-sm-2">
-                                                                    Business Partner Id</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="businesspId" id="businesspId"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">
-                                                                    Business Partner</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="business" id="business"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-
-                                                                <div class="col-sm-2">City</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="cityB" id="cityB"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">Main Contact</div>
-
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="mainc" id="mainc"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-                                                                <div class="col-sm-2">
-                                                                    Created On</div>
-
-                                                                <div class="col-sm-3">
-                                                                    <input type="date" required class="form-control"
-                                                                        disabled name="created" id="created"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2"> Country</div>
-                                                                <div class="col-sm-3">
-                                                                    <select class="form-control" name="countryb"
-                                                                        disabled id="countryb" style="height: 71%;">
-                                                                        <option selected></option>
-                                                                        <option>Arab Emirates</option>
-                                                                        <option>Afghanisthan</option>
-                                                                        <option>Albania</option>
-                                                                        <option>Armenia</option>
-                                                                        <option>Angola</option>
-                                                                        <option>Argentina</option>
-                                                                        <option>Zimbabwe</option>
-                                                                        <option>Bahamas</option>
-                                                                        <option>Bahrain</option>
-                                                                        <option>Bangladesh</option>
-                                                                        <option>Barbados</option>
-                                                                        <option>Belarus</option>
-                                                                        <option>Belgium</option>
-                                                                        <option>Belize</option>
-                                                                        <option>Benin</option>
-                                                                        <option>Bermuda</option>
-                                                                        <option>Bhutan</option>
-                                                                        <option>Bolivia</option>
-
-                                                                    </select>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-1"></div>
-                                                                    <div class="col-sm-2">Type</div>
-
-                                                                    <div class="col-sm-3">
-                                                                        <input type="text" required class="form-control"
-                                                                            disabled name="typeb" id="typeb"
-                                                                            style="height: 71%;">
-                                                                    </div>
-                                                                    <div class="col-sm-1"></div>
-                                                                </div>
-
-                                                                <br>
-                                                            </div>
-                                                            <!-- Modal footer-->
-                                                            <div class="modal-footer">
-
-                                                                <button type="submit" id="saveBusiness"
-                                                                    class="btn btn-primary" data-dismiss="modal" hidden
-                                                                    onclick="">save</button>
-                                                                <button type="button" id="cancelBusiness" class="btn"
-                                                                    data-dismiss="modal" onclick=""
-                                                                    hidden>cancel</button>
-                                                                <button type="submit" id="editBusiness"
-                                                                    class="btn btn-primary" onclick="">Edit</button>
-
-
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -7798,7 +7965,127 @@ background-size: 8%;'>
 
         </div>
 
-
+        <div id="somodal" class="modal hide no-reset" role="dialog" aria-labelledby="modal-form" aria-hidden="true"
+        style="height: auto; padding-right: 0px  ! important;">
+        <form method="post" onsubmit="return false">
+                <div class="modal-content">
+                    <div class="modal-header"
+                        style="padding-left:0;border-bottom: 1px solid #d2c7c7;margin-bottom: 20px;background-color: #e6e0e094;background-color: rgb(0, 63, 118);
+                        color: rgb(255, 255, 255);">
+                        <b class="modal-title" style="font-size:15px;margin-left:9px;">New Service offering :</b>
+                        <button type="button" onclick=" clearFormAccount()" class="close" data-dismiss="modal" style="color:white;opacity:1">×</button>
+                    </div>
+        
+                    <div class="modal-body">
+        
+                      
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="form-group"><span style="color:red">*</span>Business Unit:</div>
+                            </div>
+                            <div class="col-lg-7">
+                     <select required
+                                    style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc;"
+                                    name="acccat" id="bunitId" onchange="verticalbyBUdropdown();">
+                                    <option style="display:none;"></option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+        
+                            <div class="col-lg-5"><span style="color:red">*</span>Delivery Unit:</div>
+        
+                            <div class="col-lg-7">
+                               
+                                   <select required
+                                    style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc;"
+                                    name="acccat" id="verticalSoId">
+                                    <option style="display:none;"></option>
+                                    
+                                </select>
+                                </div>
+                            
+                        </div>
+                        <div class="row">
+        
+                                <div class="col-lg-5">
+            
+                                    <span style="color:red">*</span> Portfolio:
+                                </div>
+            
+                                <div class="col-lg-7">
+                                 
+                     <select required
+                                        style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc;"
+                                        name="acccat" id="portfolioId" onchange="SOdropdown();">
+                                        <option style="display:none;"></option>
+                                        
+                                    </select>
+                                       
+                                </div>
+            
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="form-group"><span style="color:red">*</span>Service Offering:</div>
+                                    </div>
+                                    <div class="col-lg-7"><select required
+                                            style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc;" name="vert"
+                                            id="seriviceofferingId">
+                                            <option  style="display:none;"></option>
+                                            
+                                        </select></div>
+                                </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="form-group"><span style="color:red">*</span>Location:</div>
+                            </div>
+                            <div class="col-lg-7">
+                                    <select required
+                                    style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc;"
+                                    name="acccat" id="locationId">
+                                    <option style="display:none;"></option>
+                                    
+                                </select>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="form-group"><span style="color:red">*</span>Engagement Type:</div>
+                            </div>
+                            <div class="col-lg-7"><select required
+                                    style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc;"
+                                    name="acccat" id="engagementId">
+                                    <option style="display:none;"></option>
+                                    
+                                </select></div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="form-group"><span style="color:red">*</span>Unit Of Measure:</div>
+                            </div>
+                            <div class="col-lg-7"><select onclick="" required
+                                    style="height:25px;width: 80%;border-radius:4px;border: 1px solid #ccc; height: auto;"
+                                    name="country" id="UOM">
+                                    <option style="display:none;"></option>
+                                    
+                                </select></div>
+                        </div>
+                        
+                        
+                      
+        
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" onclick="addServiceOffering();clearFormAccount()">Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="clearFormAccount()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        
+        </div>
+        
 
         <div id="leadModal" class="modal hide no-reset" role="dialog" aria-labelledby="modal-form" aria-hidden="true"
             style="height: auto; padding-right: 0px  ! important;">

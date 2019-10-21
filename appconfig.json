@@ -1159,6 +1159,110 @@
       ]
     },
     {
+      "route": "/bu",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getbu",
+      "description": "Route for Business unit look up",
+      "examples": [
+        {
+          "param": "/bu"
+        }
+      ]
+    },
+    {
+      "route": "/Location",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getlocation",
+      "description": "Route for Location look up",
+      "examples": [
+        {
+          "param": "/Location"
+        }
+      ]
+    },
+    {
+      "route": "/engagmentType",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getengagmentType",
+      "description": "Route for engagment type look up",
+      "examples": [
+        {
+          "param": "/engagmentType"
+        }
+      ]
+    },
+    {
+      "route": "/UOM",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getUOM",
+      "description": "Route for UOM look up",
+      "examples": [
+        {
+          "param": "/UOM"
+        }
+      ]
+    },
+    {
+      "route": "/VerticalByBu/:buid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getVerticalByBu",
+      "description": "Route for Vertical look up",
+      "examples": [
+        {
+          "param": "/VerticalByBu/:buid"
+        }
+      ]
+    },
+    {
+      "route": "/PortfolioByBu/:buid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getPortfolioByBu",
+      "description": "Route for Portfolio look up",
+      "examples": [
+        {
+          "param": "/VerticalByBu/:buid"
+        }
+      ]
+    },
+    {
+      "route": "/so/:pid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getSo",
+      "description": "Route for Service offerings look up",
+      "examples": [
+        {
+          "param": "/so/:pid"
+        }
+      ]
+    },
+    {
+      "route": "/serviceoffering",
+      "type": "post",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "addServiceoffering",
+      "description": "Route for Service offerings look up",
+      "examples": [
+        {
+          "param": "/serviceoffering"
+        }
+      ]
+    },
+    {
       "route": "/addcontactinfo",
       "type": "post",
       "configured": true,
