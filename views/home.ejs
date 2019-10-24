@@ -152,7 +152,10 @@
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
+       
+      
     </script>
+   
     <script>
         var searchbar = '';
 
@@ -160,6 +163,7 @@
             searchbar = moduleClicked;
 
             $('#_globalSearch').val('');
+          
         }
         $(document).ready(function () {
 
@@ -4019,6 +4023,7 @@ function serviceOfferingdisplay(i) {
                 }
             });
         };
+        
 
         function opportunitydisplay(i) {
 
@@ -5270,7 +5275,7 @@ background-size: 8%;'>
 
                 <li title="Service Offerings">
                     <a id="navlink_project" class="sidebar_navlink " href="#serviceofferingtab" data-toggle="tab"
-                        onclick="serviceofferingLoad();">
+                        onclick="serviceofferingLoad(),searchbarchange('ServiceOfferings');">
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">Service Offerings</span>
@@ -7806,10 +7811,13 @@ background-size: 8%;'>
 
                                         </table>
                                         <script>
+                                            document.querySelector('#_globalSearch').addEventListener('keyup', filterTable, false);
                                             function filterTable(event) {
                                                 if (searchbar == "Employee") {
                                                     var filter = event.target.value.toUpperCase();
+                                                   
                                                     var rows = document.querySelector("#myTableEmp tbody").rows;
+                                                  
                                                     count = 0;
                                                     var field = $('#_globalSearch').val();
                                                     var len = field.length;
@@ -7827,7 +7835,7 @@ background-size: 8%;'>
 
                                                         if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1
                                                             || fourthCol.indexOf(filter) > -1) {
-
+                                                                
                                                             rows[i].style.display = "";
                                                             count++;
                                                         } else {
@@ -8060,8 +8068,45 @@ background-size: 8%;'>
                                                     }
                                                     document.getElementById("bpcount").innerHTML = count;
                                                 }
+                                                else if (searchbar == "ServiceOfferings") {
+                                                    var filter = event.target.value.toUpperCase();
+                                                    var rows = document.querySelector("#myServiceofferingTable tbody").rows;
+                                                    count = 0;
+                                                    var field = $('#_globalSearch').val();
+                                                    var len = field.length;
+                                                    for (var i = 0; i < rows.length; i++) {
+                                                        if (len > 0) {
+                                                            //$('#searchclearEmployee').css('display','block');
+                                                        } else if (len == 0) {
+                                                            serviceofferingLoad();
+                                                        }
+                                                        var firstCol = rows[i].cells[0].textContent.toUpperCase();
+                                                        var secondCol = rows[i].cells[1].textContent.toUpperCase();
+                                                        var thirdCol = rows[i].cells[2].textContent.toUpperCase();
+                                                        var fourthCol = rows[i].cells[3].textContent.toUpperCase();
+                                                        var fifthCol = rows[i].cells[4].textContent.toUpperCase();
+                                                        var sixthCol = rows[i].cells[5].textContent.toUpperCase();
+                                                        
+
+                                                        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1
+                                                            || fourthCol.indexOf(filter) > -1 || fifthCol.indexOf(filter) > -1 || sixthCol.indexOf(filter) > -1) {
+
+                                                            rows[i].style.display = "";
+                                                            count++;
+                                                        } else {
+                                                            rows[i].style.display = "none";
+                                                        }
+                                                    }
+                                                    if (count == 0) {
+                                                        var tableData = "";
+                                                        tableData = "<tr><td></td><td></td><td><center>No Records Found</center></td><td></td><td></td></tr>";
+
+                                                        $("#serviceOfferingTable").html(tableData);
+                                                    }
+                                                    document.getElementById("socount").innerHTML = count;
+                                                }
                                             }
-                                            document.querySelector('#_globalSearch').addEventListener('keyup', filterTable, false);
+                                            
 
 
                                         </script>
