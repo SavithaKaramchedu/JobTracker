@@ -1316,6 +1316,21 @@ exports.getServiceoffering = function (req, res) {
     });
 };
 
+exports.serviceOfferingdisplay = function (req, res) {
+    
+    var Sid = req.params.i;
+   
+    let query = 'call procDisplayOnServiceOfferingMouseHoover ("' + Sid + '")'
+    db.query(query, (err, result) => {
+        if (err) {
+            console.log("db error");
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+    });
+};
+
+
 
 
 exports.updatecontphone = function (req, res) {

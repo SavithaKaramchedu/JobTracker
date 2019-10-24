@@ -1263,6 +1263,19 @@
       ]
     },
     {
+      "route": "/serviceoffdis/:i",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "serviceOfferingdisplay",
+      "description": "Route for listing all the active Businesspartners",
+      "examples": [
+        {
+          "param": "/serviceOfferingdisplay"
+        }
+      ]
+    },
+    {
       "route": "/addcontactinfo",
       "type": "post",
       "configured": true,

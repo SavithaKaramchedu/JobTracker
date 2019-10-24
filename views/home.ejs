@@ -3196,7 +3196,145 @@ $.ajax({
 
         }
 
-       
+        function updatecontphone(i) {
+            console.log("update mobile");
+            var phoneID = $("#editcphnhidden").val();
+            var phone = $("#phn").val();
+            
+            var data = {
+               
+                "iPhoneID": phoneID,
+                "iSourceID": i,
+                "iSourceType": 'contact',
+                "iCountryID": '',
+                "iPhoneType": 'Phone',
+                "iCompleteNumber": phone,
+                "iUpdateBy": 'admin',
+           
+            }
+            data = JSON.stringify(data);
+           
+            if (phone != "") {
+                $.ajax({
+                    url: "https://localhost:9090/updatecontphone",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+
+                        updatecontmobile(i);
+
+                    },
+
+                    error: function () {
+
+                    }
+                });
+            }
+        }
+
+        function updatecontmobile(i) {
+            var mobileID = $("#editcmobilehidden").val();
+            var mobile = $("#mob").val();
+            var data = {
+
+                "iSourceID": i,
+                "iPhoneID": mobileID,
+                "iSourceType": 'contact',
+                "iCountryID": '',
+                "iPhoneType": 'Mobile',
+                "iCompleteNumber": mobile,
+                "iUpdateBy": 'admin',
+            }
+            data = JSON.stringify(data);
+            if (mobile != "") {
+                $.ajax({
+                    url: "https://localhost:9090/updatecontphone",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                       
+                        updatecontfax(i);
+                   
+                    },
+                   
+                    error: function () {
+                   
+                    }
+               
+                });
+            }
+        }
+
+         function updatecontfax(i) {
+                     var faxID = $("#editcfaxhidden").val();  
+                     var fax = $("#fa").val();
+                     var data = {
+                         "iSourceID": i,
+                         "iPhoneID": faxID,
+                         "iSourceType": 'contact',
+                         "iCountryID": '',
+                         "iPhoneType":'Fax',
+                         "iCompleteNumber": fax,
+                         "iUpdateBy": 'admin',               
+                     }
+                     data = JSON.stringify(data);
+                     if (phone != "") {
+                         $.ajax({
+                             url: "https://localhost:9090/updatecontphone",
+                             type: "post",
+                             async: false,
+                             data: data,
+                             contentType: "application/json",
+                             dataType: "json",
+                             success: function (result) {
+                                 updatecontemail(i);
+                             },
+                             error: function () {
+                             }
+                         });
+                     }
+                 }
+
+        function updatecontemail(i) {
+
+            var emailID = $("#editcemailhidden").val();
+            var email = $("#eml").val();
+            var data = {
+                "iSourceID": i,
+                "iEmailID": emailID,
+                "iSourceType": 'contact',
+                "iEmail": email,
+                "iUpdateBy": 'admin',
+            }
+
+            data = JSON.stringify(data);
+
+            if (email != "") {
+
+                $.ajax({
+                    url: "https://localhost:9090/updatecontemail",
+                    type: "post",
+                    async: false,
+                    data: data,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+
+                     contactLoad();
+
+                    },
+                    error: function () {
+                    }
+                });
+            }
+        }
+
 
         function businessLoad() {
 
@@ -3441,7 +3579,7 @@ $.ajax({
                             result[0][i].NEWSERVICEOFFERINGCOMBINATION = "";
                         }
 
-                        //var leadoppoid="\""+result[0][i].LEADID+"\"";
+                        var serviceofferingid="\""+result[0][i].SERVICEOFFERINGID+"\"";
                         tableData = tableData + "  <tr> " +
                             //"<td hidden>" + result[0][i].LEADID+ "</td>" + 
 
@@ -3449,7 +3587,8 @@ $.ajax({
 
                             "<td >" + result[0][i].SERVICEOFFERINGCODE + "</td>" +
                             "<td >" + result[0][i].BUSINESSUNIT + "</td>" +
-                            "<td >" + result[0][i].SERVICEOFFERING + "</td>" +
+                            "<td >" + "<a href='#editseroffmodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='serviceOfferingdisplay("+serviceofferingid+")'>" + result[0][i].SERVICEOFFERING + "</a>" + "</td>" +
+                         // "<td >" + result[0][i].SERVICEOFFERING + "</td>" +
                             "<td >" + result[0][i].DELIVERYLOCATION + "</td>" +
                             "<td >" + result[0][i].ENGAGEMENTTYPE + "</td>" +
                             "<td >" + result[0][i].UNITOFMEASUREMENT + "</td>" +
@@ -3524,6 +3663,46 @@ $.ajax({
             $("#elownshare").hide();
 
         }
+
+
+
+function clearFormServiceOffering() {
+$("#idseroff").prop("disabled", true);
+$("#businessunit").prop("disabled", true);
+$("#deliseroff").prop("disabled", true);
+$("#locaseroff").prop("disabled", true);
+$("#enngaeseroff").prop("disabled", true);
+$("#serviceoff").prop("disabled", true);
+$("#unitmeasureser").prop("disabled", true);
+$("#portfolios").prop("disabled", true);
+$("#editseroff").show();
+
+}
+
+function serviceOfferingdisplay(i) {
+
+            var url = "https://localhost:9090/serviceoffdis/" +i;       
+            $.ajax({
+                url: url,
+                type: "GET",
+
+                success: function (result) {
+                    console.log(result);
+                    $("#servoffid").text(i);
+                    $("#idseroff").val(result[0][0].SERVICEOFFERINGCODE);
+                    $("#businessunit").val(result[0][0].BUSINESSUNIT);
+                    $("#deliseroff").val(result[0][0].VERTICAL);
+                    $("#locaseroff").val(result[0][0].DELIVERYLOCATION);
+                    $("#enngaeseroff").val(result[0][0].ENGAGEMENTTYPE);
+                    $("#serviceoff").val(result[0][0].OFFERING);
+                    $("#unitmeasureser").val(result[0][0].UNITOFMEASUREMENT);
+                    $("#portfolios").val(result[0][0].PORTFOLIOID);
+                }
+            });
+            clearFormServiceOffering();
+        };
+
+
 
         function recorddisplaylead(i) {
             var url = "https://localhost:9090/leads/" + i;
@@ -6337,6 +6516,118 @@ background-size: 8%;'>
 
 
                                             </tbody>
+
+                                            <div class="modal fade" id="editseroffmodal" style="top:24%;height:398px;">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+        
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header" style="padding-left: 0;border-bottom: 1px solid #d2c7c7;margin-bottom: 20px;background-color:  rgb(51, 122, 183);
+                                                        color: white;">
+        
+                                                            <b class="modal-title" style="font-size:15px;margin-left:9px;">PRODUCT :Enabling Functions-Others-Offshore-Fixed Price</b>
+        
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                data-backdrop="static" data-keyboard="false"
+                                                                style="opacity: 1;color:white;"
+                                                                >&times;</button>
+                                                        </div>
+        
+                                                        <!-- Modal body -->
+                                                        <div class="modal-body" id="size" style="overflow:auto;height:205px;">
+                                                            <div class="row">
+                                                                <div class="col-sm-2">
+                                                                    <label>ID:</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                <p id="servoffid" style="display:none;"></p>
+                                                                    <input type="text" class="form-control form-group" id="idseroff" disabled>
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+        
+                                                                <div class="col-sm-2">
+                                                                    <label style="width: 113px;">Business Unit:</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-group" id="businessunit" disabled>
+                                                                </div>
+                                                                <div class="col-sm-1"> </div>
+                                                            </div>
+        
+                                                            <div class="row">
+        
+                                                                <div class="col-sm-2">
+                                                                    <label>Delivery Unit:</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" class="form-control form-group" id="deliseroff" disabled>
+                                                                </div>
+                                                                <div class="col-sm-1" style="right:19px;"> </div>
+                                                                <div class="col-sm-2">
+                                                                    <label>Location:</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-group" id="locaseroff" disabled>
+                                                        
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+        
+                                                            <div class="row">
+        
+                                                                <div class="col-sm-2">
+                                                                    <label style="width: 113px;">Engagement Type :</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    
+                                                                 <input type="text" class="form-control form-group" id="enngaeseroff" disabled>
+                                                                </div>
+        
+                                                                <div class="col-sm-1" style="right:19px;">
+                                                                   
+                                                                </div>
+        
+                                                                <div class="col-sm-2">
+                                                                    <label>New Service Offering :</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-group" id="serviceoff" disabled>
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+        
+                                                            <div class="row">
+        
+                                                                <div class="col-sm-2">
+                                                                 <label>Unit of Measure:</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                   
+                                                                 <input type="text" class="form-control form-group"id="unitmeasureser" disabled>
+     
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">
+                                                                    <label>Portfolio:</label>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                        <input type="text" class="form-control form-group"id="portfolios" disabled>
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+           
+                                                        </div>
+        
+        
+                                                        <!-- Modal footer -->
+                                                 <!-- <div class="modal-footer">                        
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
 
                                         </table>
                                        
