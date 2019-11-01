@@ -1,5 +1,9 @@
-window.onload = function () {
+function welcom(){
     alert("into");
+}
+
+window.onload = function () {
+   
 (function ($) {
 
     $.fn.tableHeadFixer = function (param) {
