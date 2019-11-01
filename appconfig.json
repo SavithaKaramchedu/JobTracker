@@ -1276,6 +1276,19 @@
       ]
     },
     {
+      "route": "/revenueresource",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "RevenueResourcePage",
+      "description": "Route for listing all the active Revenue & Resource Forecast",
+      "examples": [
+        {
+          "param": "/revenueresource"
+        }
+      ]
+    },
+    {
       "route": "/addcontactinfo",
       "type": "post",
       "configured": true,

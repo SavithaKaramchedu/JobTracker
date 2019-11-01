@@ -1630,6 +1630,67 @@
                 }
             });
         }
+
+        function sortTable(n,tableid) {
+
+            console.log(tableid);
+                
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById(tableid);
+              //  console.log(table);
+                switching = true;
+                // Set the sorting direction to ascending:
+                dir = "asc";
+                /* Make a loop that will continue until
+                no switching has been done: */
+                while (switching) {
+                    // Start by saying: no switching is done:
+                    switching = false;
+                    rows = table.rows;
+                    /* Loop through all table rows (except the
+                    first, which contains table headers): */
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        // Start by saying there should be no switching:
+                        shouldSwitch = false;
+                        /* Get the two elements you want to compare,
+                        one from current row and one from the next: */
+                        x = rows[i].getElementsByTagName("TD")[n];
+                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                        /* Check if the two rows should switch place,
+                        based on the direction, asc or desc: */
+                        if (dir == "asc") {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                // If so, mark as a switch and break the loop:
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                // If so, mark as a switch and break the loop:
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+                        /* If a switch has been marked, make the switch
+                        and mark that a switch has been done: */
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                        // Each time a switch is done, increase this count by 1:
+                        switchcount++;
+                    } else {
+                        /* If no switching has been done AND the direction is "asc",
+                        set the direction to "desc" and run the while loop again. */
+                        if (switchcount == 0 && dir == "asc") {
+                            dir = "desc";
+                            switching = true;
+                        }
+                    }
+                }
+            }
+
+
         function AccountLoad() {
 
             var tableData = "";
@@ -3452,6 +3513,66 @@ $.ajax({
             $("#cancelBusiness").prop("hidden", true);
 
         }
+
+
+        function revenueLoad() {
+
+                var tableData;
+
+             //   $("#screenloading").css('display', 'block');
+
+                var url = "https://localhost:9090/revenueresource";
+
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+
+                    //    $("#screenloading").css('display', 'none');
+
+                     //   $("#bpcount").text(result[0].length);
+
+                        for (var i = 0; i < result[0].length; i++) {
+
+
+                            // if (result[0][i].BPName == null || result[0][i].BPName == 0) {
+                            //     result[0][i].BPName = "";
+                            // }
+                            // if (result[0][i].city == null || result[0][i].city == 0) {
+                            //     result[0][i].city = "";
+                            // }
+                            // if (result[0][i].MainContact == null || result[0][i].MainContact == 0) {
+                            //     result[0][i].MainContact = "";
+                            // }
+                            // if (result[0][i].country == null || result[0][i].country == 0) {
+                            //     result[0][i].country = "";
+                            // }
+
+
+                            tableData = tableData + "  <tr> " +
+
+                                "<td >" + result[0][i].BPStatus + "</td>" +
+                                "<td >" + result[0][i].BPID + "</td>" +
+                                "<td >" + result[0][i].BPName + "</td>" +
+                                "<td >" + result[0][i].city + "</td>" +
+                                "<td >" + result[0][i].MainContact + "</td>" +
+                                "<td >" + result[0][i].createddate + "</td>" +
+                                "<td >" + result[0][i].country + "</td>" +
+                                "<td >" + result[0][i].BPType + "</td>" +
+
+
+                                "</tr>";
+                        }
+
+                        $("#revenueresourceTable").html(tableData);
+                    }
+
+                });
+
+            }
+
+
 
         function leadLoad() {
 
@@ -5291,6 +5412,17 @@ background-size: 8%;'>
                         </div>
                     </a>
                 </li>
+                
+                <li title="Revenue & Resource Forecast">
+                    <a id="navlink_business" class="sidebar_navlink " href="#revenueresourceTab" data-toggle="tab"
+                        onclick="revenueLoad();">
+                        <div>
+                            <div class="navlink_img" id="navlink_project_img"></div>
+                            <span class="">Revenue & Resource Forecast</span>
+                        </div>
+                    </a>
+                </li>
+                
                 <li title="Emails">
                     <a id="navlink_email" class="sidebar_navlink " href="#homeTab" data-toggle="tab">
                         <div>
@@ -5364,10 +5496,22 @@ background-size: 8%;'>
                                                         class="caret"></span></a>
                                                 <!--Menu items are set on demand via ins.buttonBar.js-->
                                             </div>
-                                            <div class="btn-group" id="btnFilters">
-                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
-                                                        class="icon-filter"></i></a>
-                                            </div>
+                                            <div class="btn-group " id="btnFilters" style=" display: inline-block; ">
+                                                    <a class="btn " data-toggle="dropdown" id="toggleFilters" title="List View Filters">
+                                                        <i class="icon-filter"></i>
+                                                         </a>
+    
+                                                                 <ul class="dropdown-menu">
+                                                                    <li><a onclick="sortTable(1,'myContactTable')" href="#">Name</a></li>
+                                                                    <li><a onclick="sortTable(2,'myContactTable')" href="#">Account</a></li>
+                                                                    <li><a onclick="sortTable(3,'myContactTable')" href="#">Function</a></li>
+                                                                    <li><a onclick="sortTable(4,'myContactTable')" href="#">Department</a></li>
+                                                                    <li><a onclick="sortTable(5,'myContactTable')" href="#">Phone</a></li>
+                                                                    <li><a onclick="sortTable(6,'myContactTable')" href="#">Mobile</a></li>
+                                                                    <li><a onclick="sortTable(7,'myContactTable')" href="#">Email</a></li>
+                                                                    <li><a onclick="sortTable(8,'myContactTable')" href="#">Status</a></li>
+                                                                  </ul> 
+                                                </div>
 
                                             <div class="btn-group">
                                                 <button id="toggleSidebar" type="button" class="btn" 
@@ -5732,9 +5876,25 @@ background-size: 8%;'>
                                                         class="caret"></span></a>
                                                 <!--Menu items are set on demand via ins.buttonBar.js-->
                                             </div>
-                                            <div class="btn-group" id="btnFilters">
-                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
-                                                        class="icon-filter"></i></a>
+                                            <div class="btn-group " id="btnFilters" style=" display: inline-block; ">
+                                                <a class="btn " data-toggle="dropdown" id="toggleFilters" title="List View Filters">
+                                                    <i class="icon-filter"></i>
+                                                     </a>
+
+                                                             <ul class="dropdown-menu">
+                                                                <li><a onclick="sortTable(0,'myLeadTable')" href="#">Name</a></li>
+                                                                <li><a onclick="sortTable(1,'myLeadTable')" href="#">Contact First Name</a></li>
+                                                                <li><a onclick="sortTable(2,'myLeadTable')" href="#">Contact Second Name</a></li>
+                                                                <li><a onclick="sortTable(3,'myLeadTable')" href="#">Company/Customer</a></li>
+                                                                <li><a onclick="sortTable(4,'myLeadTable')" href="#">Qualification Level</a></li>
+                                                                <li><a onclick="sortTable(5,'myLeadTable')" href="#">Status</a></li>
+                                                                <li><a onclick="sortTable(6,'myLeadTable')" href="#">Source</a></li>
+                                                                <li><a onclick="sortTable(7,'myLeadTable')" href="#">Priority</a></li>
+                                                                <li><a onclick="sortTable(8,'myLeadTable')" href="#">Start Date</a></li>
+                                                                <li><a onclick="sortTable(9,'myLeadTable')" href="#">End Date</a></li>
+                                                                <li><a onclick="sortTable(10,'myLeadTable')" href="#">Category</a></li>
+                                                                <li><a onclick="sortTable(11,'myLeadTable')" href="#">Owner</a></li>
+                                                              </ul> 
                                             </div>
 
 
@@ -6473,9 +6633,20 @@ background-size: 8%;'>
                                                         class="caret"></span></a>
                                                 <!--Menu items are set on demand via ins.buttonBar.js-->
                                             </div>
-                                            <div class="btn-group" id="btnFilters">
-                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
-                                                        class="icon-filter"></i></a>
+                                            <div class="btn-group " id="btnFilters" style=" display: inline-block; ">
+                                                <a class="btn " data-toggle="dropdown" id="toggleFilters" title="List View Filters">
+                                                    <i class="icon-filter"></i>
+                                                     </a>
+
+                                                        <ul class="dropdown-menu">
+                                                            <li><a onclick="sortTable(0,'myServiceofferingTable')" href="#">ID</a></li>
+                                                            <li><a onclick="sortTable(1,'myServiceofferingTable')" href="#">Business Unit</a></li>
+                                                            <li><a onclick="sortTable(2,'myServiceofferingTable')" href="#">Product</a></li>
+                                                            <li><a onclick="sortTable(3,'myServiceofferingTable')" href="#">Location</a></li>
+                                                            <li><a onclick="sortTable(4,'myServiceofferingTable')" href="#">Engagement Type</a></li>
+                                                            <li><a onclick="sortTable(5,'myServiceofferingTable')" href="#">Unit of Measure</a></li>
+                                                            <li><a onclick="sortTable(6,'myServiceofferingTable')" href="#">Old Service Offering Combination</a></li>
+                                                        </ul> 
                                             </div>
 
 
@@ -6658,6 +6829,309 @@ background-size: 8%;'>
             </div>
             
 
+
+            <div id="revenueresourceTab" class="tab tab-pane ">
+                <div id="main" class="">
+
+                    <div id="main-container" class="list-view contact">
+                        <div id="content" class="">
+                            <header class="head-list">
+                                <div id="default_controls">
+                                    <div class="pull-right right10">
+
+                                        <div class="pull-right right10">
+                                            <div class="btn-group right10" id="tagActionDropdown"
+                                                style="display: none;">
+                                                <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                    title="Tag Actions">
+                                                    <i class="mdi mdi-tag mdi-19px"></i> <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu  pull-right">
+                                                    <li class="disabled"><a href="javascript:;" title="Tag Actions">Tag
+                                                            Actions</a></li>
+                                                    <li><a href="javascript:;" id="deleteTag" title="Delete This Tag"><i
+                                                                class="mdi mdi-18px  mdi-delete"></i> Delete This
+                                                            Tag</a></li>
+                                                    <li><a href="javascript:;" id="renameTag" title="Rename This Tag"><i
+                                                                class="mdi mdi-textbox mdi-18px"></i> Rename This
+                                                            Tag</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="btn-group" id="btnRefresh" onclick="revenueLoad()">
+                                                <a class="btn" id="refreshList" title="Refresh List"><i
+                                                        class="mdi mdi-refresh mdi-19px"></i></a>
+                                            </div>
+                                            <div class="btn-group" id="btnControls">
+                                                <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                    title="List View Controls"><i class="icon-cog"></i> <span
+                                                        class="caret"></span></a>
+                                                <!--Menu items are set on demand via ins.buttonBar.js-->
+                                            </div>
+                                            <div class="btn-group" id="btnFilters">
+                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
+                                                        class="icon-filter"></i></a>
+                                            </div>
+
+
+                                            <div class="btn-group">
+                                                <button id="toggleSidebar" type="button" class="btn"
+                                                    title="Show Sidebar"><i class="icon-indent-right"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="title">
+                                        <div class="btn-group">
+                                            <button id="btn-list-title" class="btn  " title="">
+                                                Authorized CRM Opportunities : (<span id=bpcount></span>)
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </header>
+                        </div>
+
+                        <div id="main-content" class="contact">
+
+                            <div id="tbMarksContainer">
+
+                                <div class="entity-list" id="entity-list">
+
+                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+
+                                        <table class="table table-bordered" id="myrevenue&resoyrceTable">
+
+                                            <thead
+                                                style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
+
+                                                <tr style="  font-weight:bold ; ">
+                                                    <th scope="col">Vertical Unit</th>
+                                                    <th scope="col">Account Name</th>
+                                                    <th scope="col">Customer Name</th>
+                                                    <th scope="col">Opportunity Id</th>
+                                                    <th scope="col">Old C4C Opportunity Id</th>
+                                                    <th scope="col">Opportunity Description</th>
+                                                    <th scope="col">Sales Phase</th>
+                                                    <th scope="col">Opportunity Absolute Value</th>
+                                                    <th scope="col">Weighted Value</th>
+                                                    <th scope="col">Opportunity Status</th>
+                                                    <th scope="col">Start Date</th>
+                                                    <th scope="col">Close Date</th>
+                                                    <th scope="col">Sales Manager</th>
+                                                    <th scope="col">Planning Status</th>
+                                                    <th scope="col">Delivery Agreement</th>
+                                                    <th scope="col">Delivery Rejection Remarks</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="revenueresourceTable">
+
+
+                                            </tbody>
+
+                                        </table>
+                                        <div class="modal fade docs-example-modal-lg" id="rrmodal" tabindex="-1"
+                                            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header"
+                                                        style="background-color: #e6e0e094; color:black;">
+                                                        <h6 class="modal-title">Revenue & Resource Forecast</h1>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                onclick="" style="color: #000; opacity:1.5;">×</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+
+                                                        <form class="form-signin" action="/modal" method="post">
+
+                                                            <div class="row">
+
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">Status</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="status" id="status"
+                                                                        style="height: 71%;">
+                                                                </div>
+
+                                                                <div class="col-sm-2">
+                                                                    Business Partner Id</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="businesspId" id="businesspId"
+                                                                        style="height: 71%;">
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">
+                                                                    Business Partner</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="business" id="business"
+                                                                        style="height: 71%;">
+                                                                </div>
+
+
+                                                                <div class="col-sm-2">City</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="cityB" id="cityB"
+                                                                        style="height: 71%;">
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">Main Contact</div>
+
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="mainc" id="mainc"
+                                                                        style="height: 71%;">
+                                                                </div>
+
+                                                                <div class="col-sm-2">
+                                                                    Created On</div>
+
+                                                                <div class="col-sm-3">
+                                                                    <input type="date" required class="form-control"
+                                                                        disabled name="created" id="created"
+                                                                        style="height: 71%;">
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2"> Country</div>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-control" name="countryb"
+                                                                        disabled id="countryb" style="height: 71%;">
+                                                                        <option selected></option>
+                                                                        <option>Arab Emirates</option>
+                                                                        <option>Afghanisthan</option>
+                                                                        <option>Albania</option>
+                                                                        <option>Armenia</option>
+                                                                        <option>Angola</option>
+                                                                        <option>Argentina</option>
+                                                                        <option>Zimbabwe</option>
+                                                                        <option>Bahamas</option>
+                                                                        <option>Bahrain</option>
+                                                                        <option>Bangladesh</option>
+                                                                        <option>Barbados</option>
+                                                                        <option>Belarus</option>
+                                                                        <option>Belgium</option>
+                                                                        <option>Belize</option>
+                                                                        <option>Benin</option>
+                                                                        <option>Bermuda</option>
+                                                                        <option>Bhutan</option>
+                                                                        <option>Bolivia</option>
+
+                                                                    </select>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-1"></div>
+                                                                    <div class="col-sm-2">Type</div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" required class="form-control"
+                                                                            disabled name="typeb" id="typeb"
+                                                                            style="height: 71%;">
+                                                                    </div>
+                                                                    <div class="col-sm-1"></div>
+                                                                </div>
+
+                                                                <br>
+                                                            </div>
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+
+                                                                <button type="submit" id="saveBusiness"
+                                                                    class="btn btn-primary" data-dismiss="modal" hidden
+                                                                    onclick="">save</button>
+                                                                <button type="button" id="cancelBusiness" class="btn"
+                                                                    data-dismiss="modal" onclick=""
+                                                                    hidden>cancel</button>
+                                                                <button type="submit" id="editBusiness"
+                                                                    class="btn btn-primary" onclick="">Edit</button>
+
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
+                                <div class="col-sm-2"></div>
+                                        <div class="col-sm-10">
+                            
+                                                <h6>Details: Business Partners</h6>
+                                        </div>
+                                        
+                                        <div class="col-sm-2"></div>
+                                            <div class="col-sm-10">
+                                            <h6> Main Address</h6>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-5">
+                                                 Business Partner :
+                                            </div>
+                            
+                                            <div class="col-sm-5">
+                                                    Status :
+                                               </div>
+                                              
+                                               <div class="col-sm-2"></div>
+                                               <div class="col-sm-5">
+                                                    Business Partner Id :
+                                               </div>
+                                               <div class="col-sm-5">
+                                                    City :
+                                               </div>
+                            
+                                               <div class="col-sm-2"></div>
+                                               <div class="col-sm-5">
+                                                    Main Contact :
+                                               </div>
+                                               <div class="col-sm-5">
+                                                    Country :
+                                               </div>
+                            
+                                               <div class="col-sm-2"></div>
+                                               <div class="col-sm-5">
+                                                    Created On :
+                                               </div>
+                                               <div class="col-sm-5">
+                                                    Type :
+                                               </div>
+                            
+                                        </div> -->
+
+                </div>
+
+            </div>
+
+
             <div id="accountTab" class="tab tab-pane ">
                 <div id="main" class="">
 
@@ -6706,9 +7180,23 @@ background-size: 8%;'>
                                                         class="caret"></span></a>
                                                 <!--Menu items are set on demand via ins.buttonBar.js-->
                                             </div>
-                                            <div class="btn-group" id="btnFilters">
-                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
-                                                        class="icon-filter"></i></a>
+                                            <div class="btn-group " id="btnFilters" style=" display: inline-block; ">
+                                                <a class="btn " data-toggle="dropdown" id="toggleFilters" title="List View Filters">
+                                                    <i class="icon-filter"></i>
+                                                     </a>
+
+                                                             <ul class="dropdown-menu">
+                                                                <li><a onclick="sortTable(1,'myAccountTable')" href="#">Account ID</a></li>
+                                                                <li><a onclick="sortTable(2,'myAccountTable')" href="#">Old C4C Account ID</a></li>
+                                                                <li><a onclick="sortTable(3,'myAccountTable')" href="#">Name</a></li>
+                                                                <li><a onclick="sortTable(4,'myAccountTable')" href="#">Owner</a></li>
+                                                                <li><a onclick="sortTable(5,'myAccountTable')" href="#">Type</a></li>
+                                                                <li><a onclick="sortTable(6,'myAccountTable')" href="#">Status</a></li>
+                                                                <li><a onclick="sortTable(7,'myAccountTable')" href="#">Account Category</a></li>
+                                                                <li><a onclick="sortTable(8,'myAccountTable')" href="#">Parent Account</a></li>
+                                                                <li><a onclick="sortTable(9,'myAccountTable')" href="#">Created By</a></li>
+                                                                <li><a onclick="sortTable(10,'myAccountTable')" href="#">Created On</a></li>
+                                                              </ul> 
                                             </div>
 
 
@@ -7222,8 +7710,8 @@ background-size: 8%;'>
                                                     <div class="col-sm-2" style="margin:2px;">
                                                             <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
-                                                    <div class="col-sm-1" style="margin:2px;">
-                                                            <button type="button"  style="width:103%;color: #fff;
+                                                    <div class="col-sm-1" style="margin:5px;">
+                                                            <button type="button"  style="width:140%;color: #fff; margin-left: -15px;
                                                             background-color: #337ab7">Clear Filter</button>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
@@ -8085,14 +8573,24 @@ background-size: 8%;'>
                                             <div class="btn-group" id="btnControls">
                                                 <a class="btn dropdown-toggle" data-toggle="dropdown"
                                                     title="List View Controls"><i class="icon-cog"></i> <span
-                                                        class="caret"></span></a>
+                                                        class="caret"></span>
+                                                    </a>
                                                 <!--Menu items are set on demand via ins.buttonBar.js-->
                                             </div>
-                                            <div class="btn-group" id="btnFilters">
-                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
-                                                        class="icon-filter"></i></a>
-                                            </div>
+                                            <div class="btn-group " id="btnFilters" style=" display: inline-block; ">
+                                                <a class="btn " data-toggle="dropdown" id="toggleFilters" title="List View Filters">
+                                                    <i class="icon-filter"></i>
+                                                     </a>
 
+                                                             <ul class="dropdown-menu">
+                                                                <li><a onclick="sortTable(1,'myTableEmp')" href="#">Name</a></li>
+                                                                <li><a onclick="sortTable(2,'myTableEmp')" href="#">Email</a></li>
+                                                                <li><a onclick="sortTable(3,'myTableEmp')" href="#">Mobile</a></li>
+                                                                <li><a onclick="sortTable(4,'myTableEmp')" href="#">Phone</a></li>
+                                                                <li><a onclick="sortTable(5,'myTableEmp')" href="#">Manager</a></li>
+                                                              </ul> 
+                                            </div>
+                                           
 
                                             <div class="btn-group">
                                                 <button id="toggleSidebar" type="button" class="btn"

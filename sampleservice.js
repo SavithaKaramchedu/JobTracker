@@ -104,7 +104,7 @@ exports.getEmpPage = function (req, res) {
 
 
     let query = "CALL procListAllEmployees()"; // query database to get all the employees
-
+//console.log(query);
     db.query(query, (err, result) => {
 
         if (err) {
@@ -639,6 +639,21 @@ exports.BusinessPage = function (req, res) {
     });
 };
 
+exports.RevenueResourcePage = function (req, res) {
+
+    let query = "CALL `devc4c`.`procListRevenueSplitRecords`()";
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+            res.redirect('/');
+
+        }
+        res.status(200).json(result);
+
+    });
+};
+
 exports.addAccountPage = function (req, res) {
     
     let message = '';
@@ -774,7 +789,6 @@ exports.updateaccount = function (req, res) {
     var Sid = req.body.id;
     let parentacc = req.body.parentaccount;
     let accountcat = req.body.accountcategory;
-    console.log(accountcat);
     let nam = req.body.name;
     let salesregion = req.body.salesregion;
     let webs = req.body.website;
