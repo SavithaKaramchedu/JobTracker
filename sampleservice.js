@@ -1316,6 +1316,21 @@ exports.getServiceoffering = function (req, res) {
     });
 };
 
+exports.serviceOfferingdisplay = function (req, res) {
+    
+    var Sid = req.params.i;
+   
+    let query = 'call procDisplayOnServiceOfferingMouseHoover ("' + Sid + '")'
+    db.query(query, (err, result) => {
+        if (err) {
+            console.log("db error");
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+    });
+};
+
+
 
 
 exports.updatecontphone = function (req, res) {
@@ -1370,3 +1385,159 @@ db.query(query, (err, result) => {
    
 
 
+exports.getbu = function (req, res) {
+
+
+
+    let query = 'call procLookUpBusinessUnits()'
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+exports.getlocation = function (req, res) {
+
+
+
+    let query = 'call proclookupdeliverylocationsforresourceplanning()'
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.getengagmentType = function (req, res) {
+
+
+
+    let query = 'call procLookUpEngagementTypes()'
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.getUOM = function (req, res) {
+
+
+
+    let query = 'call procLookUpUOM()'
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.getVerticalByBu = function (req, res) {
+
+    let ibu = req.params.buid;
+
+    let query = 'call procLookUpVerticalByBU("' + ibu + '")'
+//console.log(query);
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.getPortfolioByBu = function (req, res) {
+
+    let ibu = req.params.buid;
+
+    let query = 'call procLookUpPortfolios("' + ibu + '")'
+//console.log(query);
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.getSo = function (req, res) {
+
+    let ipid = req.params.pid;
+
+    let query = 'call procLookUpOfferings("' + ipid + '")'
+//console.log(query);
+    db.query(query, (err, result) => {
+
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.addServiceoffering = function (req, res) {
+ 
+     let message = '';
+     let iBuID=req.body.iBusinessUnitID;
+    // console.log(iLeadID);
+     let ipid = req.body.iPortfolioID;
+     let ioid = req.body.iOfferingID;
+     let ivid = req.body.iVerticalID;
+     let ilid = req.body.iDeliveryLocationID;
+     let ieid = req.body.iEngagementTypeID;
+     let iserviceoffering = req.body.iServiceOffering;
+     let iUOMid = req.body.iUnitOfMeasureID;
+     let inotes = req.body.iNotes;
+     let iassign = req.body.iIsAssignmentAllowed;       
+     let iCreated = req.body.iCreatedBy;
+     
+     let query = "call `procInsertServiceOffering`('" + iBuID + "','" + ipid + "', '" + ioid + "','" + ivid + "','" 
+     + ilid + "', '" + ieid + "', '" + iserviceoffering + "', '" + iUOMid + "', '" 
+     + inotes + "','" + iassign + "','" + iCreated + "', @output , @output2)";
+    console.log(query);
+         db.query(query, (err, result2) => {
+             if (err) {
+              //   console.log(err)
+                 return res.status(500).send(err);
+             }
+             let query1="SELECT @output as oServiceOfferingID, @output2 as oServiceOfferingCode";
+             db.query(query1, (err, result3) => {
+                 if (err) {
+                //     console.log(err)
+                     return res.status(500).send(err);
+                 }
+                 res.status(200).json(result3);
+               //  console.log(result3);
+             });
+            
+         });
+     
+ };
