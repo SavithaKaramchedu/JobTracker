@@ -1087,7 +1087,7 @@
             });
             leadLoad();
         }
-
+ 
 
         function addacccontID(j, k) {
             var data = {
@@ -1704,7 +1704,7 @@
             });
 
         }
-
+      
         function editAccount() {
             //acceditstatedropdown()
   $("#parentshare").show();
@@ -2352,7 +2352,7 @@ $.ajax({
                         var contid = "\"" + result[0][i].contactid + "\"";
                         tableData = tableData + "  <tr> " +
 
-                            "<td id='' hidden>" + result[0][i].contactid + "</td>" +
+                            //"<td id='' hidden>" + result[0][i].contactid + "</td>" +
                             "<td >" + "<a href='#cmodal' data-toggle='modal' data-backdrop='static' data-keyboard='false' onclick='dropdownfun(),dropdowndep(),dropdownacademictitles(),dropdownsalutations(),dropdownbestreachedby(),dropdowncontpermission(),recorddisplaycont(" + contid + ")'>" + result[0][i].Name + "</a>" + "</td>" +
                             "<td >" + result[0][i].Account + "</td>" +
                             "<td >" + result[0][i].jobfunction + "</td>" +
@@ -5282,6 +5282,15 @@ background-size: 8%;'>
                         </div>
                     </a>
                 </li>
+                <li title="Tie-In">
+                    <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
+                       >
+                        <div>
+                            <div class="navlink_img" id="navlink_project_img"></div>
+                            <span class="">TIE-IN</span>
+                        </div>
+                    </a>
+                </li>
                 <li title="Emails">
                     <a id="navlink_email" class="sidebar_navlink " href="#homeTab" data-toggle="tab">
                         <div>
@@ -5361,7 +5370,7 @@ background-size: 8%;'>
                                             </div>
 
                                             <div class="btn-group">
-                                                <button id="toggleSidebar" type="button" class="btn"
+                                                <button id="toggleSidebar" type="button" class="btn" 
                                                     title="Show Sidebar"><i class="icon-indent-right"></i></button>
                                             </div>
                                         </div>
@@ -5730,7 +5739,7 @@ background-size: 8%;'>
 
 
                                             <div class="btn-group">
-                                                <button id="toggleSidebar" type="button" class="btn"
+                                                <button id="toggleSidebar" type="button" class="btn" 
                                                     title="Show Sidebar"><i class="icon-indent-right"></i></button>
                                             </div>
                                         </div>
@@ -5756,7 +5765,7 @@ background-size: 8%;'>
                         <div id="main-content" class="contact" style="overflow: auto;height:400px;">
 
                             <div class="entity-list" id="entity-list">
-
+                                <a id="dlink" style="display:none;"></a>
                                 <table class="table table-respnosive table table-bordered" id="myLeadTable">
 
                                     <thead class="table"
@@ -6647,6 +6656,7 @@ background-size: 8%;'>
                 </div>
 
             </div>
+            
 
             <div id="accountTab" class="tab tab-pane ">
                 <div id="main" class="">
@@ -6703,7 +6713,7 @@ background-size: 8%;'>
 
 
                                             <div class="btn-group">
-                                                <button id="toggleSidebar" type="button" class="btn"
+                                                <button id="toggleSidebar" type="button" class="btn" 
                                                     title="Show Sidebar"><i class="icon-indent-right"></i></button>
                                             </div>
                                         </div>
@@ -6730,6 +6740,7 @@ background-size: 8%;'>
 
 
                                     <div class="table table-responsive" style="height:400px;overflow: auto;">
+                                        <a id="dlink" style="display:none;"></a>
                                         <table class="table table-bordered" id="myAccountTable">
                                             <thead
                                                 style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px;white-space: nowrap;">
@@ -7090,7 +7101,326 @@ background-size: 8%;'>
                 </div>
 
             </div>
+            <div id="tie-intab" class="tab tab-pane ">
+                <div id="main" class="">
 
+                    <div id="main-container" class="list-view contact">
+                        <div id="content" class="">
+                            <header class="head-list">
+                                <div id="default_controls">
+                                    <!-- <div class="pull-right right10">
+
+                                        <div class="pull-right right10">
+                                            <div class="btn-group right10" id="tagActionDropdown"
+                                                style="display: none;">
+                                                <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                    title="Tag Actions">
+                                                    <i class="mdi mdi-tag mdi-19px"></i> <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu  pull-right">
+                                                    <li class="disabled"><a href="javascript:;" title="Tag Actions">Tag
+                                                            Actions</a></li>
+                                                    <li><a href="javascript:;" id="deleteTag" title="Delete This Tag"><i
+                                                                class="mdi mdi-18px  mdi-delete"></i> Delete This
+                                                            Tag</a></li>
+                                                    <li><a href="javascript:;" id="renameTag" title="Rename This Tag"><i
+                                                                class="mdi mdi-textbox mdi-18px"></i> Rename This
+                                                            Tag</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="btn-group" id="btnRefresh" onclick="businessLoad()">
+                                                <a class="btn" id="refreshList" title="Refresh List"><i
+                                                        class="mdi mdi-refresh mdi-19px"></i></a>
+                                            </div>
+                                            <div class="btn-group" id="btnControls">
+                                                <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                    title="List View Controls"><i class="icon-cog"></i> <span
+                                                        class="caret"></span></a>
+                                               
+                                            </div>
+                                            <div class="btn-group" id="btnFilters">
+                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
+                                                        class="icon-filter"></i></a>
+                                            </div>
+
+
+                                            <div class="btn-group">
+                                                <button id="toggleSidebar" type="button" class="btn"
+                                                    title="Show Sidebar"><i class="icon-indent-right"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div> -->
+
+                                    <div class="title">
+                                        <div class="btn-group">
+                                            <button id="btn-list-title" class="btn  " title="">
+                                                <b>Sales and Delivery Lock-In</b>
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </header>
+                        </div>
+
+                        <div id="main-content" class="contact">
+                            <div style="background-color: #f5f5f5;border: 1px solid #e3e3e3;">
+                                <div class="row">
+                                        <div class="col-sm-2" style="margin-left:20px;">
+                                                <b>Vertical Group</b>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                <b>Vertical Unit</b>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                <b>Year</b>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                <b>Quarter</b>
+                                            </div>
+                                  </div>
+                                  <div class="row">
+                                        <div class="col-sm-2" style="margin-left:20px;">
+                                                <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                    <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                    <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                    <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                            </div>
+                                  </div>
+                                  <div class="row">
+                                        <div class="col-sm-2" style="margin-left:20px;">
+                                        <b>Regional Manager</b>
+                                        </div>
+                                        <div class="col-sm-2" style="margin:2px;">
+                                                <b>Territory Manager</b>
+                                            </div>
+                                            <div class="col-sm-2" style="margin:2px;">
+                                                <b>Account</b>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-sm-2" style="margin-left:20px;">
+                                                        <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    </div>
+                                                    <div class="col-sm-2" style="margin:2px;">
+                                                            <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    </div>
+                                                    <div class="col-sm-2" style="margin:2px;">
+                                                            <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    </div>
+                                                    <div class="col-sm-2" style="margin:2px;">
+                                                            <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    </div>
+                                                    <div class="col-sm-1" style="margin:2px;">
+                                                            <button type="button"  style="width:103%;color: #fff;
+                                                            background-color: #337ab7">Clear Filter</button>
+                                                    </div>
+                                                    <div class="col-sm-2" style="margin:2px;">
+                                                            <span style="float: right !important; ">
+                                                                    <a href="#" ><img src="images/export-to-excel-image.png" style="width: 27px;"></a>
+                                                                </span>
+                                                                
+                                                                        
+                                                                        <input class="form-control" type="text"  placeholder="Search" style="z-index:0;width: 78%;border-radius: 5px;height:32px;">
+                                                                        
+                                                                       
+                                                    </div>
+                                          </div>
+
+                            </div>
+                            <div id="tbMarksContainer">
+
+                                <div class="entity-list" id="entity-list">
+
+                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+
+                                        <table class="table table-bordered" id="mytie-inTable">
+
+                                            <thead
+                                                style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
+
+                                                <tr style="  font-weight:bold ; ">
+                                                    <th scope="col">Account Name</th>
+                                                    <th scope="col">Sales Total</th>
+                                                    <th scope="col">Delivery Total</th>
+                                                    <th scope="col">Delivery Sales Differ</th>
+                                                    <th scope="col">Total TieIn No.</th>
+                                                    <th scope="col">Quarter</th>
+                                                    <th scope="col">Regional Manager</th>
+                                                    <th scope="col">Territory Manager</th>
+                                                    <th scope="col">VDG</th>
+                                                    <th scope="col">VDU</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="tie-inTable">
+
+
+                                            </tbody>
+
+                                        </table>
+                                        <!-- <div class="modal fade docs-example-modal-lg" id="bpmodal" tabindex="-1"
+                                            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                   
+                                                    <div class="modal-header"
+                                                        style="background-color: #e6e0e094; color:black;">
+                                                        <h6 class="modal-title">Business Partner</h1>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                onclick="" style="color: #000; opacity:1.5;">×</button>
+                                                    </div>
+
+                                                   
+                                                    <div class="modal-body">
+
+                                                        <form class="form-signin" action="/modal" method="post">
+
+                                                            <div class="row">
+
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">Status</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="status" id="status"
+                                                                        style="height: 71%;">
+                                                                </div>
+
+                                                                <div class="col-sm-2">
+                                                                    Business Partner Id</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="businesspId" id="businesspId"
+                                                                        style="height: 71%;">
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">
+                                                                    Business Partner</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="business" id="business"
+                                                                        style="height: 71%;">
+                                                                </div>
+
+
+                                                                <div class="col-sm-2">City</div>
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="cityB" id="cityB"
+                                                                        style="height: 71%;">
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2">Main Contact</div>
+
+                                                                <div class="col-sm-3">
+                                                                    <input type="text" required class="form-control"
+                                                                        disabled name="mainc" id="mainc"
+                                                                        style="height: 71%;">
+                                                                </div>
+
+                                                                <div class="col-sm-2">
+                                                                    Created On</div>
+
+                                                                <div class="col-sm-3">
+                                                                    <input type="date" required class="form-control"
+                                                                        disabled name="created" id="created"
+                                                                        style="height: 71%;">
+                                                                </div>
+                                                                <div class="col-sm-1"></div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-sm-1"></div>
+                                                                <div class="col-sm-2"> Country</div>
+                                                                <div class="col-sm-3">
+                                                                    <select class="form-control" name="countryb"
+                                                                        disabled id="countryb" style="height: 71%;">
+                                                                        <option selected></option>
+                                                                        <option>Arab Emirates</option>
+                                                                        <option>Afghanisthan</option>
+                                                                        <option>Albania</option>
+                                                                        <option>Armenia</option>
+                                                                        <option>Angola</option>
+                                                                        <option>Argentina</option>
+                                                                        <option>Zimbabwe</option>
+                                                                        <option>Bahamas</option>
+                                                                        <option>Bahrain</option>
+                                                                        <option>Bangladesh</option>
+                                                                        <option>Barbados</option>
+                                                                        <option>Belarus</option>
+                                                                        <option>Belgium</option>
+                                                                        <option>Belize</option>
+                                                                        <option>Benin</option>
+                                                                        <option>Bermuda</option>
+                                                                        <option>Bhutan</option>
+                                                                        <option>Bolivia</option>
+
+                                                                    </select>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-1"></div>
+                                                                    <div class="col-sm-2">Type</div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <input type="text" required class="form-control"
+                                                                            disabled name="typeb" id="typeb"
+                                                                            style="height: 71%;">
+                                                                    </div>
+                                                                    <div class="col-sm-1"></div>
+                                                                </div>
+
+                                                                <br>
+                                                            </div>
+                                                          
+                                                            <div class="modal-footer">
+
+                                                                <button type="submit" id="saveBusiness"
+                                                                    class="btn btn-primary" data-dismiss="modal" hidden
+                                                                    onclick="">save</button>
+                                                                <button type="button" id="cancelBusiness" class="btn"
+                                                                    data-dismiss="modal" onclick=""
+                                                                    hidden>cancel</button>
+                                                                <button type="submit" id="editBusiness"
+                                                                    class="btn btn-primary" onclick="">Edit</button>
+
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+
+                </div>
+
+            </div>
             <div id="opportunityTab" class="tab tab-pane ">
                 <div id="main">
 
@@ -7141,7 +7471,7 @@ background-size: 8%;'>
 
 
                                             <div class="btn-group">
-                                                <button id="toggleSidebar" type="button" class="btn"
+                                                <button id="toggleSidebar" type="button" class="btn" 
                                                     title="Show Sidebar"><i class="icon-indent-right"></i></button>
                                             </div>
                                         </div>
@@ -7175,494 +7505,7 @@ background-size: 8%;'>
                             </header>
                         </div>
                         <div id="main-content" class="contact">
-                            <div class="modal fade" class="modal modal-fixed-footer" id="opportunityeditModal"
-                                style="height:400px;top:20%;">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header"
-                                            style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: -20px;">
-                                            <h4 class="modal-title" id="leadhead">Opportunity Information : </h4>
-                                            <h4 class="modal-title" id="saleshead" style="display: none">Sales Team :
-                                            </h4>
-                                            <h4 class="modal-title" id="revenuehead" style="display: none">Revenue Split
-                                                : </h4>
-                                            <h4 class="modal-title" id="overviewhead" style="display: none">Overview:
-                                            </h4>
-                                            <button type="button" id="oppexit" class="close" data-dismiss="modal"
-                                                style="color: white">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-
-                                        <div class="modal-body" style="font-size:12px;overflow: auto;height:200px;">
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Name :</label></div>
-                                                <div class="col-sm-3">
-                                                    <p id="oid" style="display:none;"></p>
-                                                    <input type="text" class="form-control form-control-sm" id="name"
-                                                        placeholder="" style="height: 24px;" disabled>
-                                                </div>
-                                                <div class="col-sm-2">Account :</div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control form-control-sm" id="account"
-                                                        placeholder="" style=" height: 24px;" disabled>
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="accounthiddenid" placeholder=""
-                                                        style=" height: 24px; display: none">
-
-                                                </div>
-                                                <div class="col-sm-1"><a href="#parrentaccModal" data-toggle="modal"
-                                                        onclick="parentAccountDisplay()"><span class="fa fa-share"
-                                                            id="accdisplayshare1" style="margin-left: -21px;"></span>
-                                                    </a></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Source :</label></div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="sourceedit"
-                                                        style="height:27px;width:157px;" disabled>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Primary
-                                                        Contact:</label></div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="primarycontact" placeholder=""
-                                                        style=" height: 22px;width:157px; " disabled>
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="pchiddenid" placeholder=""
-                                                        style=" height: 24px; display: none">
-
-                                                </div>
-                                                <div class="col-sm-1"><a href="#leadcontmodal" data-toggle="modal"
-                                                        onclick="leadcontactdisplay()"><span class="fa fa-share"
-                                                            id="accdisplayshare2" style="margin-left: -21px;"></span>
-                                                    </a></div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"><span
-                                                            style="color: red">*</span> Expected Value: </label></div>
-                                                <div class="col-sm-1">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="exceptedvalue" placeholder=""
-                                                        style="height: 24px;width: 57px;" disabled required>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <select class="strike" id="sell" style="height:24px ;width:94px;"
-                                                        disabled>
-                                                        <option>USD</option>
-                                                        <option>AUD</option>
-                                                        <option>EUR</option>
-                                                        <option>GBP</option>
-                                                        <option>INR</option>
-                                                        <option>YEN</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Start Date :</label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <input type="date" id="StartDate" class="form-control"
-                                                        style="width:100%; height:64%; padding:2px 0px;"
-                                                        name="StartDate" disabled></div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2">Closing Date :</div>
-                                                <div class="col-sm-3">
-                                                    <input type="date" class="form-control form-control-sm" id="EndDate"
-                                                        placeholder="" style="height: 24px;" disabled>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Sales cycle :</label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="salescycle"
-                                                        style="height:26px;width:158px;" disabled>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Sales phase :</label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="salesphase"
-                                                        style="height:27px;width:159px;" disabled>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2">Probability :</div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="probability" placeholder="" style=" height: 25px;" disabled>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px;"> Publish to Forecast
-                                                        :</label></div>
-                                                <div class="col-sm-3">
-                                                    <input type="checkbox" id="publishtoforecast"
-                                                        name="publishtoforecast" checked style="width:17px;height:12px;"
-                                                        disabled>
-                                                </div>
-                                                <div class="col-sm-2">Forecast category :</div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="forecastcategory" placeholder="" style="    height: 27px;"
-                                                        disabled>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Category :</label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="category"
-                                                        style="height:25px;width:159px;" disabled>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2">Owner :</div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="owneropportunity" placeholder="" style="height: 27px;"
-                                                        disabled>
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="owneroppohiddenid" placeholder=""
-                                                        style=" height: 24px; display: none">
-
-                                                </div>
-                                                <div class="col-sm-1"><a href="#oppgifmodal" data-toggle="modal"
-                                                        onclick="ownerAccountDisplay()"><span class="fa fa-share"
-                                                            id="accdisplayshare3" style="margin-left: -21px;"></span>
-                                                    </a></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px">Proposed TCV:</label>
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="Proposed" placeholder="" style="height: 24px;width: 57px;"
-                                                        disabled>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <select class="strike" id="sell" style="height:24px ;width:94px;"
-                                                        disabled>
-                                                        <option>USD</option>
-                                                        <option>AUD</option>
-                                                        <option>EUR</option>
-                                                        <option>GBP</option>
-                                                        <option>INR</option>
-                                                        <option>YEN</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px">Total Negotiated Value
-                                                        :</label></div>
-                                                <div class="col-sm-1">
-                                                    <input type="text" class="form-control form-control-sm" id="Total"
-                                                        placeholder="" style="height: 24px;width: 57px;" disabled>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <select class="strike" id="sell" style="height:24px ;width:94px;"
-                                                        disabled>
-                                                        <option>USD</option>
-                                                        <option>AUD</option>
-                                                        <option>EUR</option>
-                                                        <option>GBP</option>
-                                                        <option>INR</option>
-                                                        <option>YEN</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px">Weighted value
-                                                        :</label></div>
-                                                <div class="col-sm-1">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="weightedvalue" placeholder=""
-                                                        style="height: 24px;width: 57px;" disabled>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <select class="strike" id="sell" style="height:24px ;width:94px;"
-                                                        disabled>
-                                                        <option>USD</option>
-                                                        <option>AUD</option>
-                                                        <option>EUR</option>
-                                                        <option>GBP</option>
-                                                        <option>INR</option>
-                                                        <option>YEN</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Vertical :</label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" id="vertical" class="form-control"
-                                                        style="width:100%; height:64%; padding:2px 0px;" name="vertical"
-                                                        disabled></div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px;"> Alliance Dependencies
-                                                        :</label></div>
-                                                <div class="col-sm-3">
-                                                    <input type="checkbox" id="AllianceDependencies"
-                                                        name="AllianceDependencies" checked
-                                                        style="width:17px;height:12px;" disabled>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Opportunity Type
-                                                        :</label></div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="type" style="height:27px;width:157px;"
-                                                        disabled>
-                                                        <option>Proactive Opportunity</option>
-                                                        <option>Reactive Opportunity</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Opportunity Status :
-                                                    </label></div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="opportunityStatus"
-                                                        style="height:27px;width:159px;" disabled>
-                                                        <option>Open</option>
-                                                        <option>In Process</option>
-                                                        <option>Won</option>
-                                                        <option>Lost</option>
-                                                        <option>Abort</option>
-                                                        <option>On Hold</option>
-                                                        <option>Converted</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2">Status : </div>
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control form-control-sm" id="Status"
-                                                        placeholder="" style=" height: 25px;" disabled>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Reason for Status
-                                                        :</label></div>
-                                                <div class="col-sm-3">
-                                                    <p id="oid" style="display:none;"></p>
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        id="reasonStatus" placeholder="" style="height: 24px;" disabled>
-                                                </div>
-                                                <div class="col-sm-2">Revenue Start Date:</div>
-                                                <div class="col-sm-3">
-                                                    <input type="date" class="form-control form-control-sm"
-                                                        id="RevenueStartDate" placeholder="" style=" height: 24px;"
-                                                        disabled>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Revenue End
-                                                        Date:</label></div>
-                                                <div class="col-sm-3">
-                                                    <p id="oid" style="display:none;"></p>
-                                                    <input type="date" class="form-control form-control-sm"
-                                                        id="RevenueEndDate" placeholder="" style="height: 24px;"
-                                                        disabled>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Sales Organization
-                                                        :</label></div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="sales" style="height:27px;width:157px;"
-                                                        disabled>
-                                                        <option>LTTS</option>
-                                                        <option>ROW1_T1</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Sales Unit : </label>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="unit" style="height:27px;width:159px;"
-                                                        disabled>
-                                                        <option>Chevron</option>
-                                                        <option>Medtronic</option>
-                                                        <option>Exxon</option>
-
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2"><label style="width:108px"> Sales Office :
-                                                    </label></div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="soffice" style="height:27px;width:159px;"
-                                                        disabled>
-                                                        <option>California</option>
-                                                        <option>Singapore</option>
-                                                        <option>Denmark</option>
-                                                        <option>Belgium</option>
-                                                        <option>Illinois</option>
-                                                        <option>Georgia</option>
-                                                        <option>Ontario</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Custom Category :
-                                                    </label></div>
-                                                <div class="col-sm-3">
-                                                    <select class="strike" id="customcategory"
-                                                        style="height:27px;width:159px;" disabled>
-                                                        <option>Solution Offering</option>
-                                                        <option>Project</option>
-                                                        <option>Staffing</option>
-                                                        <option>Allied Dependencies</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2"> <span style="color: red">*</span>Opportunity Won
-                                                    Date: </div>
-                                                <div class="col-sm-3">
-                                                    <input type="date" class="form-control form-control-sm" id="wondate"
-                                                        placeholder="" style=" height: 25px;" disabled required>
-                                                </div>
-                                                <div class="col-sm-1"></div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-1"></div>
-                                                <div class="col-sm-2"><label style="width:108px"> Note :</label></div>
-                                                <div class="col-sm-3">
-                                                    <textarea rows="3" cols="22" id="opportunitynote"
-                                                        class="form-control" style="width:100%" name="Note"
-                                                        disabled></textarea> </div>
-
-                                                <div class="col-sm-1"></div>
-                                            </div>
-
-
-                                        </div>
-
-                                        <!--Sales Team Table-->
-                                        <div id="btn-sales" style="display: none;  margin-left: 11px;width: 98%;">
-
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr style=" background-color: rgb(51, 122, 183); position: relative;top: 0px; color: rgb(255, 255, 255)"
-                                                        ;>
-                                                        <th>Role</th>
-                                                        <th>Name</th>
-                                                        <th>E-Mail</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Employee Responsible</td>
-                                                        <td>Ashwini Naik</td>
-                                                        <td>ashwini.naik@lnttechservices.com</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!--REVENUE SPLITS Table-->
-                                        <div id="btn-business" style="display: none; margin-left: 11px;width: 98%;">
-
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr
-                                                        style=" background-color: rgb(51, 122, 183); position: relative;top: 0px; color: rgb(255, 255, 255)">
-                                                        <th>Revenue Partners</th>
-                                                        <th>Revenue Amount</th>
-                                                        <th>Split Percentage</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Rahul Parmar</td>
-                                                        <td>50</td>
-                                                        <td>70</td>
-                                                        <td><img src="./images/del.png" width="20px;margin-left: 22px;">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Rahul Parmar</td>
-                                                        <td>50</td>
-                                                        <td>70</td>
-                                                        <td><img src="./images/del.png" width="20px;margin-left: 22px;">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Rahul Parmar</td>
-                                                        <td>50</td>
-                                                        <td>70</td>
-                                                        <td><img src="./images/del.png" width="20px;margin-left: 22px;">
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" id="Editopp"
-                                                onclick="opportunityedit()">Edit</button>
-
-                                            <div class="dropup">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="actionsdropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Actions
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="actionsdropdown"
-                                                    style="position: fixed; transform: translate3d(-35px, -99px, 0px);top: -28px; left: -30px; will-change: transform;height: 130px;">
-                                                    <a class="dropdown-item" id="Salesdropdown" href="#"
-                                                        style="font-size: 12px;">Sales Team</a>
-                                                    <a class="dropdown-item" id="Revenuedropdown" href="#"
-                                                        style="font-size: 12px;">Revenue Split</a>
-                                                    <a class="dropdown-item" id="Overviewdropdown" href="#"
-                                                        style="font-size: 12px;">Overview</a>
-                                                    <a class="dropdown-item" id="leadtoopportunity" href="#"
-                                                        style="font-size: 12px;">Lead to Opportunity</a>
-                                                </div>
-                                            </div>
-
-
-                                            <button type="submit" class="btn btn-primary" data-dismiss="modal"
-                                                id="saveopp" onclick="updateopportunityrecord()" hidden>Save</button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                                id="cancelopp" onclick="clearFormopportunity()" hidden>Cancel</button>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
+                            
 
 
 
@@ -7672,6 +7515,7 @@ background-size: 8%;'>
 
                                     <div class="entity-list" id="entity-list">
                                         <div class="table table-responsive" style="overflow: auto;height:400px">
+                                            <a id="dlink" style="display:none;"></a>
                                             <table class="table table-bordered" id="myOppTable">
                                                 <thead
                                                     style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px;white-space: nowrap;">
@@ -7696,7 +7540,494 @@ background-size: 8%;'>
                                                 </tbody>
 
                                             </table>
-
+                                            <div class="modal fade" class="modal modal-fixed-footer" id="opportunityeditModal"
+                                            style="height:400px;top:20%;">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+            
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header"
+                                                        style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: -20px;">
+                                                        <h4 class="modal-title" id="leadhead">Opportunity Information : </h4>
+                                                        <h4 class="modal-title" id="saleshead" style="display: none">Sales Team :
+                                                        </h4>
+                                                        <h4 class="modal-title" id="revenuehead" style="display: none">Revenue Split
+                                                            : </h4>
+                                                        <h4 class="modal-title" id="overviewhead" style="display: none">Overview:
+                                                        </h4>
+                                                        <button type="button" id="oppexit" class="close" data-dismiss="modal"
+                                                            style="color: white">&times;</button>
+                                                    </div>
+            
+                                                    <!-- Modal body -->
+            
+                                                    <div class="modal-body" style="font-size:12px;overflow: auto;height:200px;">
+            
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Name :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <p id="oid" style="display:none;"></p>
+                                                                <input type="text" class="form-control form-control-sm" id="name"
+                                                                    placeholder="" style="height: 24px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-2">Account :</div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-control-sm" id="account"
+                                                                    placeholder="" style=" height: 24px;" disabled>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="accounthiddenid" placeholder=""
+                                                                    style=" height: 24px; display: none">
+            
+                                                            </div>
+                                                            <div class="col-sm-1"><a href="#parrentaccModal" data-toggle="modal"
+                                                                    onclick="parentAccountDisplay()"><span class="fa fa-share"
+                                                                        id="accdisplayshare1" style="margin-left: -21px;"></span>
+                                                                </a></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Source :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="sourceedit"
+                                                                    style="height:27px;width:157px;" disabled>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Primary
+                                                                    Contact:</label></div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="primarycontact" placeholder=""
+                                                                    style=" height: 22px;width:157px; " disabled>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="pchiddenid" placeholder=""
+                                                                    style=" height: 24px; display: none">
+            
+                                                            </div>
+                                                            <div class="col-sm-1"><a href="#leadcontmodal" data-toggle="modal"
+                                                                    onclick="leadcontactdisplay()"><span class="fa fa-share"
+                                                                        id="accdisplayshare2" style="margin-left: -21px;"></span>
+                                                                </a></div>
+                                                        </div>
+            
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"><span
+                                                                        style="color: red">*</span> Expected Value: </label></div>
+                                                            <div class="col-sm-1">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="exceptedvalue" placeholder=""
+                                                                    style="height: 24px;width: 57px;" disabled required>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select class="strike" id="sell" style="height:24px ;width:94px;"
+                                                                    disabled>
+                                                                    <option>USD</option>
+                                                                    <option>AUD</option>
+                                                                    <option>EUR</option>
+                                                                    <option>GBP</option>
+                                                                    <option>INR</option>
+                                                                    <option>YEN</option>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Start Date :</label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <input type="date" id="StartDate" class="form-control"
+                                                                    style="width:100%; height:64%; padding:2px 0px;"
+                                                                    name="StartDate" disabled></div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+            
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2">Closing Date :</div>
+                                                            <div class="col-sm-3">
+                                                                <input type="date" class="form-control form-control-sm" id="EndDate"
+                                                                    placeholder="" style="height: 24px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Sales cycle :</label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="salescycle"
+                                                                    style="height:26px;width:158px;" disabled>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Sales phase :</label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="salesphase"
+                                                                    style="height:27px;width:159px;" disabled>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">Probability :</div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="probability" placeholder="" style=" height: 25px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px;"> Publish to Forecast
+                                                                    :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <input type="checkbox" id="publishtoforecast"
+                                                                    name="publishtoforecast" checked style="width:17px;height:12px;"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="col-sm-2">Forecast category :</div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="forecastcategory" placeholder="" style="    height: 27px;"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Category :</label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="category"
+                                                                    style="height:25px;width:159px;" disabled>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">Owner :</div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="owneropportunity" placeholder="" style="height: 27px;"
+                                                                    disabled>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="owneroppohiddenid" placeholder=""
+                                                                    style=" height: 24px; display: none">
+            
+                                                            </div>
+                                                            <div class="col-sm-1"><a href="#oppgifmodal" data-toggle="modal"
+                                                                    onclick="ownerAccountDisplay()"><span class="fa fa-share"
+                                                                        id="accdisplayshare3" style="margin-left: -21px;"></span>
+                                                                </a></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px">Proposed TCV:</label>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="Proposed" placeholder="" style="height: 24px;width: 57px;"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select class="strike" id="sell" style="height:24px ;width:94px;"
+                                                                    disabled>
+                                                                    <option>USD</option>
+                                                                    <option>AUD</option>
+                                                                    <option>EUR</option>
+                                                                    <option>GBP</option>
+                                                                    <option>INR</option>
+                                                                    <option>YEN</option>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px">Total Negotiated Value
+                                                                    :</label></div>
+                                                            <div class="col-sm-1">
+                                                                <input type="text" class="form-control form-control-sm" id="Total"
+                                                                    placeholder="" style="height: 24px;width: 57px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select class="strike" id="sell" style="height:24px ;width:94px;"
+                                                                    disabled>
+                                                                    <option>USD</option>
+                                                                    <option>AUD</option>
+                                                                    <option>EUR</option>
+                                                                    <option>GBP</option>
+                                                                    <option>INR</option>
+                                                                    <option>YEN</option>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px">Weighted value
+                                                                    :</label></div>
+                                                            <div class="col-sm-1">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="weightedvalue" placeholder=""
+                                                                    style="height: 24px;width: 57px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select class="strike" id="sell" style="height:24px ;width:94px;"
+                                                                    disabled>
+                                                                    <option>USD</option>
+                                                                    <option>AUD</option>
+                                                                    <option>EUR</option>
+                                                                    <option>GBP</option>
+                                                                    <option>INR</option>
+                                                                    <option>YEN</option>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Vertical :</label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" id="vertical" class="form-control"
+                                                                    style="width:100%; height:64%; padding:2px 0px;" name="vertical"
+                                                                    disabled></div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px;"> Alliance Dependencies
+                                                                    :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <input type="checkbox" id="AllianceDependencies"
+                                                                    name="AllianceDependencies" checked
+                                                                    style="width:17px;height:12px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Opportunity Type
+                                                                    :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="type" style="height:27px;width:157px;"
+                                                                    disabled>
+                                                                    <option>Proactive Opportunity</option>
+                                                                    <option>Reactive Opportunity</option>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Opportunity Status :
+                                                                </label></div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="opportunityStatus"
+                                                                    style="height:27px;width:159px;" disabled>
+                                                                    <option>Open</option>
+                                                                    <option>In Process</option>
+                                                                    <option>Won</option>
+                                                                    <option>Lost</option>
+                                                                    <option>Abort</option>
+                                                                    <option>On Hold</option>
+                                                                    <option>Converted</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">Status : </div>
+                                                            <div class="col-sm-3">
+                                                                <input type="text" class="form-control form-control-sm" id="Status"
+                                                                    placeholder="" style=" height: 25px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Reason for Status
+                                                                    :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <p id="oid" style="display:none;"></p>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="reasonStatus" placeholder="" style="height: 24px;" disabled>
+                                                            </div>
+                                                            <div class="col-sm-2">Revenue Start Date:</div>
+                                                            <div class="col-sm-3">
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="RevenueStartDate" placeholder="" style=" height: 24px;"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Revenue End
+                                                                    Date:</label></div>
+                                                            <div class="col-sm-3">
+                                                                <p id="oid" style="display:none;"></p>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="RevenueEndDate" placeholder="" style="height: 24px;"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Sales Organization
+                                                                    :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="sales" style="height:27px;width:157px;"
+                                                                    disabled>
+                                                                    <option>LTTS</option>
+                                                                    <option>ROW1_T1</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Sales Unit : </label>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="unit" style="height:27px;width:159px;"
+                                                                    disabled>
+                                                                    <option>Chevron</option>
+                                                                    <option>Medtronic</option>
+                                                                    <option>Exxon</option>
+            
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Sales Office :
+                                                                </label></div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="soffice" style="height:27px;width:159px;"
+                                                                    disabled>
+                                                                    <option>California</option>
+                                                                    <option>Singapore</option>
+                                                                    <option>Denmark</option>
+                                                                    <option>Belgium</option>
+                                                                    <option>Illinois</option>
+                                                                    <option>Georgia</option>
+                                                                    <option>Ontario</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Custom Category :
+                                                                </label></div>
+                                                            <div class="col-sm-3">
+                                                                <select class="strike" id="customcategory"
+                                                                    style="height:27px;width:159px;" disabled>
+                                                                    <option>Solution Offering</option>
+                                                                    <option>Project</option>
+                                                                    <option>Staffing</option>
+                                                                    <option>Allied Dependencies</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2"> <span style="color: red">*</span>Opportunity Won
+                                                                Date: </div>
+                                                            <div class="col-sm-3">
+                                                                <input type="date" class="form-control form-control-sm" id="wondate"
+                                                                    placeholder="" style=" height: 25px;" disabled required>
+                                                            </div>
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-1"></div>
+                                                            <div class="col-sm-2"><label style="width:108px"> Note :</label></div>
+                                                            <div class="col-sm-3">
+                                                                <textarea rows="3" cols="22" id="opportunitynote"
+                                                                    class="form-control" style="width:100%" name="Note"
+                                                                    disabled></textarea> </div>
+            
+                                                            <div class="col-sm-1"></div>
+                                                        </div>
+            
+            
+                                                    </div>
+            
+                                                    <!--Sales Team Table-->
+                                                    <div id="btn-sales" style="display: none;  margin-left: 11px;width: 98%;">
+            
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr style=" background-color: rgb(51, 122, 183); position: relative;top: 0px; color: rgb(255, 255, 255)"
+                                                                    ;>
+                                                                    <th>Role</th>
+                                                                    <th>Name</th>
+                                                                    <th>E-Mail</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Employee Responsible</td>
+                                                                    <td>Ashwini Naik</td>
+                                                                    <td>ashwini.naik@lnttechservices.com</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--REVENUE SPLITS Table-->
+                                                    <div id="btn-business" style="display: none; margin-left: 11px;width: 98%;">
+            
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr
+                                                                    style=" background-color: rgb(51, 122, 183); position: relative;top: 0px; color: rgb(255, 255, 255)">
+                                                                    <th>Revenue Partners</th>
+                                                                    <th>Revenue Amount</th>
+                                                                    <th>Split Percentage</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Rahul Parmar</td>
+                                                                    <td>50</td>
+                                                                    <td>70</td>
+                                                                    <td><img src="./images/del.png" width="20px;margin-left: 22px;">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Rahul Parmar</td>
+                                                                    <td>50</td>
+                                                                    <td>70</td>
+                                                                    <td><img src="./images/del.png" width="20px;margin-left: 22px;">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Rahul Parmar</td>
+                                                                    <td>50</td>
+                                                                    <td>70</td>
+                                                                    <td><img src="./images/del.png" width="20px;margin-left: 22px;">
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+            
+            
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary" id="Editopp"
+                                                            onclick="opportunityedit()">Edit</button>
+            
+                                                        <div class="dropup">
+                                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                                id="actionsdropdown" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                Actions
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="actionsdropdown"
+                                                                style="position: fixed; transform: translate3d(-35px, -99px, 0px);top: -28px; left: -30px; will-change: transform;height: 130px;">
+                                                                <a class="dropdown-item" id="Salesdropdown" href="#"
+                                                                    style="font-size: 12px;">Sales Team</a>
+                                                                <a class="dropdown-item" id="Revenuedropdown" href="#"
+                                                                    style="font-size: 12px;">Revenue Split</a>
+                                                                <a class="dropdown-item" id="Overviewdropdown" href="#"
+                                                                    style="font-size: 12px;">Overview</a>
+                                                                <a class="dropdown-item" id="leadtoopportunity" href="#"
+                                                                    style="font-size: 12px;">Lead to Opportunity</a>
+                                                            </div>
+                                                        </div>
+            
+            
+                                                        <button type="submit" class="btn btn-primary" data-dismiss="modal"
+                                                            id="saveopp" onclick="updateopportunityrecord()" hidden>Save</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                            id="cancelopp" onclick="clearFormopportunity()" hidden>Cancel</button>
+                                                    </div>
+            
+                                                </div>
+            
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
