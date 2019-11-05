@@ -1469,12 +1469,13 @@ exports.getUOM = function (req, res) {
 exports.getVerticalByBu = function (req, res) {
 
     let ibu = req.params.buid;
-
+    
     let query = 'call procLookUpVerticalByBU("' + ibu + '")'
-//console.log(query);
+
     db.query(query, (err, result) => {
 
         if (err) {
+           
             return res.status(500).send(err);
         }
         res.status(200).json(result);
@@ -1504,7 +1505,7 @@ exports.getSo = function (req, res) {
 
     let ipid = req.params.pid;
 
-    let query = 'call procLookUpOfferings("' + ipid + '")'
+    let query = 'call procLookUpOfferings("' + ipid + '")';
 //console.log(query);
     db.query(query, (err, result) => {
 
@@ -1555,3 +1556,107 @@ exports.addServiceoffering = function (req, res) {
          });
      
  };
+
+ exports.Tieinverticalgroup = function (req, res) {
+  
+    let query = 'CALL procLookUpBusinessUnitsTieIn();';
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+
+    });
+
+};
+
+exports.Tieinparaccbybu = function (req, res) {
+
+    let ibu = req.params.buid;
+
+    let query = "call procLookUpParentAccountbyBU('" + ibu + "')";
+    
+    db.query(query, (err, result) => {
+        
+        if (err) {
+            return res.status(500).send(err);
+       
+        }
+        res.status(200).json(result);
+    });
+
+}; 
+
+exports.Tieinverticalunit = function (req, res) {
+  
+    let query = 'call procLookUpVertical();';
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.Tieinparaccbyvertical = function (req, res) {
+  
+    let ivd = req.params.ivuid;
+
+    let query = 'CALL procLookUpParentAccountbyVertical("' + ivd + '");';
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+    });
+
+};
+
+exports.Tieinregionalmanager = function (req, res) {
+ 
+    let query = 'call procLookUpAllRegionalManagers();';
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+
+    });
+
+};
+
+exports.Tieinterritorymanager = function (req, res) {
+
+    let irm = req.params.rmid;
+    
+    let query = 'call procLookUpAllTerritoryManagers("' + irm + '");';
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+
+
+    });
+
+};

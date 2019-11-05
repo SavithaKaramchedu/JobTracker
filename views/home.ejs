@@ -133,7 +133,11 @@
         height: 400px;
         overflow: auto;
     }   */
-
+    #wrapper #main-container {
+    float: left;
+    width: 100%;
+    height: 600px;
+}
 
 
     </style>
@@ -1953,7 +1957,7 @@ var tableToExcel = (function() {
                     $("#countryacc").val(result[0][0].countryid).attr('selected', 'selected');
                     $("#city").val(result[0][0].city);
                   var c= $("#stateacc").val(result[0][0].stateid).attr('selected','selected');
-                    console.log(c);
+                  //  console.log(c);
                     $("#owner").val(result[0][0].Owner);
                     $("#accountcode").val(result[0][0].AccountCode);
                     $("#accpipeline").val(result[0][0].ActivePipeline);
@@ -2134,7 +2138,7 @@ var tableToExcel = (function() {
 
         }
         function updateAccountAddress(i){
-            console.log("update address");
+          //  console.log("update address");
    // var accvertical=$("#accountVertical").val();
     var updateaccountry=$("#countryacc").val();
     var updateacccity=$("#city").val();
@@ -2163,7 +2167,7 @@ var data={
 
 data=JSON.stringify(data); 
 var url="https://localhost:9090/updateaccaddress/" +i;
-console.log(url);
+// console.log(url);
 $.ajax({
     url:url,
     type: "put",
@@ -2493,7 +2497,7 @@ $.ajax({
                 url: "https://localhost:9090/contact/" + i,
                 type: "GET",
                 success: function (result) {
-                    console.log(result);
+                  //  console.log(result);
                     $("#cid").text(i);
                     $("#cid").val(result[0][0].CONTACTID);
                     $("#firstname").val(result[0][0].FIRSTNAME);
@@ -2985,6 +2989,166 @@ $.ajax({
 
         }
 
+        function dropverticalgroup() {
+                
+                var url = "https://localhost:9090/dropdownverticalgroup";
+                var dropdowndata = "";
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                    
+                     //     dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        for (var i = 0; i < result[0].length; i++) {
+                            dropdowndata = dropdowndata + '<option value="' + result[0][i].BUSINESSUNITID + '">' + result[0][i].BUSINESSUNIT + '</option>';
+                        }
+
+                        $("#verticalgroup").html(dropdowndata);
+
+                    }
+
+                });
+
+            }
+
+        function dropparentaccbybu() {
+
+                var buid= $("#verticalgroup").find(":selected").val();
+                var url = "https://localhost:9090/dropdownparaccbybu/"+buid;
+                var dropdowndata = "";
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                       
+                       // dropdowndata = dropdowndata + "<option style='display:none;'></option>"
+                        for (var i = 0; i < result[0].length; i++) {
+
+                            dropdowndata = dropdowndata +
+                                '<option value= "' + result[0][i].AccountID + '" >' + result[0][i].Account + '</option>'
+                        }
+                        $("#parentaccbybu").html(dropdowndata);
+                    }
+                });
+            }; 
+
+            function dropverticalunitbybu() {
+
+                    var buid = $("#verticalgroup").find(":selected").val();
+                    var url = "https://localhost:9090/VerticalByBu/" + buid;
+                    var dropdowndata = "";
+
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+
+                            // dropdowndata = dropdowndata + "<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+
+                                dropdowndata = dropdowndata +
+                                    '<option value= "' + result[0][i].VerticalID + '" >' + result[0][i].VERTICAL + '</option>'
+                            }
+                            $("#verticalunit").html(dropdowndata);
+                        }
+                    });
+                }; 
+
+
+        function dropdownverticalunit() {
+
+                var url = "https://localhost:9090/dropdownverticalunit";
+                var dropdowndata = "";
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+
+                     //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        for (var i = 0; i < result[0].length; i++) {
+                            dropdowndata = dropdowndata + '<option value="' + result[0][i].VerticalID + '">' + result[0][i].VERTICAL + '</option>';
+                        }
+                     
+                        $("#verticalunit").html(dropdowndata);
+
+                    }
+
+                });
+
+            }
+
+            function dropparaccbyvertical() {
+
+                    var ivuid = $("#verticalunit").find(":selected").val();
+                    var url = "https://localhost:9090/dropparaccbyvertical/" + ivuid;
+                    var dropdowndata = "";
+                    
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                        
+                            //  dropdowndata = dropdowndata+"<option style='display:none;'></option>";
+                            for (var i = 0; i < result[0].length; i++) {
+                                dropdowndata = dropdowndata + '<option value="' + result[0][i].AccountID + '">' + result[0][i].Name + '</option>';
+                            }
+
+                            $("#parentaccbybu").html(dropdowndata);
+
+                        }
+
+                    });
+
+                }
+
+            function regionalmanager() {
+
+                    var url = "https://localhost:9090/regionalmanager";
+                    var dropdowndata = "";
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+
+                         //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                            for (var i = 0; i < result[0].length; i++) {
+                                dropdowndata = dropdowndata + '<option value="' + result[0][i].EmpID + '">' + result[0][i].RegionalHead +  '</option>';
+                            }
+                            
+                            $("#regionalmanager").html(dropdowndata);
+
+                        }
+
+                    });
+
+                }
+
+                function dropterritorymanager() {
+
+                    var rmid= $("#regionalmanager").find(":selected").val();
+                    var url = "https://localhost:9090/territorymanager/"+ rmid;
+                    var dropdowndata = "";
+                        
+                    $.ajax({
+                            url: url,
+                            type: "GET",
+                            success: function (result) {
+
+                             //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                                for (var i = 0; i < result[0].length; i++) {
+                                    dropdowndata = dropdowndata + '<option value="' + result[0][i].empid + '">' + result[0][i].TerritoryHead + '</option>';
+                                }
+
+                                $("#territorymanager").html(dropdowndata);
+                               
+                            }
+
+                        });
+
+                    }
+
         function contAccountDetails() {
 
             var tableData;
@@ -3315,7 +3479,7 @@ $.ajax({
         }
 
         function updatecontphone(i) {
-            console.log("update mobile");
+          //  console.log("update mobile");
             var phoneID = $("#editcphnhidden").val();
             var phone = $("#phn").val();
             
@@ -3865,7 +4029,7 @@ function serviceOfferingdisplay(i) {
                 type: "GET",
 
                 success: function (result) {
-                    console.log(result);
+                 //   console.log(result);
                     $("#servoffid").text(i);
                     $("#idseroff").val(result[0][0].SERVICEOFFERINGCODE);
                     $("#businessunit").val(result[0][0].BUSINESSUNIT);
@@ -3890,7 +4054,7 @@ function serviceOfferingdisplay(i) {
                 type: "GET",
 
                 success: function (result) {
-                    console.log(result);
+                  //  console.log(result);
                     $("#servoffid").text(i);
                     $("#idseroff").val(result[0][0].SERVICEOFFERINGCODE);
                     $("#businessunit").val(result[0][0].BUSINESSUNIT);
@@ -3915,7 +4079,7 @@ function serviceOfferingdisplay(i) {
                 type: "GET",
 
                 success: function (result) {
-                    console.log(result);
+                  //  console.log(result);
                     // console.log(result[0][0].LeadStatusID);
                     $("#leadid").text(i);
                     $("#oppleadid").val(i);
@@ -5483,7 +5647,7 @@ background-size: 8%;'>
                 </li>
                 <li title="Tie-In">
                     <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
-                       >
+                      onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager();" >
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">TIE-IN</span>
@@ -5619,7 +5783,7 @@ background-size: 8%;'>
                             <div id="tbMarksContainer">
 
                                 <div class="entity-list" id="entity-list">
-                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+                                    <div class="table table-responsive" style="overflow: auto;height:500px">
                                         <table class="table table-bordered" id="myContactTable">
                                             <thead
                                                 style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px;">
@@ -6000,7 +6164,7 @@ background-size: 8%;'>
 
                             </header>
                         </div>
-                        <div id="main-content" class="contact" style="overflow: auto;height:400px;">
+                        <div id="main-content" class="contact" style="overflow: auto;height:500px;">
 
                             <div class="entity-list" id="entity-list">
                                 <a id="dlink" style="display:none;"></a>
@@ -6445,7 +6609,7 @@ background-size: 8%;'>
 
                                 <div class="entity-list" id="entity-list">
 
-                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+                                    <div class="table table-responsive" style="overflow: auto;height:500px">
 
                                         <table class="table table-bordered" id="myBusinessTable">
 
@@ -6756,7 +6920,7 @@ background-size: 8%;'>
 
                                 <div class="entity-list" id="entity-list">
 
-                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+                                    <div class="table table-responsive" style="overflow: auto;height:500px">
 
                                         <table class="table table-bordered" id="myServiceofferingTable">
 
@@ -6914,7 +7078,8 @@ background-size: 8%;'>
                             <div class="col-sm-1" >
                                     <button type="button"  class="btn btn-primary" style="height:40px;width:188%;color: #fff;background-image: -webkit-linear-gradient(top,#337ab7,#337ab7);">Sales Pipeline</button>
                             </div>
-<br>
+<hr style="margin:11px; width: 100%;
+margin-left: 1px;">
                             <div id="main-content" class="contact">
                                     <div style="background-color: #f5f5f5;border: 1px solid #e3e3e3;">
            
@@ -7329,7 +7494,7 @@ background-size: 8%;'>
                                 <div class="entity-list" id="entity-list">
 
 
-                                    <div class="table table-responsive" style="height:400px;overflow: auto;">
+                                    <div class="table table-responsive" style="height:500px;overflow: auto;">
                                         <a id="dlink" style="display:none;"></a>
                                         <table class="table table-bordered" id="myAccountTable">
                                             <thead
@@ -7775,10 +7940,10 @@ background-size: 8%;'>
                                   </div>
                                   <div class="row">
                                         <div class="col-sm-2" style="margin-left:20px;">
-                                                <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                <select  class="form-control" id="verticalgroup" onchange="dropparentaccbybu(),dropverticalunitbybu()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
-                                                    <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    <select  class="form-control" id="verticalunit" onchange="dropparaccbyvertical()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
                                                     <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
@@ -7801,13 +7966,13 @@ background-size: 8%;'>
                                         </div>
                                         <div class="row">
                                                 <div class="col-sm-2" style="margin-left:20px;">
-                                                        <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                            <select  class="form-control" id="territorymanager" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                            <select  class="form-control" id="parentaccbybu" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
                                                             <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
@@ -8128,7 +8293,7 @@ background-size: 8%;'>
                                 <div id="tbMarksContainer">
 
                                     <div class="entity-list" id="entity-list">
-                                        <div class="table table-responsive" style="overflow: auto;height:400px">
+                                        <div class="table table-responsive" style="overflow: auto;height:500px">
                                             <a id="dlink" style="display:none;"></a>
                                             <table class="table table-bordered" id="myOppTable">
                                                 <thead
@@ -8746,7 +8911,7 @@ background-size: 8%;'>
                             <div id="tbMarksContainer">
 
                                 <div class="entity-list" id="entity-list">
-                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+                                    <div class="table table-responsive" style="overflow: auto;height:500px">
                                         <table class="table table-bordered" id="myTableEmp">
                                             <thead
                                                 style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px;">
@@ -9080,7 +9245,7 @@ background-size: 8%;'>
 
             <div id="homeTab" class="tab tab-pane active ">
                 <div id="main">
-                    <div id="main-container" class="list-view contact">
+                    <div id="main-container" class="list-view contact" style="height:700px;">
                         <header class="head-list">
                             <div id="default_controls">
 

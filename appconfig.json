@@ -1159,6 +1159,84 @@
       ]
     },
     {
+      "route": "/dropdownverticalgroup",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "Tieinverticalgroup",
+      "description": "Route for dynamic dropdown vertical Group",
+      "examples": [
+        {
+          "param": "/verticalgroupdropdown"
+        }
+      ]
+    },
+    {
+      "route": "/dropdownparaccbybu/:buid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "Tieinparaccbybu",
+      "description": "Route for dynamic dropdown parent account by bu",
+      "examples": [
+        {
+          "param": "/paraccbybu/:buid"
+        }
+      ]
+    },
+    {
+      "route": "/dropdownverticalunit",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "Tieinverticalunit",
+      "description": "Route for dynamic dropdown vertical unit",
+      "examples": [
+        {
+          "param": "/verticalunitdropdown"
+        }
+      ]
+    },
+    {
+      "route": "/dropparaccbyvertical/:ivuid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "Tieinparaccbyvertical",
+      "description": "Route for dynamic dropdown vertical unit",
+      "examples": [
+        {
+          "param": "/dropparaccbyvertical/:ivuid"
+        }
+      ]
+    },
+    {
+      "route": "/regionalmanager",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "Tieinregionalmanager",
+      "description": "Route for dynamic dropdown Regional Manager",
+      "examples": [
+        {
+          "param": "/regionalmanagerdropdown"
+        }
+      ]
+    },
+    {
+      "route": "/territorymanager/:rmid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "Tieinterritorymanager",
+      "description": "Route for dynamic dropdown Territory Manager",
+      "examples": [
+        {
+          "param": "/territorymanager/:rmid"
+        }
+      ]
+    },
+    {
       "route": "/bu",
       "type": "get",
       "configured": true,
