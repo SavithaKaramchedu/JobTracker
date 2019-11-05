@@ -1439,6 +1439,20 @@
           "param": "/parentaccountdrop"
         }
       ]
+    },
+    {
+      "route": "/tiein",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "tieinPage",
+      "description": "Route for listing all the active Tie-in",
+      "examples": [
+        {
+          "param": "/tiein"
+        }
+      ]
     }
+
   ]
 }

@@ -1696,6 +1696,37 @@
                     }
                 }
             }
+            function tieinLoad() {
+                console.log("tieinload");
+                    var tableData;
+                  //  var iBusinessunitID=$("#verticalgroup").find(":selected").val();
+                    //   $("#screenloading").css('display', 'block');
+                    var url = "https://localhost:9090/tiein";
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                            
+                            for (var i = 0; i < result[0].length; i++) {
+                                
+                                tableData = tableData + "  <tr> " +
+                                    
+                                    "<td >" + result[0][i].BPStatus + "</td>" +
+                                    "<td >" + result[0][i].BPID + "</td>" +
+                                    "<td >" + result[0][i].BPName + "</td>" +
+                                    "<td >" + result[0][i].city + "</td>" +
+                                    "<td >" + result[0][i].MainContact + "</td>" +
+                                    "<td >" + result[0][i].createddate + "</td>" +
+                                    "<td >" + result[0][i].country + "</td>" +
+                                    "<td >" + result[0][i].BPType + "</td>" +
+                                    "</tr>";
+                            }
+                            $("#tie-inTable").html(tableData);
+                        }
+                    });
+                }
+
+
 
 
         function AccountLoad() {
@@ -1902,6 +1933,8 @@ var tableToExcel = (function() {
             $("#cancelAccount").prop("hidden", true);
 
         }
+
+
 
         function accountdisplay(i) {
 
@@ -5714,7 +5747,7 @@ background-size: 8%;'>
                 </li>
                 <li title="Tie-In">
                     <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
-                      onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager(),parentaccountdrop(),tiecalenderdropdown(),lookupquarters();" >
+                      onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager(),parentaccountdrop(),tiecalenderdropdown(),lookupquarters()" >
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">TIE-IN</span>
@@ -8042,11 +8075,9 @@ margin-left: 1px;">
                                                     <div class="col-sm-2" style="margin:2px;">
                                                             <select  class="form-control" id="parentaccbybu" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
+                                                  
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
-                                                    </div>
-                                                    <div class="col-sm-1" style="margin:5px;">
-                                                            <button type="button"  style="width:140%;color: #fff; margin-left: -15px;
+                                                            <button type="button"  style="width:78%;color: #fff;
                                                             background-color: #337ab7">Clear Filter</button>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">

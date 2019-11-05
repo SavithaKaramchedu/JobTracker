@@ -1705,3 +1705,13 @@ exports.parentaccountdrop = function (req, res) {
     });
 
 };
+ exports.tieinPage = function (req, res) {
+    let query = "CALL `devc4c`.`procTieInLockInListingMain`('','','','','','','')";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+    });
+};
+
