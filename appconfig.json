@@ -1366,6 +1366,37 @@
         }
       ]
     },
+
+    
+	
+    {
+      "route": "/tieincalender",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "tiecalender",
+      "description": "Tiecalender dropdown dynamically",
+      "examples": [
+        {
+          "param": "/tieincalender"
+        }
+      ]
+    },
+  
+    {
+      "route": "/lookupquarters",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "lookupquarters",
+      "description": "Quarters dropdown dynamically",
+      "examples": [
+        {
+          "param": "/lookupquarters"
+        }
+      ]
+    },
+    
     {
       "route": "/addcontactinfo",
       "type": "post",

@@ -2429,8 +2429,48 @@ $.ajax({
                 }
             });
         };
+        function tiecalenderdropdown() {
+          
+            var Tiecalaenderdata = "";
+            var url = "https://localhost:9090/tieincalender/";
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (result) {
+                    Tiecalaenderdata = Tiecalaenderdata + "<option style='display:none;'></option>"
+                   
+                    for (var i = 0; i < result[0].length; i++) {
 
+                        Tiecalaenderdata = Tiecalaenderdata +
+                            '<option value="' + result[0][i].CalendarYearID + '">' + result[0][i]. CalendarYear + '</option>'
+                    }
+            
+                    $("#tieinyear").html(Tiecalaenderdata);
+              
+   
+                }
+            });
 
+        }
+
+        function lookupquarters() {
+                // console.log("haiiii");
+                var dropdowndata = "";
+                var url = "https://localhost:9090/lookupquarters"
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                        dropdowndata = dropdowndata + "<option style='display:none;'></option>"
+                        for (var i = 0; i < result[0].length; i++) {
+                            dropdowndata = dropdowndata +
+                                '<option value= "' + result[0][i].QuarterID + '" >' + result[0][i].Quarter + '</option>'
+                        }
+                        $("#quaterdrop").html(dropdowndata);
+                    }
+                });
+            }; 
+      
         function contactLoad() {
 
             var tableData;
@@ -3736,7 +3776,7 @@ $.ajax({
 
                 var tableData;
 
-             //   $("#screenloading").css('display', 'block');
+                //   $("#screenloading").css('display', 'block');
 
                 var url = "https://localhost:9090/revenueresource";
 
@@ -3746,9 +3786,9 @@ $.ajax({
                     type: "GET",
                     success: function (result) {
 
-                    //    $("#screenloading").css('display', 'none');
+                        //    $("#screenloading").css('display', 'none');
 
-                     //   $("#bpcount").text(result[0].length);
+                        //   $("#bpcount").text(result[0].length);
 
                         for (var i = 0; i < result[0].length; i++) {
 
@@ -5674,10 +5714,10 @@ background-size: 8%;'>
                 </li>
                 <li title="Tie-In">
                     <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
-                      onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager();" >
+                      onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager(),parentaccountdrop(),tiecalenderdropdown(),lookupquarters();" >
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
-                            <span class="" onclick="parentaccountdrop();">TIE-IN</span>
+                            <span class="">TIE-IN</span>
                         </div>
                     </a>
                 </li>
@@ -7890,7 +7930,7 @@ margin-left: 1px;">
                         <div id="content" class="">
                             <header class="head-list">
                                 <div id="default_controls">
-                                    <!-- <div class="pull-right right10">
+                                     <div class="pull-right right10">
 
                                         <div class="pull-right right10">
                                             <div class="btn-group right10" id="tagActionDropdown"
@@ -7911,7 +7951,7 @@ margin-left: 1px;">
                                                 </ul>
                                             </div>
 
-                                            <div class="btn-group" id="btnRefresh" onclick="businessLoad()">
+                                            <div class="btn-group" id="btnRefresh" onclick="tieinLoad()">
                                                 <a class="btn" id="refreshList" title="Refresh List"><i
                                                         class="mdi mdi-refresh mdi-19px"></i></a>
                                             </div>
@@ -7928,12 +7968,12 @@ margin-left: 1px;">
 
 
                                             <div class="btn-group">
-                                                <button id="toggleSidebar" type="button" class="btn" onclick="tableToExcel('myOppTable', 'name', 'Opportunities.xls')"
+                                                <button id="toggleSidebar" type="button" class="btn" onclick="tableToExcel('mytie-inTable', 'name', 'Tie-In.xls')"
                                                     title="Excel"><i class="icon-indent-right"></i></button>
                                             </div>
                                         </div>
 
-                                    </div> -->
+                                    </div> 
 
                                     <div class="title">
                                         <div class="btn-group">
@@ -7973,11 +8013,11 @@ margin-left: 1px;">
                                                     <select  class="form-control" id="verticalunit" onchange="dropparaccbyvertical()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
-                                                    <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    <select id="tieinyear" class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
                                                
-                                                  <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                  <select id="quaterdrop" class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                   </div>
                                   <div class="row">
@@ -7990,8 +8030,8 @@ margin-left: 1px;">
                                             <div class="col-sm-2" style="margin:2px;">
                                                 <b>Account</b>
                                             </div>
-                                            
-                                        </div>
+                                           
+                                    </div>
                                         <div class="row">
                                                 <div class="col-sm-2" style="margin-left:20px;">
                                                         <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager()" style="width:78%;height:30px; padding:0px 0px;"></select>
@@ -8010,16 +8050,12 @@ margin-left: 1px;">
                                                             background-color: #337ab7">Clear Filter</button>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <span style="float: right !important; ">
+                                                            <!-- <span style="float: right !important; ">
                                                                     <a href="#" ><img src="images/export-to-excel-image.png" style="width: 27px;"></a>
-                                                                </span>
-                                                                
-                                                                        
-                                                                        <input class="form-control" type="text"  placeholder="Search" style="z-index:0;width: 78%;border-radius: 5px;height:32px;">
-                                                                        
-                                                                       
+                                                            </span>  -->
+                                                            <input class="form-control" type="text"  placeholder="Search" style="z-index:0;width: 78%;border-radius: 5px;height:32px;">
                                                     </div>
-                                          </div>
+                                        </div>
 
                             </div>
                             <br>
@@ -8045,7 +8081,7 @@ margin-left: 1px;">
                                     </div>
                                 </div>
                           
-                            <hr>
+                            <hr style="margin: 6px 0;">
                             <div id="tbMarksContainer">
 
                                 <div class="entity-list" id="entity-list">
