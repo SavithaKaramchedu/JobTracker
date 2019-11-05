@@ -1394,6 +1394,20 @@
           }
         }
       ]
+    },
+   
+    {
+      "route": "/parentaccountdrop",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "parentaccountdrop",
+      "description": "Route for listing all the active tie-in tab",
+      "examples": [
+        {
+          "param": "/parentaccountdrop"
+        }
+      ]
     }
   ]
 }

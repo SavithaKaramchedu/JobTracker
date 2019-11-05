@@ -5005,57 +5005,84 @@ function serviceOfferingdisplay(i) {
                         }
                     });
                 };
+
+            
+                function parentaccountdrop() {
+                 
+                    var dropdowndata = "";
+                 
+                    var url = "https://localhost:9090/parentaccountdrop"
+                        
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (result) {
+                           
+                           dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            for (var i = 0; i < result[0].length; i++) {
+                             
+
+                                dropdowndata = dropdowndata  +
+                                '<option value= "' + result[0][i].AccountID + '" >' + result[0][i].Account +  '</option>' 
+                              
+                            }
+                           
+                            $("#parentaccbybu").html(dropdowndata);
+                            
+                        }
+                    });
+                };
                 function addServiceOffering() {
- var Buid = $("#bunitId").val();
- var verticalid = $("#verticalSoId").val();
- var portfolioid = $("#portfolioId").val();
- var offeringid = $("#seriviceofferingId").val();
- var Locationid = $("#locationId").val();
- var engagementid = $("#engagementId").val();
- var UOMid = $("#UOM").val();
- var Bu= $("#bunitId option:selected").text();
- var offering = $("#seriviceofferingId option:selected").text();
- var location= $("#locationId option:selected").text();
- var engagement = $("#engagementId option:selected").text();
-var function1=Bu+"-"+offering+"-"+location+"-"+engagement;
-var data={
-"iBusinessUnitID":Buid,
-"iPortfolioID":portfolioid,
-"iOfferingID":offeringid,
-"iVerticalID":verticalid,
-"iDeliveryLocationID":Locationid,
-"iEngagementTypeID":engagementid,
-"iServiceOffering":function1,
-"iUnitOfMeasureID":UOMid,
-"iNotes":'',
-"iIsAssignmentAllowed":'Y',
-"iCreatedBy":'Admin'
+                        var Buid = $("#bunitId").val();
+                        var verticalid = $("#verticalSoId").val();
+                        var portfolioid = $("#portfolioId").val();
+                        var offeringid = $("#seriviceofferingId").val();
+                        var Locationid = $("#locationId").val();
+                        var engagementid = $("#engagementId").val();
+                        var UOMid = $("#UOM").val();
+                        var Bu= $("#bunitId option:selected").text();
+                        var offering = $("#seriviceofferingId option:selected").text();
+                        var location= $("#locationId option:selected").text();
+                        var engagement = $("#engagementId option:selected").text();
+                        var function1=Bu+"-"+offering+"-"+location+"-"+engagement;
+                        var data={
+                        "iBusinessUnitID":Buid,
+                        "iPortfolioID":portfolioid,
+                        "iOfferingID":offeringid,
+                        "iVerticalID":verticalid,
+                        "iDeliveryLocationID":Locationid,
+                        "iEngagementTypeID":engagementid,
+                        "iServiceOffering":function1,
+                        "iUnitOfMeasureID":UOMid,
+                        "iNotes":'',
+                        "iIsAssignmentAllowed":'Y',
+                        "iCreatedBy":'Admin'
 
-}
+                        }
 
-data = JSON.stringify(data);
-console.log(data);
-if(Buid !="" && verticalid!="" && portfolioid!=""){
+                            data = JSON.stringify(data);
+                            console.log(data);
+                            if(Buid !="" && verticalid!="" && portfolioid!=""){
 
-$.ajax({
-    url: "https://localhost:9090/serviceoffering",
-    type: "post",
-    async: false,
-    data: data,
-    contentType: "application/json",
-    dataType: "json",
-    success: function (data) {
-       
-        serviceofferingLoad();
-    },
+                            $.ajax({
+                                url: "https://localhost:9090/serviceoffering",
+                                type: "post",
+                                async: false,
+                                data: data,
+                                contentType: "application/json",
+                                dataType: "json",
+                                success: function (data) {
+                                
+                                    serviceofferingLoad();
+                                },
 
-    error: function () {
-       
-    }
-});
+                                error: function () {
+                                
+                                }
+                            });
 
-}
-}
+                            }
+                            }
 
 
 
@@ -5650,7 +5677,7 @@ background-size: 8%;'>
                       onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager();" >
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
-                            <span class="">TIE-IN</span>
+                            <span class="" onclick="parentaccountdrop();">TIE-IN</span>
                         </div>
                     </a>
                 </li>
@@ -7949,7 +7976,8 @@ margin-left: 1px;">
                                                     <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
-                                                    <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                               
+                                                  <select  class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                   </div>
                                   <div class="row">

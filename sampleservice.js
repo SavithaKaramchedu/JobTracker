@@ -1660,3 +1660,20 @@ exports.Tieinterritorymanager = function (req, res) {
     });
 
 };
+exports.parentaccountdrop = function (req, res) {
+
+    let ipad = req.params.buid;
+
+    let query = 'call procLookUpParentAccount()'
+    
+    db.query(query, (err, result) => {
+     
+        if (err) {
+         
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+       
+    });
+
+};
