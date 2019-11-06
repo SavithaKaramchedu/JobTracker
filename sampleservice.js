@@ -1017,11 +1017,16 @@ exports.Salesphase = function (req, res) {
     });
 };
 exports.tiecalender = function (req, res) {
+   
     let calenderQuery = "CALL procLookUpCalendarYears()";
+    
     db.query(calenderQuery, (err, result) => {
+        
         if (err) {
+          
             return res.status(500).send(err);
         }
+       
         res.status(200).json(result);
 
     });
@@ -1029,12 +1034,17 @@ exports.tiecalender = function (req, res) {
 
 
 exports.lookupquarters = function (req, res) {
+    
     let query = 'call procLookUpQuarters()'
     //console.log(query);
+    
     db.query(query, (err, result) => {
+       
         if (err) {
+           
             return res.status(500).send(err);
         }
+        
         res.status(200).json(result);
     });
 }; 

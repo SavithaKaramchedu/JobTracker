@@ -2465,12 +2465,12 @@ $.ajax({
         function tiecalenderdropdown() {
           
             var Tiecalaenderdata = "";
-            var url = "https://localhost:9090/tieincalender/";
+            var url = "https://localhost:9090/tieincalender";
             $.ajax({
                 url: url,
                 type: "GET",
                 success: function (result) {
-                    Tiecalaenderdata = Tiecalaenderdata + "<option style='display:none;'></option>"
+                 //   Tiecalaenderdata = Tiecalaenderdata + "<option style='display:none;'></option>"
                    
                     for (var i = 0; i < result[0].length; i++) {
 
@@ -2494,7 +2494,7 @@ $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
-                        dropdowndata = dropdowndata + "<option style='display:none;'></option>"
+                     //   dropdowndata = dropdowndata + "<option style='display:none;'></option>"
                         for (var i = 0; i < result[0].length; i++) {
                             dropdowndata = dropdowndata +
                                 '<option value= "' + result[0][i].QuarterID + '" >' + result[0][i].Quarter + '</option>'
@@ -3072,7 +3072,7 @@ $.ajax({
                     type: "GET",
                     success: function (result) {
                     
-                     //     dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                         for (var i = 0; i < result[0].length; i++) {
                             dropdowndata = dropdowndata + '<option value="' + result[0][i].BUSINESSUNITID + '">' + result[0][i].BUSINESSUNIT + '</option>';
                         }
@@ -3139,7 +3139,7 @@ $.ajax({
                     type: "GET",
                     success: function (result) {
 
-                     //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                         for (var i = 0; i < result[0].length; i++) {
                             dropdowndata = dropdowndata + '<option value="' + result[0][i].VerticalID + '">' + result[0][i].VERTICAL + '</option>';
                         }
@@ -3185,7 +3185,7 @@ $.ajax({
                         type: "GET",
                         success: function (result) {
 
-                         //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                            dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                             for (var i = 0; i < result[0].length; i++) {
                                 dropdowndata = dropdowndata + '<option value="' + result[0][i].EmpID + '">' + result[0][i].RegionalHead +  '</option>';
                             }
@@ -3209,7 +3209,7 @@ $.ajax({
                             type: "GET",
                             success: function (result) {
 
-                             //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                            //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                                 for (var i = 0; i < result[0].length; i++) {
                                     dropdowndata = dropdowndata + '<option value="' + result[0][i].empid + '">' + result[0][i].TerritoryHead + '</option>';
                                 }
@@ -5064,7 +5064,7 @@ function serviceOfferingdisplay(i) {
                         type: "GET",
                         success: function (result) {
                             
-                            dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                            dropdowndata = dropdowndata+"<option style='display:none;'></option>";
                             for (var i = 0; i < result[0].length; i++) {
                              
 
@@ -5084,14 +5084,14 @@ function serviceOfferingdisplay(i) {
                  
                     var dropdowndata = "";
                  
-                    var url = "https://localhost:9090/parentaccountdrop"
+                    var url = "https://localhost:9090/parentaccountdrop";
                         
                     $.ajax({
                         url: url,
                         type: "GET",
                         success: function (result) {
                            
-                           dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                           dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                             for (var i = 0; i < result[0].length; i++) {
                              
 
