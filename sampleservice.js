@@ -1700,7 +1700,7 @@ exports.Tieinterritorymanager = function (req, res) {
 };
 exports.parentaccountdrop = function (req, res) {
 
-    let ipad = req.params.buid;
+   // let ipad = req.params.buid;
 
     let query = 'call procLookUpParentAccount()'
     
@@ -1716,12 +1716,21 @@ exports.parentaccountdrop = function (req, res) {
 
 };
  exports.tieinPage = function (req, res) {
-    let query = "CALL `devc4c`.`procTieInLockInListingMain`('','','','','','','')";
+    let iBusinessunitID = req.params.iBusinessunitID;
+    let iVerticalD = req.params.iVerticalD;
+    let iCalendaryearid = req.params.iCalendaryearid;
+    let iQuarterID = req.params.iQuarterID;
+    let iRegionaHeadiD = req.params.iRegionaHeadiD;
+    let iTerritoryHeadiD = req.params.iTerritoryHeadiD;
+    let iParentAccountID = req.params.iParentAccountID;
+    let query = "CALL `devc4c`.`procTieInLockInListingMain`('" + iBusinessunitID + "','" + iVerticalD + "','" + iCalendaryearid + "','" + iQuarterID + "','" + iRegionaHeadiD + "','" + iTerritoryHeadiD + "','" + iParentAccountID + "')";
+    console.log(query);
     db.query(query, (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
         res.status(200).json(result);
+       
     });
 };
 

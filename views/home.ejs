@@ -1696,29 +1696,60 @@
                     }
                 }
             }
+
+           function tieinLoad1(){
+         alert("tieinLoad");
+                setTimeout(function() {
+                    
+                 dropverticalgroup();
+                 dropdownverticalunit();
+                 regionalmanager();
+                 parentaccountdrop();
+                 tiecalenderdropdown();
+                 lookupquarters();
+                 //tieinLoad();
+		},1);
+	
+           }
             function tieinLoad() {
-                console.log("tieinload");
-                    var tableData;
-                  //  var iBusinessunitID=$("#verticalgroup").find(":selected").val();
-                    //   $("#screenloading").css('display', 'block');
-                    var url = "https://localhost:9090/tiein";
+                $("#loading").css('display', 'block');
+               // console.log("tieinload");
+                let iBusinessunitID = $("#verticalgroup").find(":selected").val();
+                let iVerticalD = $("#verticalunit").find(":selected").val();
+                let iCalendaryearid = $("#tieinyear").find(":selected").val();
+
+                alert(iCalendaryearid);
+
+                let iQuarterID = $("#quaterdrop").find(":selected").val();
+                //alert(iQuarterID);
+                let iRegionaHeadiD = $("#regionalmanager").find(":selected").val();
+                let iTerritoryHeadiD = $("#territorymanager").find(":selected").val();
+                let iParentAccountID = $("#parentaccbybu").find(":selected").val();
+                alert(iParentAccountID);
+
+                    var url = "https://localhost:9090/tiein/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
+                    console.log(url);
                     $.ajax({
                         url: url,
                         type: "GET",
+                         dataType: "json",
                         success: function (result) {
-                            
+                            var tableData="";
+                            $("#loading").css('display', 'none');
                             for (var i = 0; i < result[0].length; i++) {
                                 
                                 tableData = tableData + "  <tr> " +
                                     
-                                    "<td >" + result[0][i].BPStatus + "</td>" +
-                                    "<td >" + result[0][i].BPID + "</td>" +
-                                    "<td >" + result[0][i].BPName + "</td>" +
-                                    "<td >" + result[0][i].city + "</td>" +
-                                    "<td >" + result[0][i].MainContact + "</td>" +
-                                    "<td >" + result[0][i].createddate + "</td>" +
-                                    "<td >" + result[0][i].country + "</td>" +
-                                    "<td >" + result[0][i].BPType + "</td>" +
+                                    "<td >" + result[0][i].AccountName + "</td>" +
+                                    "<td >" + result[0][i].SalesTotal + "</td>" +
+                                    "<td >" + result[0][i].DeliveryTotal + "</td>" +
+                                    "<td >" + result[0][i].DeliverySalesDiffer + "</td>" +
+                                    "<td >" + result[0][i].TotalTieInNo + "</td>" +
+                                    "<td >" + result[0][i].QUARTER + "</td>" +
+                                    "<td >" + result[0][i].RegionaHead + "</td>" +
+                                    "<td >" + result[0][i].TerritoryHead + "</td>" +
+                                    "<td >" + result[0][i].VDG + "</td>" +
+                                    "<td >" + result[0][i].VDU + "</td>" +
                                     "</tr>";
                             }
                             $("#tie-inTable").html(tableData);
@@ -2497,11 +2528,12 @@ $.ajax({
                      //   dropdowndata = dropdowndata + "<option style='display:none;'></option>"
                         for (var i = 0; i < result[0].length; i++) {
                             dropdowndata = dropdowndata +
-                                '<option value= "' + result[0][i].QuarterID + '" >' + result[0][i].Quarter + '</option>'
+                                '<option value= "' + result[0][i].QuarterID + '">' + result[0][i].Quarter + '</option>'
                         }
                         $("#quaterdrop").html(dropdowndata);
                     }
                 });
+               // tieinLoad();
             }; 
       
         function contactLoad() {
@@ -3209,7 +3241,7 @@ $.ajax({
                             type: "GET",
                             success: function (result) {
 
-                            //   dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                            dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                                 for (var i = 0; i < result[0].length; i++) {
                                     dropdowndata = dropdowndata + '<option value="' + result[0][i].empid + '">' + result[0][i].TerritoryHead + '</option>';
                                 }
@@ -5747,7 +5779,7 @@ background-size: 8%;'>
                 </li>
                 <li title="Tie-In">
                     <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
-                      onclick="dropverticalgroup(),dropdownverticalunit(),regionalmanager(),parentaccountdrop(),tiecalenderdropdown(),lookupquarters()" >
+                      onclick="tieinLoad1()">
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">TIE-IN</span>
@@ -8040,10 +8072,10 @@ margin-left: 1px;">
                                   </div>
                                   <div class="row">
                                         <div class="col-sm-2" style="margin-left:20px;">
-                                                <select  class="form-control" id="verticalgroup" onchange="dropparentaccbybu(),dropverticalunitbybu()" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                <select  class="form-control" id="verticalgroup" onchange="dropparentaccbybu(),dropverticalunitbybu(),tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
-                                                    <select  class="form-control" id="verticalunit" onchange="dropparaccbyvertical()" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    <select  class="form-control" id="verticalunit" onchange="dropparaccbyvertical(),tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
                                                     <select id="tieinyear" class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
@@ -8067,13 +8099,13 @@ margin-left: 1px;">
                                     </div>
                                         <div class="row">
                                                 <div class="col-sm-2" style="margin-left:20px;">
-                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager()" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager(),tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <select  class="form-control" id="territorymanager" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                            <select  class="form-control" id="territorymanager" onchange="tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <select  class="form-control" id="parentaccbybu" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                            <select  class="form-control" id="parentaccbybu" style="width:78%;height:30px; padding:0px 0px;" onchange="tieinLoad()"></select>
                                                     </div>
                                                   
                                                     <div class="col-sm-2" style="margin:2px;">
@@ -8117,7 +8149,7 @@ margin-left: 1px;">
 
                                 <div class="entity-list" id="entity-list">
 
-                                    <div class="table table-responsive" style="overflow: auto;height:400px">
+                                    <div class="table table-responsive" style="overflow: auto;height:300px">
 
                                         <table class="table table-bordered" id="mytie-inTable">
 

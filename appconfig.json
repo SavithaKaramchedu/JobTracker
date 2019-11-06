@@ -1380,6 +1380,7 @@
         {
           "param": "/tieincalender"
         }
+
       ]
     },
   
@@ -1441,7 +1442,7 @@
       ]
     },
     {
-      "route": "/tiein",
+      "route": "/tiein/:iBusinessunitID/:iVerticalD/:iCalendaryearid/:iQuarterID/:iRegionaHeadiD/:iTerritoryHeadiD/:iParentAccountID",
       "type": "get",
       "configured": true,
       "routeclass": "./sampleservice.js",
