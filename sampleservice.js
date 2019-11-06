@@ -1727,6 +1727,23 @@ exports.parentaccountdrop = function (req, res) {
     console.log(query);
     db.query(query, (err, result) => {
         if (err) {
+  
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+       
+    });
+};
+exports.businessunitsforaccount = function (req, res) {
+
+    let iacid = req.params.acid;
+
+    let query = 'call procLookUpBusinessUnitsForAccount("'+iacid+'")'
+    
+    db.query(query, (err, result) => {
+     
+        if (err) {
+         
             return res.status(500).send(err);
         }
         res.status(200).json(result);
@@ -1734,3 +1751,20 @@ exports.parentaccountdrop = function (req, res) {
     });
 };
 
+exports.verticalbyaccount = function (req, res) {
+
+    let ivacid = req.params.vacid;
+
+    let query = 'call procLookUpVerticalByAccount("'+ivacid+'")'
+    
+    db.query(query, (err, result) => {
+     
+        if (err) {
+         
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+       
+    });
+
+};

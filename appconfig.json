@@ -1453,6 +1453,32 @@
           "param": "/tiein"
         }
       ]
+    },
+    {
+      "route": "/businessunitsforaccount/:acid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "businessunitsforaccount",
+      "description": "Route for listing all the active tie-in tab",
+      "examples": [
+        {
+          "param": "/businessunitsforaccount"
+        }
+      ]
+    },
+    {
+      "route": "/verticalbyaccount/:vacid",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "verticalbyaccount",
+      "description": "Route for listing all the active tie-in tab",
+      "examples": [
+        {
+          "param": "/verticalbyaccount"
+        }
+      ]
     }
 
   ]

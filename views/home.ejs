@@ -5137,6 +5137,60 @@ function serviceOfferingdisplay(i) {
                         }
                     });
                 };
+
+
+                function businessunitsforaccount () {
+                 
+                 var dropdowndata = "";
+                 var acid= $("#parentaccbybu").find(":selected").val();
+                 var url = "https://localhost:9090/businessunitsforaccount/"+acid;
+                     
+                 $.ajax({
+                     url: url,
+                     type: "GET",
+                     success: function (result) {
+                        
+                        dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                         for (var i = 0; i < result[0].length; i++) {
+                          
+
+                             dropdowndata = dropdowndata  +
+                             '<option value= "' + result[0][i].BUSINESSUNITID + '" >' + result[0][i].BUSINESSUNIT +  '</option>' 
+                           
+                         }
+                        
+                         $("#verticalgroup").html(dropdowndata);
+                         
+                     }
+                 });
+             };
+
+
+             function verticalbyaccount() {
+                 
+                 var dropdowndata = "";
+                 var vacid= $("#parentaccbybu").find(":selected").val();
+                 var url = "https://localhost:9090/verticalbyaccount/"+vacid;
+                     
+                 $.ajax({
+                     url: url,
+                     type: "GET",
+                     success: function (result) {
+                        
+                        dropdowndata = dropdowndata+"<option style='display:none;'></option>"
+                         for (var i = 0; i < result[0].length; i++) {
+                          
+
+                             dropdowndata = dropdowndata  +
+                             '<option value= "' + result[0][i].VerticalID + '" >' + result[0][i].VERTICAL +  '</option>' 
+                           
+                         }
+                        
+                         $("#verticalunit").html(dropdowndata);
+                         
+                     }
+                 });
+             };
                 function addServiceOffering() {
                         var Buid = $("#bunitId").val();
                         var verticalid = $("#verticalSoId").val();
@@ -8105,7 +8159,7 @@ margin-left: 1px;">
                                                             <select  class="form-control" id="territorymanager" onchange="tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <select  class="form-control" id="parentaccbybu" style="width:78%;height:30px; padding:0px 0px;" onchange="tieinLoad()"></select>
+                                                            <select  class="form-control" id="parentaccbybu" onchange="businessunitsforaccount(),verticalbyaccount(),tieinLoad();" style="width:78%;height:30px; padding:0px 0px;" ></select>
                                                     </div>
                                                   
                                                     <div class="col-sm-2" style="margin:2px;">
