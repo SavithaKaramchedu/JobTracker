@@ -1723,8 +1723,8 @@ exports.parentaccountdrop = function (req, res) {
     let iRegionaHeadiD = req.params.iRegionaHeadiD;
     let iTerritoryHeadiD = req.params.iTerritoryHeadiD;
     let iParentAccountID = req.params.iParentAccountID;
-    let query = "CALL `devc4c`.`procTieInLockInListingMain`('" + iBusinessunitID + "','" + iVerticalD + "','" + iCalendaryearid + "','" + iQuarterID + "','" + iRegionaHeadiD + "','" + iTerritoryHeadiD + "','" + iParentAccountID + "')";
-    console.log(query);
+    let query = "CALL `procTieInLockInListingMain`('" + iBusinessunitID + "','" + iVerticalD + "','" + iCalendaryearid + "','" + iQuarterID + "','" + iRegionaHeadiD + "','" + iTerritoryHeadiD + "','" + iParentAccountID + "')";
+//    console.log(query);
     db.query(query, (err, result) => {
         if (err) {
   

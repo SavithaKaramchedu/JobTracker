@@ -1698,16 +1698,17 @@
             }
 
            function tieinLoad1(){
-         alert("tieinLoad");
+      //   alert("tieinLoad");
                 setTimeout(function() {
                     
                  dropverticalgroup();
                  dropdownverticalunit();
                  regionalmanager();
+                 dropterritorymanager();
                  parentaccountdrop();
                  tiecalenderdropdown();
                  lookupquarters();
-                 //tieinLoad();
+                // tieinLoad();
 		},1);
 	
            }
@@ -1715,29 +1716,47 @@
                 $("#loading").css('display', 'block');
                // console.log("tieinload");
                 let iBusinessunitID = $("#verticalgroup").find(":selected").val();
-                let iVerticalD = $("#verticalunit").find(":selected").val();
-                let iCalendaryearid = $("#tieinyear").find(":selected").val();
-
-                alert(iCalendaryearid);
-
+                if (iBusinessunitID == "NULL" || iBusinessunitID == "") {
+                            iBusinessunitID = "NULL";
+                }                
+                let iVerticalD = $("#verticalunit").find(":selected").val();              
+                if (iVerticalD == "NULL" || iVerticalD == "") {
+                            iVerticalD = "NULL";
+                }
+                let iCalendaryearid = $("#tieinyear").find(":selected").val();                
+                if (iCalendaryearid == "NULL" || iCalendaryearid == "") {
+                           iCalendaryearid = "NULL";
+                }
                 let iQuarterID = $("#quaterdrop").find(":selected").val();
-                //alert(iQuarterID);
+                if (iQuarterID == "NULL" || iQuarterID == "") {
+                           iQuarterID = "NULL";
+                }
                 let iRegionaHeadiD = $("#regionalmanager").find(":selected").val();
-                let iTerritoryHeadiD = $("#territorymanager").find(":selected").val();
+                if (iRegionaHeadiD == "NULL" || iRegionaHeadiD == "") {
+                            iRegionaHeadiD = "NULL";
+                }
+                let iTerritoryHeadiD = $("#territorymanager").find(":selected").val();             
+                if (iTerritoryHeadiD == "NULL" || iTerritoryHeadiD == "") {
+                            iTerritoryHeadiD = "NULL";
+                }
                 let iParentAccountID = $("#parentaccbybu").find(":selected").val();
-                alert(iParentAccountID);
+                if (iParentAccountID == "NULL" || iParentAccountID == "") {
+                            iParentAccountID = "NULL";
+                }
 
-                    var url = "https://localhost:9090/tiein/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
-                    console.log(url);
-                    $.ajax({
-                        url: url,
-                        type: "GET",
-                         dataType: "json",
-                        success: function (result) {
-                            var tableData="";
+                 var tableData="";
+                   
+                 var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
+                  // alert(url);
+                   
+                 $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                          
                             $("#loading").css('display', 'none');
                             for (var i = 0; i < result[0].length; i++) {
-                                
+                           
                                 tableData = tableData + "  <tr> " +
                                     
                                     "<td >" + result[0][i].AccountName + "</td>" +
@@ -1756,9 +1775,6 @@
                         }
                     });
                 }
-
-
-
 
         function AccountLoad() {
 
@@ -3227,7 +3243,7 @@ $.ajax({
                         }
 
                     });
-
+                //      tieinLoad();
                 }
 
                 function dropterritorymanager() {
@@ -3241,7 +3257,7 @@ $.ajax({
                             type: "GET",
                             success: function (result) {
 
-                            dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                          //  dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                                 for (var i = 0; i < result[0].length; i++) {
                                     dropdowndata = dropdowndata + '<option value="' + result[0][i].empid + '">' + result[0][i].TerritoryHead + '</option>';
                                 }
@@ -3251,7 +3267,7 @@ $.ajax({
                             }
 
                         });
-
+                      //  tieinLoad();
                     }
 
         function contAccountDetails() {
@@ -8132,11 +8148,11 @@ margin-left: 1px;">
                                                     <select  class="form-control" id="verticalunit" onchange="dropparaccbyvertical(),tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
-                                                    <select id="tieinyear" class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                    <select id="tieinyear" class="form-control" onchange="tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                             <div class="col-sm-2" style="margin:2px;">
                                                
-                                                  <select id="quaterdrop" class="form-control"  style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                  <select id="quaterdrop" class="form-control" onchange="tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                             </div>
                                   </div>
                                   <div class="row">
@@ -8153,7 +8169,7 @@ margin-left: 1px;">
                                     </div>
                                         <div class="row">
                                                 <div class="col-sm-2" style="margin-left:20px;">
-                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager(),tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
                                                             <select  class="form-control" id="territorymanager" onchange="tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
