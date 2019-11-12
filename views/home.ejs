@@ -3853,65 +3853,7 @@ $.ajax({
         }
 
 
-        function revenueLoad() {
-
-                var tableData;
-
-                //   $("#screenloading").css('display', 'block');
-
-                var url = "https://localhost:9090/revenueresource";
-
-
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    success: function (result) {
-
-                        //    $("#screenloading").css('display', 'none');
-
-                        //   $("#bpcount").text(result[0].length);
-
-                        for (var i = 0; i < result[0].length; i++) {
-
-
-                            // if (result[0][i].BPName == null || result[0][i].BPName == 0) {
-                            //     result[0][i].BPName = "";
-                            // }
-                            // if (result[0][i].city == null || result[0][i].city == 0) {
-                            //     result[0][i].city = "";
-                            // }
-                            // if (result[0][i].MainContact == null || result[0][i].MainContact == 0) {
-                            //     result[0][i].MainContact = "";
-                            // }
-                            // if (result[0][i].country == null || result[0][i].country == 0) {
-                            //     result[0][i].country = "";
-                            // }
-
-
-                            tableData = tableData + "  <tr> " +
-
-                                "<td >" + result[0][i].BPStatus + "</td>" +
-                                "<td >" + result[0][i].BPID + "</td>" +
-                                "<td >" + result[0][i].BPName + "</td>" +
-                                "<td >" + result[0][i].city + "</td>" +
-                                "<td >" + result[0][i].MainContact + "</td>" +
-                                "<td >" + result[0][i].createddate + "</td>" +
-                                "<td >" + result[0][i].country + "</td>" +
-                                "<td >" + result[0][i].BPType + "</td>" +
-
-
-                                "</tr>";
-                        }
-
-                        $("#revenueresourceTable").html(tableData);
-                    }
-
-                });
-
-            }
-
-
-
+     
         function leadLoad() {
 
             var tableData = "";
@@ -7276,12 +7218,78 @@ background-size: 8%;'>
 
             <div id="revenueresourceTab" class="tab tab-pane ">
                 <div id="main" class="">
+
+
+
+                        <div id="content" class="">
+                                <header class="head-list">
+                                    <div id="default_controls">
+                                        <div class="pull-right right10">
+    
+                                            <div class="pull-right right10">
+                                                <div class="btn-group right10" id="tagActionDropdown"
+                                                    style="display: none;">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                        title="Tag Actions">
+                                                        <i class="mdi mdi-tag mdi-19px"></i> <span class="caret"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu  pull-right">
+                                                        <li class="disabled"><a href="javascript:;" title="Tag Actions">Tag
+                                                                Actions</a></li>
+                                                        <li><a href="javascript:;" id="deleteTag" title="Delete This Tag"><i
+                                                                    class="mdi mdi-18px  mdi-delete"></i> Delete This
+                                                                Tag</a></li>
+                                                        <li><a href="javascript:;" id="renameTag" title="Rename This Tag"><i
+                                                                    class="mdi mdi-textbox mdi-18px"></i> Rename This
+                                                                Tag</a></li>
+                                                    </ul>
+                                                </div>
+    
+                                                <div class="btn-group" id="btnRefresh" onclick="revenueLoad()">
+                                                    <a class="btn" id="refreshList" title="Refresh List"><i
+                                                            class="mdi mdi-refresh mdi-19px"></i></a>
+                                                </div>
+                                                <div class="btn-group" id="btnControls">
+                                                    <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                        title="List View Controls"><i class="icon-cog"></i> <span
+                                                            class="caret"></span></a>
+                                                    <!--Menu items are set on demand via ins.buttonBar.js-->
+                                                </div>
+                                                <div class="btn-group" id="btnFilters">
+                                                    <a class="btn" id="toggleFilters" title="Show List View Filters"><i
+                                                            class="icon-filter"></i></a>
+                                                </div>
+    
+    
+                                                <div class="btn-group">
+                                                    <button id="toggleSidebar" type="button" class="btn"
+                                                        title="Show Sidebar"><i class="icon-indent-right"></i></button>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="title">
+                                            <div class="btn-group">
+                                                <button id="btn-list-title" class="btn  " title="">
+                                                    Authorized CRM Opportunities : (<span id=bpcount></span>)
+                                                </button>
+    
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                </header>
+                            </div>
+
+
                     <div id="main-container" class="list-view contact">
                             <div class="col-sm-1" >
                                     <button type="button"  class="btn btn-primary" style="height:40px;width:188%;color: #fff;background-image: -webkit-linear-gradient(top,#337ab7,#337ab7);">Sales Pipeline</button>
                             </div>
-<hr style="margin:11px; width: 100%;
-margin-left: 1px;">
+                            <hr style="margin:11px; width: 100%;
+                            margin-left: 1px;">
                             <div id="main-content" class="contact">
                                     <div style="background-color: #f5f5f5;border: 1px solid #e3e3e3;">
            
@@ -7327,9 +7335,9 @@ margin-left: 1px;">
                                                                     <button type="button"  class="btn btn-primary" style="width:140%;color: #fff;background-image: -webkit-linear-gradient(top,#337ab7,#337ab7);">Search</button>
                                                             </div>
                                                             <div class="col-sm-1" >
-                                                             <span style="float: right !important; ">
+                                                             <!-- <span style="float: right !important; ">
                                                                  <a href="#" ><img src="images/export-to-excel-image.png" style="width: 27px;"></a>                                                   
-                                                                </span>                                                 
+                                                                </span>                                                  -->
                                                                 <i class="fa fa-refresh" aria-hidden="true"></i> 
                                                                  
                                                                 
@@ -7341,67 +7349,7 @@ margin-left: 1px;">
                          
                                 </div>
 
-                        <div id="content" class="">
-                            <header class="head-list">
-                                <div id="default_controls">
-                                    <div class="pull-right right10">
-
-                                        <div class="pull-right right10">
-                                            <div class="btn-group right10" id="tagActionDropdown"
-                                                style="display: none;">
-                                                <a class="btn dropdown-toggle" data-toggle="dropdown"
-                                                    title="Tag Actions">
-                                                    <i class="mdi mdi-tag mdi-19px"></i> <span class="caret"></span>
-                                                </a>
-                                                <ul class="dropdown-menu  pull-right">
-                                                    <li class="disabled"><a href="javascript:;" title="Tag Actions">Tag
-                                                            Actions</a></li>
-                                                    <li><a href="javascript:;" id="deleteTag" title="Delete This Tag"><i
-                                                                class="mdi mdi-18px  mdi-delete"></i> Delete This
-                                                            Tag</a></li>
-                                                    <li><a href="javascript:;" id="renameTag" title="Rename This Tag"><i
-                                                                class="mdi mdi-textbox mdi-18px"></i> Rename This
-                                                            Tag</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="btn-group" id="btnRefresh" onclick="revenueLoad()">
-                                                <a class="btn" id="refreshList" title="Refresh List"><i
-                                                        class="mdi mdi-refresh mdi-19px"></i></a>
-                                            </div>
-                                            <div class="btn-group" id="btnControls">
-                                                <a class="btn dropdown-toggle" data-toggle="dropdown"
-                                                    title="List View Controls"><i class="icon-cog"></i> <span
-                                                        class="caret"></span></a>
-                                                <!--Menu items are set on demand via ins.buttonBar.js-->
-                                            </div>
-                                            <div class="btn-group" id="btnFilters">
-                                                <a class="btn" id="toggleFilters" title="Show List View Filters"><i
-                                                        class="icon-filter"></i></a>
-                                            </div>
-
-
-                                            <div class="btn-group">
-                                                <button id="toggleSidebar" type="button" class="btn"
-                                                    title="Show Sidebar"><i class="icon-indent-right"></i></button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="title">
-                                        <div class="btn-group">
-                                            <button id="btn-list-title" class="btn  " title="">
-                                                Authorized CRM Opportunities : (<span id=bpcount></span>)
-                                            </button>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </header>
-                        </div>
+          
                         <div id="main-content" class="contact">
 
                             <div id="tbMarksContainer">
@@ -7433,115 +7381,183 @@ margin-left: 1px;">
                                                     <th scope="col">Delivery Agreement</th>
                                                     <th scope="col">Delivery Rejection Remarks</th>
                                                 </tr>
+
                                             </thead>
 
                                             <tbody id="revenueresourceTable">
-
-
+                                            <tr>
+ 
+                                                    <td>Medical</td>
+                                                    <td>MEDTRONIC</td>
+                                                    <td>MEDTRONIC</td>
+                                                   <td> <a href="#reveunueresourcemodal"  data-toggle="modal" data-backdrop="static" data-keyboard="false">6011812</a></td>
+                                                    <td>NA</td>
+                                                    <td>Oppo Reno A7</td>
+                                                    <td>10% - Ideation</td>
+                                                    <td>34</td>
+                                                    <td>3</td>
+                                                    <td>Open</td>
+                                                    <td>10/05/2019 12:00 AM</td>
+                                                    <td>01/02/2020 12:00 AM</td>
+                                                    <td>Saurabh Parmar</td>
+                                                    <td>Yet to start</td>
+                                                    <td></td>
+                                                    <td></td>
+                                             </tr>
+                                                   
                                             </tbody>
 
                                         </table>
-                                        <div class="modal fade docs-example-modal-lg" id="rrmodal" tabindex="-1"
-                                            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header"
-                                                        style="background-color: #e6e0e094; color:black;">
-                                                        <h6 class="modal-title">Revenue & Resource Forecast</h1>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                onclick="" style="color: #000; opacity:1.5;">×</button>
-                                                    </div>
 
+
+
+
+
+                        <div class="modal fade" id="reveunueresourcemodal" style="top:6%;height:675px;width:78%;padding-right:11%;left:44%">
+                                <div class="modal-dialog modal-lg">
+                                <div class="modal-content" style="width: 119%;">
+    
+                                     <!-- Modal Header -->  
+
+                                <div class="modal-header" style="height: 40px;padding: 0px; border-bottom: 1px solid #e5e5e5;background-color: rgba(0, 63, 118, 1);color: white;">
+                                    
+                                    <div class="col-sm-8">
+                                    <h4><b style="font-weight:500;">Opportunity Id:<span>6011832</span> </b></h4>
+                                    </div>
+                                    
+                                    <div class="col-sm-4" style="padding-top: 10px;">
+                                    <button type="button" class="close" data-dismiss="modal" style="color: white;  opacity: 1;" onclick="clearIrsTransTableData()">×</button>
+                                    </div>
+
+                                    </div>                            
+                                
                                                     <!-- Modal body -->
-                                                    <div class="modal-body">
+                                                    
+    
+	                                <div class="modal-body" id="" style="height:515px;">
+                                                    
+                                        <div class="row">
+                                            <div class="col-sm-12" style="margin-bottom: 5px;"></div>
+                                        </div>
+											<div class="row">
+												<div class="col-sm-12">
+												<b>Products of Opportunity</b>
+												</div>
+											 <div class="col-sm-6">
+											 <div class="row">
+											  <div class="col-sm-5">
+												<p><span style="color: red;">*</span> Account :</p>
+												</div>
+												<div class="col-sm-7">
+												<p id="" style="width:78%; height:22px;">L&amp;T1</p>
+												</div>
+												</div>
+												</div>
+											<div class="col-sm-6">
+											<div class="row">
+											<div class="col-sm-5">
+											<p><span style="color: red;">*</span>Opportunity :</p>
+											</div>
+											<div class="col-sm-7">
+											<p id="" style="width:78%; height:22px;">Samsungreno</p>											
+												</div>
+												</div>
+												</div>
+												</div>
+												<div class="row">
+												<div class="col-sm-6">
+												<div class="row">
+										     	<div class="col-sm-5">
+												<p><span style="color: red;">*</span>Opportunity Value :</p>
+												</div>
+												<div class="col-sm-7">
+												<p id="" style="width:78%; height:22px;">77</p>																								
+												</div>
+												</div>
+												</div>
+											     <div class="col-sm-6">
+											      <div class="row">
+											     <div class="col-sm-5">
+										      	<p><span style="color: red;">*</span>Sales Phase :</p>
+											    </div>
+										      	<div class="col-sm-7">
+										     	<p id="" style="width:78%; height:22px;">100% - Execution</p>																								
+											   </div>
+											</div>
+											</div>
+												
+											</div>
+										<div  style="height: 300px; overflow: auto;">
+																		
+																				
+											<table class="table table-bordered" id="" style="border: 1px solid rgb(255, 255, 255);">
+												<thead>
+														<tr style="background-color: rgb(51, 122, 183);color: white;">
+													<th>Opportunity Id and Product Description</th>																					
+                                                    <th>Sales Product Category</th>	
+                                                    <th>Probable Start Date</th>	
+                                                    <th>Horizontal</th>	
+                                                    <th>Planning Status</th>	
+                                                    <th>Revenue Start Date</th>	
+                                                    <th>Revenue End Date</th>	
+                                                    <th>Delivery Product Category</th>	
+                                                    <th>Assign To(Email)</th>	
+                                                    <th>ProjectId</th>	
+															</tr>
+															</thead>
+																						
+															<tbody id="">
 
-                                                        <form class="form-signin" action="/modal" method="post">
-
-                                                            <div class="row">
-
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">Status</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="status" id="status"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-                                                                <div class="col-sm-2">
-                                                                    Business Partner Id</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="businesspId" id="businesspId"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">
-                                                                    Business Partner</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="business" id="business"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-
-                                                                <div class="col-sm-2">City</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="cityB" id="cityB"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
+                                                            </tbody>
+                                                            </table>
+                                                </div>
+																				
+														<div  style="height: 250px; overflow: auto;">																																																																									
+															<table class="table table-bordered" id="" style="border: 1px solid rgb(255, 255, 255);">
+																<thead>
+																<tr style="background-color: rgb(51, 122, 183);color: white;">
+																<th>Opp Id</th>	
+																<th>Product category</th>																					
+																<th>Year</th>	
+																<th>Negotiated Value</th>
+																<th>Total</th>																	
+																<th>Jan</th>	
+																<th>Feb</th>
+																<th>Mar</th>
+																<th>Apr</th>																					
+																<th>May</th>																					
+																<th>Jun</th>	
+																<th>Jul</th>
+																<th>Aug</th>
+																<th>Sep</th>																					
+																<th>Oct</th>																					
+																<th>Nov</th>	
+																<th>Dec</th>
+																<th>Edited By</th>																				
+																</tr>
+																</thead>
+																						
+																						
+																<tbody >
+																						
+													            </tbody>
+                                                            </table>
+                                                       </div>
+																					
+										</div>
 
 
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">Main Contact</div>
-
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="mainc" id="mainc"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-                                                                <div class="col-sm-2">
-                                                                    Created On</div>
-
-                                                                <div class="col-sm-3">
-                                                                    <input type="date" required class="form-control"
-                                                                        disabled name="created" id="created"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2"> Country</div>
-                                                                <div class="col-sm-3">
-                                                                        <input type="text" class="form-control form-group"id="portfolios" disabled>
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-           
-                                                        </div>
-        
-        
-                                                        <!-- Modal footer -->
-                                                 <!-- <div class="modal-footer">                        
-                                                        </div> -->
+    
+                                                    <!-- Modal footer -->
+                                        <div class="modal-footer">                                                               
+                                            <button type="button" class="btn btn-primary" style="width:14%;color: #fff;background-image: -webkit-linear-gradient(top,#337ab7,#337ab7);">Resource Forecast</button>                                                   
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-
-
-
+ 
+                                        
                                         </table>
                                        
                                     </div>
@@ -7550,51 +7566,7 @@ margin-left: 1px;">
                         </div>
                     </div>
 
-                    <!-- <div class="row">
-                                <div class="col-sm-2"></div>
-                                        <div class="col-sm-10">
-                            
-                                                <h6>Details: Business Partners</h6>
-                                        </div>
-                                        
-                                        <div class="col-sm-2"></div>
-                                            <div class="col-sm-10">
-                                            <h6> Main Address</h6>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                        <div class="col-sm-5">
-                                                 Business Partner :
-                                            </div>
-                            
-                                            <div class="col-sm-5">
-                                                    Status :
-                                               </div>
-                                              
-                                               <div class="col-sm-2"></div>
-                                               <div class="col-sm-5">
-                                                    Business Partner Id :
-                                               </div>
-                                               <div class="col-sm-5">
-                                                    City :
-                                               </div>
-                            
-                                               <div class="col-sm-2"></div>
-                                               <div class="col-sm-5">
-                                                    Main Contact :
-                                               </div>
-                                               <div class="col-sm-5">
-                                                    Country :
-                                               </div>
-                            
-                                               <div class="col-sm-2"></div>
-                                               <div class="col-sm-5">
-                                                    Created On :
-                                               </div>
-                                               <div class="col-sm-5">
-                                                    Type :
-                                               </div>
-                            
-                                        </div> -->
+                   
 
                 </div>
 
