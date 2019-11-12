@@ -1708,7 +1708,7 @@
                  parentaccountdrop();
                  tiecalenderdropdown();
                  lookupquarters();
-                // tieinLoad();
+                tieinLoad();
 		},1);
 	
            }
@@ -1716,44 +1716,45 @@
                 $("#loading").css('display', 'block');
                // console.log("tieinload");
                 let iBusinessunitID = $("#verticalgroup").find(":selected").val();
-                if (iBusinessunitID == "NULL" || iBusinessunitID == "") {
+                if (iBusinessunitID == "NULL" || iBusinessunitID == ""|| iBusinessunitID == undefined) {
                             iBusinessunitID = "NULL";
                 }                
+                console.log(iBusinessunitID);
                 let iVerticalD = $("#verticalunit").find(":selected").val();              
-                if (iVerticalD == "NULL" || iVerticalD == "") {
+                if (iVerticalD == "NULL" || iVerticalD == ""|| iVerticalD == undefined) {
                             iVerticalD = "NULL";
                 }
-                let iCalendaryearid = $("#tieinyear").find(":selected").val();                
-                if (iCalendaryearid == "NULL" || iCalendaryearid == "") {
+                let iCalendaryearid = '6d1ca9dd-27a4-11e8-af05-484d7ec12da6';                
+                if (iCalendaryearid == "NULL" || iCalendaryearid == ""|| iCalendaryearid == undefined) {
                            iCalendaryearid = "NULL";
                 }
-                let iQuarterID = $("#quaterdrop").find(":selected").val();
-                if (iQuarterID == "NULL" || iQuarterID == "") {
+                let iQuarterID = '9da55122-3bba-11e8-a663-484d7ec12da6';
+                if (iQuarterID == "NULL" || iQuarterID == ""|| iQuarterID == undefined) {
                            iQuarterID = "NULL";
                 }
                 let iRegionaHeadiD = $("#regionalmanager").find(":selected").val();
-                if (iRegionaHeadiD == "NULL" || iRegionaHeadiD == "") {
+                if (iRegionaHeadiD == "NULL" || iRegionaHeadiD == ""|| iRegionaHeadiD == undefined) {
                             iRegionaHeadiD = "NULL";
                 }
                 let iTerritoryHeadiD = $("#territorymanager").find(":selected").val();             
-                if (iTerritoryHeadiD == "NULL" || iTerritoryHeadiD == "") {
+                if (iTerritoryHeadiD == "NULL" || iTerritoryHeadiD == ""|| iTerritoryHeadiD == undefined) {
                             iTerritoryHeadiD = "NULL";
                 }
                 let iParentAccountID = $("#parentaccbybu").find(":selected").val();
-                if (iParentAccountID == "NULL" || iParentAccountID == "") {
+                if (iParentAccountID == "NULL" || iParentAccountID == ""|| iParentAccountID == undefined) {
                             iParentAccountID = "NULL";
                 }
 
                  var tableData="";
                    
                  var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
-                  // alert(url);
+                 
                    
                  $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
-                          
+                         
                             $("#loading").css('display', 'none');
                             for (var i = 0; i < result[0].length; i++) {
                            

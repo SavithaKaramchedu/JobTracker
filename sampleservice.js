@@ -1716,22 +1716,30 @@ exports.parentaccountdrop = function (req, res) {
 
 };
  exports.tieinPage = function (req, res) {
+    
     let iBusinessunitID = req.params.iBusinessunitID;
+   
     let iVerticalD = req.params.iVerticalD;
+   
     let iCalendaryearid = req.params.iCalendaryearid;
+    
     let iQuarterID = req.params.iQuarterID;
+    
     let iRegionaHeadiD = req.params.iRegionaHeadiD;
+    
     let iTerritoryHeadiD = req.params.iTerritoryHeadiD;
+    
     let iParentAccountID = req.params.iParentAccountID;
+   
     let query = "CALL `procTieInLockInListingMain`('" + iBusinessunitID + "','" + iVerticalD + "','" + iCalendaryearid + "','" + iQuarterID + "','" + iRegionaHeadiD + "','" + iTerritoryHeadiD + "','" + iParentAccountID + "')";
-//    console.log(query);
+console.log(query);
     db.query(query, (err, result) => {
         if (err) {
   
             return res.status(500).send(err);
         }
         res.status(200).json(result);
-       
+      
     });
 };
 exports.businessunitsforaccount = function (req, res) {
