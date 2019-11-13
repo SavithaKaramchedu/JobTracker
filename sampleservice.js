@@ -626,7 +626,7 @@ exports.deletedisplaycont = function (req, res) {
 
 exports.BusinessPage = function (req, res) {
 
-    let query = "CALL `devc4c`.`procListAllBusinessPartners`()";
+    let query = "CALL `procListAllBusinessPartners`()";
 
     db.query(query, (err, result) => {
 
@@ -639,9 +639,61 @@ exports.BusinessPage = function (req, res) {
     });
 };
 
-exports.RevenueResourcePage = function (req, res) {
+    exports.RevenueResourcePage = function (req, res) {
+    
+        let Startrow = req.params.Startrow;
+       
+        let EndRow = req.params.EndRow;
+       
+        let iOpportunityCode = req.params.iOpportunityCode;
+        
+        let iPlanningStatus = req.params.iPlanningStatus;
+        
+        let iParentAccountCode = req.params.iParentAccountCode;
+        
+        let iAccountId = req.params.iAccountId;
+        
+        let iSalesPhaseId = req.params.iSalesPhaseId;
 
-    let query = "CALL `devc4c`.`procListRevenueSplitRecords`()";
+        let iSearch = req.params.iSearch;
+
+        let oldIdSearch = req.params.oldIdSearch;
+       
+        let query = "CALL `procAdminListO2RSummaryAdvanceFilter`(" + Startrow + "," + EndRow + "," + iOpportunityCode + "," + iPlanningStatus + "," + iParentAccountCode + "," + iAccountId + "," + iSalesPhaseId + "," + iSearch + "," + oldIdSearch + ",@output)";
+    
+        console.log(query);
+      
+        db.query(query, (err, result) => {
+            if (err) {
+            //    console.log(err);
+                return res.status(500).send(err);
+               
+            }
+           // res.status(200).json(result);
+           // console.log(result);
+
+            let query1 = "SELECT @output as revenuerowid";
+            
+            db.query(query1, (err, result3) => {
+                
+                if (err) {
+                    
+                    return res.status(500).send(err);
+               
+                }
+                
+                res.status(200).json(result);
+              
+
+            });
+
+        });
+    };
+    
+
+exports.RevenuePlanningStatus = function (req, res) {
+
+    let query = "CALL `procLookUpPlanningStatuses`()";
 
     db.query(query, (err, result) => {
 
@@ -652,10 +704,37 @@ exports.RevenueResourcePage = function (req, res) {
         res.status(200).json(result);
 
     });
-};
+}
 
+exports.RevenueAccountName = function (req, res) {
 
+    let query = 'CALL `procAdminLookUpAccountsByFilter`("Parent")';
 
+    db.query(query, (err, result) => {
+
+        if (err) {
+            res.redirect('/');
+
+        }
+        res.status(200).json(result);
+
+    });
+}
+
+exports.RevenueCustomerName = function (req, res) {
+
+    let query = "CALL `procLookUpCustomers`()";
+
+    db.query(query, (err, result) => {
+
+        if (err) {
+            res.redirect('/');
+
+        }
+        res.status(200).json(result);
+
+    });
+}
 
 
 
@@ -1742,6 +1821,7 @@ console.log(query);
       
     });
 };
+
 exports.businessunitsforaccount = function (req, res) {
 
     let iacid = req.params.acid;

@@ -1758,6 +1758,37 @@
                             $("#loading").css('display', 'none');
                             for (var i = 0; i < result[0].length; i++) {
                            
+                               if (result[0][i].AccountName == null || result[0][i].AccountName == 0) {
+                                    result[0][i].AccountName = "";
+                                }
+                                if (result[0][i].SalesTotal == null || result[0][i].SalesTotal == 0) {
+                                    result[0][i].SalesTotal = 0;
+                                }
+                                if (result[0][i].DeliveryTotal == null || result[0][i].DeliveryTotal == 0) {
+                                    result[0][i].DeliveryTotal = 0;
+                                }
+                                if (result[0][i].DeliverySalesDiffer == null || result[0][i].DeliverySalesDiffer == 0) {
+                                    result[0][i].DeliverySalesDiffer = 0;
+                                }
+                                if (result[0][i].TotalTieInNo == null || result[0][i].TotalTieInNo == 0) {
+                                    result[0][i].TotalTieInNo = 0;
+                                }
+                                if (result[0][i].QUARTER == null || result[0][i].QUARTER == 0) {
+                                    result[0][i].QUARTER = "";
+                                }
+                                if (result[0][i].RegionaHead == null || result[0][i].RegionaHead == 0) {
+                                    result[0][i].RegionaHead = "";
+                                }
+                                if (result[0][i].TerritoryHead == null || result[0][i].TerritoryHead == 0) {
+                                    result[0][i].TerritoryHead = "";
+                                }
+                                if (result[0][i].VDG == null || result[0][i].VDG == 0) {
+                                    result[0][i].VDG = "";
+                                }
+                                if (result[0][i].VDU == null || result[0][i].VDU == 0) {
+                                    result[0][i].VDU = "";
+                                }
+                                
                                 tableData = tableData + "  <tr> " +
                                     "<td >" + result[0][i].AccountName + "</td>" +
                                     "<td >" + result[0][i].SalesTotal + "</td>" +
@@ -3853,7 +3884,189 @@ $.ajax({
         }
 
 
-     
+        function revenueLoad() {
+
+
+            let Startrow =0;
+
+            let EndRow =12000;
+
+            let iOpportunityCode = $("#rroppoid").val();
+            
+            if (iOpportunityCode == null || iOpportunityCode == "" || iOpportunityCode == undefined ) {
+                iOpportunityCode = null;
+            }
+           
+            let iPlanningStatus = $("#planningstatus").find(":selected").val();
+
+            if (iPlanningStatus == null || iPlanningStatus == "" || iPlanningStatus == undefined ) {
+                iPlanningStatus = null;
+            }
+            let iParentAccountCode = $("#accountname").find(":selected").val();
+
+            if (iParentAccountCode == null || iParentAccountCode == "" || iParentAccountCode == undefined ) {
+                iParentAccountCode = null;
+            }
+
+            let iAccountId = $("#customername").find(":selected").val();
+           
+            if (iAccountId == null || iAccountId == "" || iAccountId == undefined ) {
+                iAccountId = null;
+            }
+
+            let iSalesPhaseId = $("#rrsalesphase").find(":selected").val();
+
+            if (iSalesPhaseId == null || iSalesPhaseId == "" || iSalesPhaseId == undefined) {
+                iSalesPhaseId = null;
+            }
+          
+            let iSearch =null;
+
+            let oldIdSearch =null;
+
+            var tableData;
+
+                $("#screenloading").css('display', 'block');
+
+            var url = "https://localhost:9090/revenueresource/"+Startrow+","+EndRow+","+iOpportunityCode+","+iPlanningStatus+","+iParentAccountCode+","+iAccountId+","+iSalesPhaseId+","+iSearch+","+oldIdSearch;
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+
+                          $("#screenloading").css('display', 'none');
+
+                        //   $("#bpcount").text(result[0].length);
+
+                        for (var i = 0; i < result[0].length; i++) {
+
+                            var revenuerowid = "\"" + result[0][i].orowCount + "\"";
+
+                            if (result[0][i].VERTICAL == null || result[0][i].VERTICAL == 0) {
+                            result[0][i].VERTICAL = "";
+                            }
+                            
+                            if (result[0][i].SOURCEC4COPPORTUNITYCODE == null || result[0][i].SOURCEC4COPPORTUNITYCODE == 0) {
+                            result[0][i].SOURCEC4COPPORTUNITYCODE = "NA";
+                            }
+
+                            if (result[0][i].WEIGHTEDVALUE == null || result[0][i].WEIGHTEDVALUE == 0) {
+                            result[0][i].WEIGHTEDVALUE = "";
+                            }
+                            
+                            if (result[0][i].SalesManager == null || result[0][i].SalesManager == 0) {
+                            result[0][i].SalesManager = "";
+                            }
+
+                            if (result[0][i].DELIVERYREJECTIONREASON == null || result[0][i].DELIVERYREJECTIONREASON == 0) {
+                            result[0][i].DELIVERYREJECTIONREASON = "";
+                            }
+                           
+                            if (result[0][i].DELIVERYREJECTIONREMARKS == null || result[0][i].DELIVERYREJECTIONREMARKS == 0) {
+                            result[0][i].DELIVERYREJECTIONREMARKS = "";
+                            }
+
+                            tableData = tableData + "  <tr> " +
+
+                                "<td hidden >" + result[0][i].OPPORTUNITYID + "</td>" +
+                                "<td >" + result[0][i].VERTICAL + "</td>" +
+                                "<td >" + result[0][i].ParentAccountName + "</td>" +
+                                "<td >" + result[0][i].Account + "</td>" +
+                                "<td >" + result[0][i].OPPORTUNITYCODE + "</td>" +
+                                "<td >" + result[0][i].SOURCEC4COPPORTUNITYCODE + "</td>" +
+                                "<td >" + result[0][i].OPPORTUNITYNAME + "</td>" +
+                                "<td >" + result[0][i].SALESPHASE + "</td>" +
+                                "<td >" + result[0][i].EXPECTEDVALUE + "</td>" +
+                                "<td >" + result[0][i].WEIGHTEDVALUE + "</td>" +
+                                "<td >" + result[0][i].STATUS + "</td>" +
+                                "<td >" + result[0][i].OPPORTUNITYSTARTDATE + "</td>" +
+                                "<td >" + result[0][i].OPPORTUNITYENDDATE + "</td>" +
+                                "<td >" + result[0][i].SalesManager + "</td>" +
+                                "<td >" + result[0][i].PlanningStatus + "</td>" +
+                                "<td >" + result[0][i].DELIVERYREJECTIONREASON + "</td>" +
+                                "<td >" + result[0][i].DELIVERYREJECTIONREMARKS + "</td>" +
+
+                                "</tr>";
+                        }
+
+                        $("#revenueresourceTable").html(tableData);
+                    }
+
+                });
+
+            }
+         
+            function dropplanningstatus() {
+                
+                var url = "https://localhost:9090/rrplanningstatus";
+                var dropdowndata = "";
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                    
+                        dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        for (var i = 0; i < result[0].length; i++) {
+                            dropdowndata = dropdowndata + '<option value="' + result[0][i].PLANNINGSTATUSID + '">' + result[0][i].PLANNINGSTATUS + '</option>';
+                        }
+
+                        $("#planningstatus").html(dropdowndata);
+
+                    }
+
+                });
+
+            }
+
+            function dropaccountname() {
+                
+                var url = "https://localhost:9090/rraccountname";
+                var dropdowndata = "";
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                    
+                        dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        for (var i = 0; i < result[0].length; i++) {
+                            dropdowndata = dropdowndata + '<option value="' + result[0][i].ACCOUNTID + '">' + result[0][i].Account + '</option>';
+                        }
+
+                        $("#accountname").html(dropdowndata);
+
+                    }
+
+                });
+
+            }
+
+            function dropcustomername() {
+                
+                var url = "https://localhost:9090/rrcustomername";
+                var dropdowndata = "";
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (result) {
+                    
+                        dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                        for (var i = 0; i < result[0].length; i++) {
+                            dropdowndata = dropdowndata + '<option value="' + result[0][i].ACCOUNTID + '">' + result[0][i].ACCOUNT + '</option>';
+                        }
+
+                        $("#customername").html(dropdowndata);
+
+                    }
+
+                });
+
+            }
+
+
         function leadLoad() {
 
             var tableData = "";
@@ -4661,6 +4874,7 @@ function serviceOfferingdisplay(i) {
                     }
                     $("#Salesphase").html(Salesphasedata);
                     $("#salesphase").html(Salesphasedata);
+                    $("#rrsalesphase").html(Salesphasedata);
                 }
             });
 
@@ -5801,7 +6015,7 @@ background-size: 8%;'>
                 
                 <li title="Revenue & Resource Forecast">
                     <a id="navlink_business" class="sidebar_navlink " href="#revenueresourceTab" data-toggle="tab"
-                        onclick="revenueLoad();">
+                        onclick="dropplanningstatus(),dropaccountname(),dropcustomername(),oppoSalesphasedropdown(),revenueLoad();">
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">Revenue & Resource Forecast</span>
@@ -7315,20 +7529,20 @@ background-size: 8%;'>
                                                 </div>
                                                 <div class="row">
                                                         <div class="col-sm-2">
-                                                                <input type="text"  class="form-control" style="width:100%;height:30px;"> 
+                                                                <input type="text" id="rroppoid" class="form-control" style="width:100%;height:30px;"> 
                                                          
                                                             </div>
                                                             <div class="col-sm-2" >
-                                                                    <select  class="form-control"   style="width:100%;height:30px;"></select>
+                                                                    <select  class="form-control" id="planningstatus" style="width:100%;height:30px;"></select>
                                                             </div>
                                                             <div class="col-sm-2" >
-                                                                    <select  class="form-control"  style="width:100%;height:30px;"></select>
+                                                                    <select  class="form-control" id="accountname"  style="width:100%;height:30px;"></select>
                                                             </div>
                                                             <div class="col-sm-2" >
-                                                                    <select  class="form-control"   style="width:100%;height:30px;"></select>
+                                                                    <select  class="form-control" id="customername" style="width:100%;height:30px;"></select>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <select  class="form-control"  style="width:100%;height:30px;"></select>
+                                                                <select  class="form-control" id="rrsalesphase" style="width:100%;height:30px;"></select>
                                                         </div>
                                                             
                                                             <div class="col-sm-1" >
@@ -8151,7 +8365,7 @@ background-size: 8%;'>
                                                     </div>
                                                   
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <button type="button"  style="width:78%;color: #fff;
+                                                            <button type="button" onclick="tieinLoad1()" style="width:78%;color: #fff;
                                                             background-color: #337ab7">Clear Filter</button>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">

@@ -1354,7 +1354,7 @@
       ]
     },
     {
-      "route": "/revenueresource",
+      "route": "/revenueresource/:Startrow,:EndRow,:iOpportunityCode,:iPlanningStatus,:iParentAccountCode,:iAccountId,:iSalesPhaseId,:iSearch,:oldIdSearch",
       "type": "get",
       "configured": true,
       "routeclass": "./sampleservice.js",
@@ -1363,6 +1363,45 @@
       "examples": [
         {
           "param": "/revenueresource"
+        }
+      ]
+    },
+    {
+      "route": "/rrplanningstatus",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "RevenuePlanningStatus",
+      "description": "Route for listing all the PlanningStatus in Revenue & Resource Forecast",
+      "examples": [
+        {
+          "param": "/rrplanningstatus"
+        }
+      ]
+    },
+    {
+      "route": "/rraccountname",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "RevenueAccountName",
+      "description": "Route for listing all the AccountName in Revenue & Resource Forecast",
+      "examples": [
+        {
+          "param": "/rraccountname"
+        }
+      ]
+    },
+    {
+      "route": "/rrcustomername",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "RevenueCustomerName",
+      "description": "Route for listing all the CustomerName in Revenue & Resource Forecast",
+      "examples": [
+        {
+          "param": "/rrcustomername"
         }
       ]
     },
