@@ -1447,6 +1447,36 @@ exports.getServiceoffering = function (req, res) {
     });
 };
 
+exports.revenueforecast = function (req, res) {
+
+    let iOpportunityID = req.params.iOpportunityID;
+
+    let query = "call `procEditO2RSummary`('" + iOpportunityID + "')";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+    });
+};
+
+
+exports.forecastoppresource = function (req, res) {
+
+    let iOpportunityID = req.params.iOpportunityID;
+	
+	let iSaleServiceOfferingID = req.params.iSaleServiceOfferingID;
+	
+    let query = "call `procListIRSTransDataForDelivery` ('" + iOpportunityID + "','" + iSaleServiceOfferingID + "')";
+    db.query(query, (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).json(result);
+    });
+};
+
+
 exports.serviceOfferingdisplay = function (req, res) {
     
     var Sid = req.params.i;

@@ -1158,6 +1158,36 @@
         }
       ]
     },
+
+    {
+      "route": "/revenueforecast/:iOpportunityID",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "revenueforecast",
+      "description": "Route for listing all the active Revenue Resource",
+      "examples": [
+        {
+          "param": "/revenueforecast"
+        }
+      ]
+    },
+	
+	
+    {
+      "route": "/forecastoppresource/:iOpportunityID,:iSaleServiceOfferingID",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "forecastoppresource",
+      "description": "Route for listing all the active Opportunity Revenue Resource",
+      "examples": [
+        {
+          "param": "/forecastoppresource"
+        }
+      ]
+    },
+
     {
       "route": "/dropdownverticalgroup",
       "type": "get",
