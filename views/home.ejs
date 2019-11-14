@@ -1697,65 +1697,71 @@
                 }
             }
 
-           function tieinLoad1(){
-      //   alert("tieinLoad");
+           function tieinLoadsidebar(){
+      	
                 setTimeout(function() {
-                    
                  dropverticalgroup();
-                 dropdownverticalunit();
-                 regionalmanager();
-                 dropterritorymanager();
-                 parentaccountdrop();
                  tiecalenderdropdown();
+                 regionalmanager();
+                 parentaccountdrop();
                  lookupquarters();
-                tieinLoad();
+                 dropdownverticalunit();
+                 dropterritorymanager();
+              //tieinLoad();
 		},1);
-	
+       
            }
             function tieinLoad() {
-                $("#loading").css('display', 'block');
+                
                // console.log("tieinload");
+    
                 let iBusinessunitID = $("#verticalgroup").find(":selected").val();
-                if (iBusinessunitID == "NULL" || iBusinessunitID == ""|| iBusinessunitID == undefined) {
-                            iBusinessunitID = "NULL";
+                if (iBusinessunitID == null || iBusinessunitID == ""|| iBusinessunitID == undefined) {
+                            iBusinessunitID =null;
                 }                
-                console.log(iBusinessunitID);
+                
+                          
                 let iVerticalD = $("#verticalunit").find(":selected").val();              
-                if (iVerticalD == "NULL" || iVerticalD == ""|| iVerticalD == undefined) {
-                            iVerticalD = "NULL";
+                if (iVerticalD == null || iVerticalD == ""|| iVerticalD == undefined) {
+                            iVerticalD = null;
                 }
-                let iCalendaryearid = '6d1ca9dd-27a4-11e8-af05-484d7ec12da6';                
-                if (iCalendaryearid == "NULL" || iCalendaryearid == ""|| iCalendaryearid == undefined) {
-                           iCalendaryearid = "NULL";
+                let iCalendaryearid = $("#tieinyear").find(":selected").val();    
+                //console.log(iCalendaryearid);    
+                if (iCalendaryearid == null || iCalendaryearid == ""|| iCalendaryearid == undefined) {
+                           iCalendaryearid =null;
                 }
-                let iQuarterID = '9da55122-3bba-11e8-a663-484d7ec12da6';
-                if (iQuarterID == "NULL" || iQuarterID == ""|| iQuarterID == undefined) {
-                           iQuarterID = "NULL";
+                
+                let iQuarterID = $("#quaterdrop").find(":selected").val();
+                //console.log(iQuarterID);
+                if (iQuarterID == null || iQuarterID == ""|| iQuarterID == undefined) {
+                           iQuarterID =null;
                 }
                 let iRegionaHeadiD = $("#regionalmanager").find(":selected").val();
-                if (iRegionaHeadiD == "NULL" || iRegionaHeadiD == ""|| iRegionaHeadiD == undefined) {
-                            iRegionaHeadiD = "NULL";
+                if (iRegionaHeadiD == null || iRegionaHeadiD == ""|| iRegionaHeadiD == undefined) {
+                            iRegionaHeadiD = null;
                 }
                 let iTerritoryHeadiD = $("#territorymanager").find(":selected").val();             
-                if (iTerritoryHeadiD == "NULL" || iTerritoryHeadiD == ""|| iTerritoryHeadiD == undefined) {
-                            iTerritoryHeadiD = "NULL";
+                if (iTerritoryHeadiD == null || iTerritoryHeadiD == ""|| iTerritoryHeadiD == undefined) {
+                            iTerritoryHeadiD = null;
                 }
                 let iParentAccountID = $("#parentaccbybu").find(":selected").val();
-                if (iParentAccountID == "NULL" || iParentAccountID == ""|| iParentAccountID == undefined) {
-                            iParentAccountID = "NULL";
+                if (iParentAccountID == null || iParentAccountID == ""|| iParentAccountID == undefined) {
+                            iParentAccountID = null;
                 }
+                
 
                  var tableData="";
                    
                  var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
-                 
-                   
+                 $("#loading").css('display', 'block');
+                  // console.log(url);
                  $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
-                         
+                         console.log(result);
                             $("#loading").css('display', 'none');
+                           
                             for (var i = 0; i < result[0].length; i++) {
                            
                                if (result[0][i].AccountName == null || result[0][i].AccountName == 0) {
@@ -1789,7 +1795,8 @@
                                     result[0][i].VDU = "";
                                 }
                                 
-                                tableData = tableData + "  <tr> " +
+                                
+                                tableData = tableData + "  <tr ondblclick='tieinmodal()'> " +
                                     "<td >" + result[0][i].AccountName + "</td>" +
                                     "<td >" + result[0][i].SalesTotal + "</td>" +
                                     "<td >" + result[0][i].DeliveryTotal + "</td>" +
@@ -1806,8 +1813,11 @@
                         }
                     });
                 }
+function tieinmodal(){
 
+    $("#modalQuarterWise").modal();
 
+}
 
                 function revenueforecast() {
                         //   $("#loading").css('display', 'block');
@@ -2628,6 +2638,7 @@ $.ajax({
    
                 }
             });
+         tieinLoad();
 
         }
 
@@ -2647,7 +2658,7 @@ $.ajax({
                         $("#quaterdrop").html(dropdowndata);
                     }
                 });
-               // tieinLoad();
+              tieinLoad();
             }; 
       
         function contactLoad() {
@@ -6074,7 +6085,7 @@ background-size: 8%;'>
                 </li>
                 <li title="Tie-In">
                     <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
-                      onclick="tieinLoad1()">
+                      onclick="tieinLoadsidebar()">
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">TIE-IN</span>
@@ -8480,151 +8491,90 @@ background-size: 8%;'>
                                             </thead>
 
                                             <tbody id="tie-inTable">
-
-
+                                                   
                                             </tbody>
 
                                         </table>
-                                        <!-- <div class="modal fade docs-example-modal-lg" id="bpmodal" tabindex="-1"
-                                            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
+                                        <div class="modal fade" id="modalQuarterWise" style="top:6%;height:629px;width: 97%;margin-left: -48%;background-color: #626262;box-shadow: none; background: padding-box;border: none;">
+                                            <div class="modal-dialog" style="width:112%;top:15%;">
+                                            <div class="modal-content" style="width: 295%;right:97% ">
+                
+                                                 <!-- Modal Header -->  
+            
+                                                 <div class="modal-header" id="modl_header" style="height: 40px; padding: 0px; background-color: rgb(0, 63, 118); color: rgb(255, 255, 255);">
                                                    
-                                                    <div class="modal-header"
-                                                        style="background-color: #e6e0e094; color:black;">
-                                                        <h6 class="modal-title">Business Partner</h1>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                onclick="" style="color: #000; opacity:1.5;">×</button>
-                                                    </div>
-
-                                                   
-                                                    <div class="modal-body">
-
-                                                        <form class="form-signin" action="/modal" method="post">
-
-                                                            <div class="row">
-
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">Status</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="status" id="status"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-                                                                <div class="col-sm-2">
-                                                                    Business Partner Id</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="businesspId" id="businesspId"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">
-                                                                    Business Partner</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="business" id="business"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-
-                                                                <div class="col-sm-2">City</div>
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="cityB" id="cityB"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2">Main Contact</div>
-
-                                                                <div class="col-sm-3">
-                                                                    <input type="text" required class="form-control"
-                                                                        disabled name="mainc" id="mainc"
-                                                                        style="height: 71%;">
-                                                                </div>
-
-                                                                <div class="col-sm-2">
-                                                                    Created On</div>
-
-                                                                <div class="col-sm-3">
-                                                                    <input type="date" required class="form-control"
-                                                                        disabled name="created" id="created"
-                                                                        style="height: 71%;">
-                                                                </div>
-                                                                <div class="col-sm-1"></div>
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-1"></div>
-                                                                <div class="col-sm-2"> Country</div>
-                                                                <div class="col-sm-3">
-                                                                    <select class="form-control" name="countryb"
-                                                                        disabled id="countryb" style="height: 71%;">
-                                                                        <option selected></option>
-                                                                        <option>Arab Emirates</option>
-                                                                        <option>Afghanisthan</option>
-                                                                        <option>Albania</option>
-                                                                        <option>Armenia</option>
-                                                                        <option>Angola</option>
-                                                                        <option>Argentina</option>
-                                                                        <option>Zimbabwe</option>
-                                                                        <option>Bahamas</option>
-                                                                        <option>Bahrain</option>
-                                                                        <option>Bangladesh</option>
-                                                                        <option>Barbados</option>
-                                                                        <option>Belarus</option>
-                                                                        <option>Belgium</option>
-                                                                        <option>Belize</option>
-                                                                        <option>Benin</option>
-                                                                        <option>Bermuda</option>
-                                                                        <option>Bhutan</option>
-                                                                        <option>Bolivia</option>
-
-                                                                    </select>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-1"></div>
-                                                                    <div class="col-sm-2">Type</div>
-
-                                                                    <div class="col-sm-3">
-                                                                        <input type="text" required class="form-control"
-                                                                            disabled name="typeb" id="typeb"
-                                                                            style="height: 71%;">
+                                                    <h4 class="modal-title" style="padding:6px; font-size: 16px;">Sales &amp; Delivery Lock-In for account <span id="accountnamequartermodal">ADIENT</span> for quarter <span id="quarterforquartermodal">Q1</span> - <span id="yearforquartermodal">2017</span></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" style="color: white; opacity: 1;padding:25px;">×</button>
+                                                </div>                         
+                                            
+                                                                <!-- Modal body -->
+                                                                
+                
+                                                                <div class="modal-body">
+      
+                                                                    <div class="tab-content">
+                                                                     
+                                                                      
+                                                                    
+                                                                                       <div id="idForTableForEachTab" class="side-content" style="padding:13px; height:300px;overflow-x: auto;">
+                                                                                                                        <table class="table table-bordered" id="QuarterWiseTieIn" style="border: 1px solid rgb(255, 255, 255);">
+                                                                                                                        <thead>
+                                                                                                                            <tr>
+                                                                                                                                <th style="background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);"></th>
+                                                                                                                                <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);" colspan="3">100%</th>
+                                                                                                                                <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);" colspan="3">90%</th>
+                                                                                                                                <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);" colspan="3">80%</th>
+                                                                                                                                <th colspan="13" style="background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);"></th>
+                                                                                                                                
+                                                                                                                                
+                                                                                                                                
+                                                                                                                            </tr>
+                                                                                                                            <tr style="white-space: nowrap;"><th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Month</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Sales</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Delivery</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Tie-In</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Sales</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Delivery</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Tie-In</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Sales</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Delivery</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Tie-In</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Total Delivery A </th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Total Sales B</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Difference(A-B)</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Total(Tie-IN)</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Actual Value</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Upside Revenue</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Action Owned by</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Action Category</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Delivery Agreement</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Delivery Remarks</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Sales Agreement</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Sales Remarks</th>
+                                                                                                                            <th style="text-align: center; background-color: rgb(51, 122, 183); color: rgb(255, 255, 255);">Actions</th></tr>
+                                                                                                                            
+                                                                                                                            
+                                                                                                                        
+                                                                                                                        </thead>
+                                                                                                                        
+                                                                                                    
+                                                                                                                        <tbody id="QuarterWiseData"> </tbody>
+                                                                                                                        
+                                                                                                                            </table>
+                                                                      </div>		
+                                                                    
                                                                     </div>
-                                                                    <div class="col-sm-1"></div>
-                                                                </div>
-
-                                                                <br>
+                                                                            </div>
+            
+                
+                                                                <!-- Modal footer -->
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                                                  </div>
                                                             </div>
-                                                          
-                                                            <div class="modal-footer">
-
-                                                                <button type="submit" id="saveBusiness"
-                                                                    class="btn btn-primary" data-dismiss="modal" hidden
-                                                                    onclick="">save</button>
-                                                                <button type="button" id="cancelBusiness" class="btn"
-                                                                    data-dismiss="modal" onclick=""
-                                                                    hidden>cancel</button>
-                                                                <button type="submit" id="editBusiness"
-                                                                    class="btn btn-primary" onclick="">Edit</button>
-
-
-                                                            </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
+            
                                     </div>
                                 </div>
                             </div>

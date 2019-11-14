@@ -1841,7 +1841,7 @@ exports.parentaccountdrop = function (req, res) {
     let iParentAccountID = req.params.iParentAccountID;
    
     let query = "CALL `procTieInLockInListingMain`('" + iBusinessunitID + "','" + iVerticalD + "','" + iCalendaryearid + "','" + iQuarterID + "','" + iRegionaHeadiD + "','" + iTerritoryHeadiD + "','" + iParentAccountID + "')";
-console.log(query);
+//console.log(query);
     db.query(query, (err, result) => {
         if (err) {
   
