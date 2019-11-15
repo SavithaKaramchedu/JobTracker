@@ -670,7 +670,6 @@ exports.BusinessPage = function (req, res) {
                
             }
            // res.status(200).json(result);
-           // console.log(result);
 
             let query1 = "SELECT @output as revenuerowid";
             
@@ -684,6 +683,7 @@ exports.BusinessPage = function (req, res) {
                 
                 res.status(200).json(result);
               
+                console.log(result);
 
             });
 
@@ -1453,10 +1453,13 @@ exports.revenueforecast = function (req, res) {
 
     let query = "call `procEditO2RSummary`('" + iOpportunityID + "')";
     db.query(query, (err, result) => {
+        console.log(query);
+
         if (err) {
             return res.status(500).send(err);
         }
         res.status(200).json(result);
+        
     });
 };
 
@@ -1464,15 +1467,16 @@ exports.revenueforecast = function (req, res) {
 exports.forecastoppresource = function (req, res) {
 
     let iOpportunityID = req.params.iOpportunityID;
-	
+	console.log(iOpportunityID);
 	let iSaleServiceOfferingID = req.params.iSaleServiceOfferingID;
-	
-    let query = "call `procListIRSTransDataForDelivery` ('" + iOpportunityID + "','" + iSaleServiceOfferingID + "')";
+	console.log(iSaleServiceOfferingID);
+    let query ="call procListIRSTransDataForDelivery ('" + iOpportunityID + "','" + iSaleServiceOfferingID + "')";
     db.query(query, (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
         res.status(200).json(result);
+        console.log(result);
     });
 };
 

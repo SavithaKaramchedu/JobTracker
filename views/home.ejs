@@ -1759,7 +1759,6 @@
                     url: url,
                     type: "GET",
                     success: function (result) {
-                         console.log(result);
                             $("#loading").css('display', 'none');
                            
                             for (var i = 0; i < result[0].length; i++) {
@@ -1819,68 +1818,7 @@ function tieinmodal(){
 
 }
 
-                function revenueforecast() {
-                        //   $("#loading").css('display', 'block');
-                        var tableData = "";
-
-                        var url = "https://localhost:9090/revenueforecast/" + iOpportunityID;
-
-                        $.ajax({
-                            url: url,
-                            type: "GET",
-                            success: function (result) {
-
-                                $("#loading").css('display', 'none');
-                                for (var i = 0; i < result[0].length; i++) {
-
-                                    tableData = tableData + "  <tr> " +
-                                        "<td >" + result[0][i].SALESERVICEOFFERINGID + "</td>" +
-                                        "<td >" + result[0][i].SalesTotal + "</td>" +
-                                        "<td >" + result[0][i].DeliveryTotal + "</td>" +
-                                        "<td >" + result[0][i].DeliverySalesDiffer + "</td>" +
-                                        "<td >" + result[0][i].TotalTieInNo + "</td>" +
-                                        "<td >" + result[0][i].QUARTER + "</td>" +
-                                        "<td >" + result[0][i].RegionaHead + "</td>" +
-                                        "<td >" + result[0][i].TerritoryHead + "</td>" +
-                                        "<td >" + result[0][i].VDG + "</td>" +
-                                        "<td >" + result[0][i].VDU + "</td>" +
-                                        "</tr>";
-                                }
-                                $("#revenueresourceTable").html(tableData);
-                            }
-                        });
-                    }
-
-                    function forecastoppresource() {
-                       // $("#loading").css('display', 'block');
-                        var tableData = "";
-
-                        var url = "https://localhost:9090/forecastoppresource/" + iOpportunityID + "," + iSaleServiceOfferingID;
-                        $.ajax({
-                            url: url,
-                            type: "GET",
-                            success: function (result) {
-
-                                $("#loading").css('display', 'none');
-                                for (var i = 0; i < result[0].length; i++) {
-
-                                    tableData = tableData + "  <tr> " +
-                                        "<td >" + result[0][i].SALESERVICEOFFERINGID + "</td>" +
-                                        "<td >" + result[0][i].SalesTotal + "</td>" +
-                                        "<td >" + result[0][i].DeliveryTotal + "</td>" +
-                                        "<td >" + result[0][i].DeliverySalesDiffer + "</td>" +
-                                        "<td >" + result[0][i].TotalTieInNo + "</td>" +
-                                        "<td >" + result[0][i].QUARTER + "</td>" +
-                                        "<td >" + result[0][i].RegionaHead + "</td>" +
-                                        "<td >" + result[0][i].TerritoryHead + "</td>" +
-                                        "<td >" + result[0][i].VDG + "</td>" +
-                                        "<td >" + result[0][i].VDU + "</td>" +
-                                        "</tr>";
-                                }
-                                $("#resourceoppo").html(tableData);
-                            }
-                        });
-                    }
+               
 
 
 
@@ -4004,7 +3942,7 @@ $.ajax({
 
             var tableData;
 
-                $("#screenloading").css('display', 'block');
+               $("#screenloading").css('display', 'block');
 
             var url = "https://localhost:9090/revenueresource/"+Startrow+","+EndRow+","+iOpportunityCode+","+iPlanningStatus+","+iParentAccountCode+","+iAccountId+","+iSalesPhaseId+","+iSearch+","+oldIdSearch;
 
@@ -4012,15 +3950,19 @@ $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
+                        console.log(result);
 
-                          $("#screenloading").css('display', 'none');
+                         $("#screenloading").css('display', 'none');
 
-                        //   $("#bpcount").text(result[0].length);
+                        // $("#bpcount").text(result[0].length);
 
                         for (var i = 0; i < result[0].length; i++) {
-
+                           
                             var revenuerowid = "\"" + result[0][i].orowCount + "\"";
-
+                            var Revenueacc = "\"" + result[0][i].Account + "\"";
+                            var revenueopportunity = "\"" + result[0][i].OPPORTUNITYNAME + "\"";
+                            var resourceoppvalue = "\"" + result[0][i].EXPECTEDVALUE + "\"";
+                            var revenuesalesphase = "\"" + result[0][i].SALESPHASE + "\"";
                             if (result[0][i].VERTICAL == null || result[0][i].VERTICAL == 0) {
                             result[0][i].VERTICAL = "";
                             }
@@ -4044,16 +3986,18 @@ $.ajax({
                             if (result[0][i].DELIVERYREJECTIONREMARKS == null || result[0][i].DELIVERYREJECTIONREMARKS == 0) {
                             result[0][i].DELIVERYREJECTIONREMARKS = "";
                             }
-                            
+                            var resourceoppoID = "\"" + result[0][i].OPPORTUNITYID + "\"";
 
-                            $("#Revenuehidden").text(result[0][i].OPPORTUNITYID);
+                                   
+
+                           // $("#Revenuehidden").text(result[0][i].OPPORTUNITYID);
                             tableData = tableData + "  <tr> " +
 
                                 "<td hidden >" + result[0][i].OPPORTUNITYID + "</td>" +
                                 "<td >" + result[0][i].VERTICAL + "</td>" +
                                 "<td >" + result[0][i].ParentAccountName + "</td>" +
                                 "<td >" + result[0][i].Account + "</td>" +
-                                "<td >"+"<a href='#reveunueresourcemodal' onclick='revenueforecast()' data-toggle='modal' data-backdrop='static' data-keyboard='false'>" + result[0][i].OPPORTUNITYCODE + "</td>" +
+                                "<td >"+"<a href='#reveunueresourcemodal' onclick='revenueforecast(" + resourceoppoID+ "," + Revenueacc+ "," + revenueopportunity+ "," + resourceoppvalue+ "," + revenuesalesphase+ ")' data-toggle='modal' data-backdrop='static' data-keyboard='false'>" + result[0][i].OPPORTUNITYCODE + "</td>" +
                                 "<td >" + result[0][i].SOURCEC4COPPORTUNITYCODE + "</td>" +
                                 "<td >" + result[0][i].OPPORTUNITYNAME + "</td>" +
                                 "<td >" + result[0][i].SALESPHASE + "</td>" +
@@ -4077,6 +4021,91 @@ $.ajax({
 
             }
          
+
+            function revenueforecast(k,x,y,z,w) {
+                $("#Revenueacc").text(x);
+                                    $("#revenueopportunity").text(y);
+                                    $("#resourceoppvalue").text(z);
+                                    $("#revenuesalesphase").text(w);
+                console.log(k);
+                    console.log("revenueforecast");
+                        //   $("#loading").css('display', 'block');
+                        var tableData = "";
+
+                        var url = "https://localhost:9090/revenueforecast/" + k;
+
+                        $.ajax({
+                            url: url,
+                            type: "GET",
+                            success: function (result) {
+                                console.log(result);
+                                $("#loading").css('display', 'none');
+                                for (var i = 0; i < result[0].length; i++) {
+                            
+                                    var resourceoppoID = "\"" + k + "\"" ;
+                                    
+                                    var salesserviceoppoID = "\"" + result[0][i].SALESERVICEOFFERINGID + "\"";
+                                    
+                                    tableData = tableData + "  <tr  onclick='forecastoppresource("+ resourceoppoID +","+ salesserviceoppoID +")'> " +
+                                        "<td >" + result[0][i].OPPIDANDSERVICEOFFERING + "</td>" +
+                                        "<td >" + result[0][i].SERVICEOFFERING + "</td>" +
+                                        "<td >" + result[0][i].ProbableStartDate + "</td>" +
+                                        "<td >" + result[0][i].Horizontal + "</td>" +
+                                        "<td >" + result[0][i].PlanningStatus+ "</td>" +
+                                        "<td >" + result[0][i].REVENUESTARTDATE + "</td>" +
+                                        "<td >" + result[0][i].REVENUEENDDATE + "</td>" +
+                                        "<td >" + result[0][i].DELIVERYSERVICEOFFERING + "</td>" +
+                                        "<td >" + result[0][i].AssignToEmail + "</td>" +
+                                        "<td >" + result[0][i].ProjectID + "</td>" +
+                                        "</tr>";
+                                }
+                                $("#revenveoppo").html(tableData);
+                            }
+                        });
+                    }
+
+                    function forecastoppresource(i,j) {
+                        console.log("clicking");
+                    // $("#loading").css('display', 'block');
+                        var tableData = "";
+
+                        var url = "https://localhost:9090/forecastoppresource/" + i + "," + j;
+                        console.log(url);
+                        $.ajax({
+                            url: url,
+                            type: "GET",
+                            success: function (result) {
+
+                                $("#loading").css('display', 'none');
+                                for (var i = 0; i < result[0].length; i++) {
+
+                                    tableData = tableData + "  <tr> " +
+                                        "<td >" + result[0][i].OPPORTUNITYCODE + "</td>" +
+                                        "<td >" + result[0][i].SERVICEOFFERING + "</td>" +
+                                        "<td >" + result[0][i].Year + "</td>" +
+                                        "<td >" + result[0][i].NEGOTIATEDVALUE + "</td>" +
+                                        "<td >" + result[0][i].PlanningStatus+ "</td>" +
+                                        "<td >" + result[0][i].January + "</td>" +
+                                        "<td >" + result[0][i].February + "</td>" +
+                                        "<td >" + result[0][i].March + "</td>" +
+                                        "<td >" + result[0][i].April + "</td>" +
+                                        "<td >" + result[0][i].May + "</td>" +
+                                        "<td >" + result[0][i].June + "</td>" +
+                                        "<td >" + result[0][i].July+ "</td>" +
+                                        "<td >" + result[0][i].August + "</td>" +
+                                        "<td >" + result[0][i].September + "</td>" +
+                                        "<td >" + result[0][i].October + "</td>" +
+                                        "<td >" + result[0][i].November + "</td>" +
+                                        "<td >" + result[0][i].December+ "</td>" +
+                                        "<td >" + result[0][i].PARTYDESCRIPTION+ "</td>" +  
+                                        "</tr>";
+                                }
+                                $("#resourceoppo").html(tableData);
+                            }
+                        });
+                    }
+
+
             function dropplanningstatus() {
                 
                 var url = "https://localhost:9090/rrplanningstatus";
@@ -7720,22 +7749,22 @@ background-size: 8%;'>
                                                 <div class="col-sm-6">
                                                     <div class="row">
                                                         <div class="col-sm-5">
-                                                            <p><span style="color: red;">*</span> Account :</p>
-                                                            <p id="Revenuehidden" style="display: none;"> </p>
+                                                            <p id=""><span style="color: red;">*</span> Account :</p>
+                                                            
 
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p id="" style="width:78%; height:22px;"></p>
+                                                            <p id="Revenueacc" style="width:78%; height:22px;"></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="row">
                                                         <div class="col-sm-5">
-                                                            <p><span style="color: red;">*</span>Opportunity :</p>
+                                                            <p id=""><span style="color: red;">*</span>Opportunity :</p>
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p id="" style="width:78%; height:22px;"></p>
+                                                            <p id="revenueopportunity" style="width:78%; height:22px;"></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7744,20 +7773,21 @@ background-size: 8%;'>
                                                 <div class="col-sm-6">
                                                     <div class="row">
                                                         <div class="col-sm-5">
-                                                            <p><span style="color: red;">*</span>Opportunity Value :</p>
+                                                            <p id=""><span style="color: red;">*</span>Opportunity Value :</p>
+                                                            
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p id="" style="width:78%; height:22px;"></p>
+                                                            <p id="resourceoppvalue" style="width:78%; height:22px;"></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="row">
                                                         <div class="col-sm-5">
-                                                            <p><span style="color: red;">*</span>Sales Phase :</p>
+                                                            <p id=""><span style="color: red;">*</span>Sales Phase :</p>
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p id="" style="width:78%; height:22px;"> </p>
+                                                            <p id="revenuesalesphase" style="width:78%; height:22px;"> </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -7783,7 +7813,7 @@ background-size: 8%;'>
                                                         </tr>
                                                     </thead>
             
-                                                    <tbody id="">
+                                                    <tbody id="revenveoppo" >
             
                                                     </tbody>
                                                 </table>
