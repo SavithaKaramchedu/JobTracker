@@ -1820,14 +1820,11 @@
                     }
                     });
                 }
-function tieinmodal(){
+        function tieinmodal() {
 
-    $("#modalQuarterWise").modal();
+            $("#modalQuarterWise").modal();
 
-}
-
-               
-
+        }
 
 
         function AccountLoad() {
@@ -3926,10 +3923,20 @@ $.ajax({
             if (iPlanningStatus == null || iPlanningStatus == "" || iPlanningStatus == undefined ) {
                 iPlanningStatus = null;
             }
+             else{
+                
+            iPlanningStatus = "\"" + iPlanningStatus + "\"";
+                
+            }
             let iParentAccountCode = $("#accountname").find(":selected").val();
 
             if (iParentAccountCode == null || iParentAccountCode == "" || iParentAccountCode == undefined ) {
                 iParentAccountCode = null;
+            }
+            else{
+                
+                iParentAccountCode = "\"" + iParentAccountCode + "\"";
+                    
             }
 
             let iAccountId = $("#customername").find(":selected").val();
@@ -3937,11 +3944,21 @@ $.ajax({
             if (iAccountId == null || iAccountId == "" || iAccountId == undefined ) {
                 iAccountId = null;
             }
+            else{
+                
+                iAccountId = "\"" + iAccountId + "\"";
+                    
+            }
 
             let iSalesPhaseId = $("#rrsalesphase").find(":selected").val();
 
             if (iSalesPhaseId == null || iSalesPhaseId == "" || iSalesPhaseId == undefined) {
                 iSalesPhaseId = null;
+            }
+            else{
+                
+                iSalesPhaseId = "\"" + iSalesPhaseId + "\"";
+                    
             }
           
             let iSearch =null;
@@ -3962,7 +3979,7 @@ $.ajax({
 
                          $("#screenloading").css('display', 'none');
 
-                        // $("#bpcount").text(result[0].length);
+                           $("#rrcount").text(result[0].length);
 
                         for (var i = 0; i < result[0].length; i++) {
                            
@@ -4149,7 +4166,7 @@ $.ajax({
                     
                         dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                         for (var i = 0; i < result[0].length; i++) {
-                            dropdowndata = dropdowndata + '<option value="' + result[0][i].ACCOUNTID + '">' + result[0][i].Account + '</option>';
+                            dropdowndata = dropdowndata + '<option value="' + result[0][i].ACCOUNTCODE + '">' + result[0][i].Account + '</option>';
                         }
 
                         $("#accountname").html(dropdowndata);
@@ -4984,8 +5001,11 @@ function serviceOfferingdisplay(i) {
                 type: "GET",
                 success: function (result) {
 
+                     Salesphasedata = Salesphasedata +"<option value selected>--Select--</option>";
+
                     for (var i = 0; i < result[0].length; i++) {
 
+                       
                         Salesphasedata = Salesphasedata +
                             '<option value="' + result[0][i].salesphaseid + '">' + result[0][i].salesphase + '</option>';
                     }
@@ -6120,22 +6140,23 @@ background-size: 8%;'>
                         </div>
                     </a>
                 </li>
-                <li title="Tie-In">
-                    <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
-                      onclick="tieinLoadsidebar()">
-                        <div>
-                            <div class="navlink_img" id="navlink_project_img"></div>
-                            <span class="">TIE-IN</span>
-                        </div>
-                    </a>
-                </li>
-                
+
                 <li title="Revenue & Resource Forecast">
                     <a id="navlink_business" class="sidebar_navlink " href="#revenueresourceTab" data-toggle="tab"
                         onclick="dropplanningstatus(),dropaccountname(),dropcustomername(),oppoSalesphasedropdown(),revenueLoad();">
                         <div>
                             <div class="navlink_img" id="navlink_project_img"></div>
                             <span class="">Revenue & Resource Forecast</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li title="Tie-In">
+                    <a id="navlink_project" class="sidebar_navlink " href="#tie-intab" data-toggle="tab"
+                      onclick="tieinLoadsidebar()">
+                        <div>
+                            <div class="navlink_img" id="navlink_project_img"></div>
+                            <span class="">TIE-IN</span>
                         </div>
                     </a>
                 </li>
@@ -7066,7 +7087,7 @@ background-size: 8%;'>
 
                                     <div class="title">
                                         <div class="btn-group">
-                                            <button id="btn-list-title" class="btn  " title="">
+                                            <button id="btn-list-title" class="btn" title="">
                                                 All Business Partners (<span id=bpcount></span>)
                                             </button>
 
@@ -7549,17 +7570,18 @@ background-size: 8%;'>
 
             <div id="revenueresourceTab" class="tab tab-pane ">
                 <div id="main" class="">
-            
-            
-            
+                
+                    
                     <div id="content" class="">
                         <header class="head-list">
                             <div id="default_controls">
                                 <div class="pull-right right10">
-            
+
                                     <div class="pull-right right10">
-                                        <div class="btn-group right10" id="tagActionDropdown" style="display: none;">
-                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Tag Actions">
+                                        <div class="btn-group right10" id="tagActionDropdown"
+                                            style="display: none;">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                title="Tag Actions">
                                                 <i class="mdi mdi-tag mdi-19px"></i> <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu  pull-right">
@@ -7573,44 +7595,45 @@ background-size: 8%;'>
                                                         Tag</a></li>
                                             </ul>
                                         </div>
-            
-                                        <div class="btn-group" id="btnRefresh" >
+
+                                        <div class="btn-group" id="btnRefresh" onclick="revenueLoad()">
                                             <a class="btn" id="refreshList" title="Refresh List"><i
                                                     class="mdi mdi-refresh mdi-19px"></i></a>
                                         </div>
                                         <div class="btn-group" id="btnControls">
-                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="List View Controls"><i
-                                                    class="icon-cog"></i> <span class="caret"></span></a>
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown"
+                                                title="List View Controls"><i class="icon-cog"></i> <span
+                                                    class="caret"></span></a>
                                             <!--Menu items are set on demand via ins.buttonBar.js-->
                                         </div>
                                         <div class="btn-group" id="btnFilters">
                                             <a class="btn" id="toggleFilters" title="Show List View Filters"><i
                                                     class="icon-filter"></i></a>
                                         </div>
-            
-            
+
+
                                         <div class="btn-group">
                                             <button id="toggleSidebar" type="button" class="btn" title="Show Sidebar"><i
                                                     class="icon-indent-right"></i></button>
                                         </div>
                                     </div>
-            
+
                                 </div>
-            
+
                                 <div class="title">
                                     <div class="btn-group">
-                                        <button id="btn-list-title" class="btn  " title="">
-                                            Authorized CRM Opportunities : (<span id=bpcount></span>)
+                                        <button id="btn-list-title" class="btn" title="">
+                                            Authorized CRM Opportunities:(<span id=rrcount></span>)
                                         </button>
-            
+
                                     </div>
                                 </div>
-            
+
                             </div>
-            
+
                         </header>
                     </div>
-            
+
             
                     <div id="main-container" class="list-view contact" style="box-shadow:none;border:none;">
                         <div class="col-sm-1">
@@ -8467,7 +8490,7 @@ background-size: 8%;'>
                                                     </div>
                                                   
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <button type="button" onclick="tieinLoad1()" style="width:78%;color: #fff;
+                                                            <button type="button" onclick="tieinLoadsidebar()" style="width:78%;color: #fff;
                                                             background-color: #337ab7">Clear Filter</button>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
