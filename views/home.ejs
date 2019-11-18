@@ -1754,11 +1754,18 @@
                    
                  var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
                  $("#loading").css('display', 'block');
-                  // console.log(url);
+                 // console.log(url);
                  $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
+                       // console.log(result[0].length);
+                        if (result[0].length=="0"){
+                         //   console.log(result[0].length);
+                           tableData = "<tr><td></td><td></td><td></td><td></td><td></td><td><center>No Records Found</center></td><td></td><td></td><td></td><td></td></tr>";
+                        }
+                        else{
+                       // console.log(result);
                             $("#loading").css('display', 'none');
                            
                             for (var i = 0; i < result[0].length; i++) {
@@ -1810,6 +1817,7 @@
                             }
                             $("#tie-inTable").html(tableData);
                         }
+                    }
                     });
                 }
 function tieinmodal(){
@@ -3304,7 +3312,7 @@ $.ajax({
                             type: "GET",
                             success: function (result) {
 
-                          //  dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
+                           dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                                 for (var i = 0; i < result[0].length; i++) {
                                     dropdowndata = dropdowndata + '<option value="' + result[0][i].empid + '">' + result[0][i].TerritoryHead + '</option>';
                                 }

@@ -1453,7 +1453,7 @@ exports.revenueforecast = function (req, res) {
 
     let query = "call `procEditO2RSummary`('" + iOpportunityID + "')";
     db.query(query, (err, result) => {
-        console.log(query);
+       // console.log(query);
 
         if (err) {
             return res.status(500).send(err);
@@ -1852,7 +1852,7 @@ exports.parentaccountdrop = function (req, res) {
             return res.status(500).send(err);
         }
         res.status(200).json(result);
-      
+        //console.log(result);
     });
 };
 
