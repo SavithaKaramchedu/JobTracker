@@ -749,8 +749,8 @@
 
         });
     </script>
-
-    <script>
+  
+  <script>
 
         function opportunityedit() {
             $("#name").prop("disabled", false);
@@ -1753,8 +1753,9 @@
                  var tableData="";
                    
                  var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
+                 
                  $("#loading").css('display', 'block');
-                 // console.log(url);
+                  console.log(url);
                  $.ajax({
                     url: url,
                     type: "GET",
@@ -2581,7 +2582,7 @@ $.ajax({
    
                 }
             });
-         tieinLoad();
+       //  tieinLoad();
 
         }
 
@@ -2599,9 +2600,10 @@ $.ajax({
                                 '<option value= "' + result[0][i].QuarterID + '">' + result[0][i].Quarter + '</option>'
                         }
                         $("#quaterdrop").html(dropdowndata);
+                        tieinLoad();
                     }
                 });
-              tieinLoad();
+             
             }; 
       
         function contactLoad() {
@@ -3255,17 +3257,20 @@ $.ajax({
             function dropparaccbyvertical() {
 
                     var ivuid = $("#verticalunit").find(":selected").val();
+                  //  console.log(ivuid);
                     var url = "https://localhost:9090/dropparaccbyvertical/" + ivuid;
+                  //  console.log(url);
                     var dropdowndata = "";
                     
                     $.ajax({
                         url: url,
                         type: "GET",
                         success: function (result) {
-                        
-                            //  dropdowndata = dropdowndata+"<option style='display:none;'></option>";
+                      //  console.log(result);
+        
+                        dropdowndata = dropdowndata+"<option value selected>--Select--</option>";
                             for (var i = 0; i < result[0].length; i++) {
-                                dropdowndata = dropdowndata + '<option value="' + result[0][i].AccountID + '">' + result[0][i].Name + '</option>';
+                                dropdowndata = dropdowndata + '<option value="' + result[0][i].AccountID + '">' + result[0][i].Account + '</option>';
                             }
 
                             $("#parentaccbybu").html(dropdowndata);
@@ -3907,10 +3912,14 @@ $.ajax({
 
         function revenueLoad() {
 
+            // $("#planningstatus").val('');
+            // $("#accountname").val('');
+            // $("#customername").val('');
+            // $("#rrsalesphase").val('');
 
             let Startrow =0;
 
-            let EndRow =12000;
+            let EndRow =3000;
 
             let iOpportunityCode = $("#rroppoid").val();
             
@@ -3970,12 +3979,12 @@ $.ajax({
                $("#screenloading").css('display', 'block');
 
             var url = "https://localhost:9090/revenueresource/"+Startrow+","+EndRow+","+iOpportunityCode+","+iPlanningStatus+","+iParentAccountCode+","+iAccountId+","+iSalesPhaseId+","+iSearch+","+oldIdSearch;
-
+// console.log(url);
                 $.ajax({
                     url: url,
                     type: "GET",
                     success: function (result) {
-                        console.log(result);
+                       // console.log(result);
 
                          $("#screenloading").css('display', 'none');
 
@@ -3988,6 +3997,7 @@ $.ajax({
                             var revenueopportunity = "\"" + result[0][i].OPPORTUNITYNAME + "\"";
                             var resourceoppvalue = "\"" + result[0][i].EXPECTEDVALUE + "\"";
                             var revenuesalesphase = "\"" + result[0][i].SALESPHASE + "\"";
+                           
                             if (result[0][i].VERTICAL == null || result[0][i].VERTICAL == 0) {
                             result[0][i].VERTICAL = "";
                             }
@@ -7707,7 +7717,7 @@ background-size: 8%;'>
             
                         <div class="table table-responsive" style="overflow: auto;height:440px">
             
-                            <table class="table table-bordered" id="myrevenue&resoyrceTable">
+                            <table class="table table-bordered" id="myrevenue&resourceTable">
             
                                 <thead
                                     style="background-color: rgb(51, 122, 183);position: relative;color: rgb(255, 255, 255);top: 0px; white-space: nowrap;">
@@ -8480,7 +8490,7 @@ background-size: 8%;'>
                                     </div>
                                         <div class="row">
                                                 <div class="col-sm-2" style="margin-left:20px;">
-                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager()" style="width:78%;height:30px; padding:0px 0px;"></select>
+                                                        <select  class="form-control" id="regionalmanager" onchange="dropterritorymanager(),tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
                                                             <select  class="form-control" id="territorymanager" onchange="tieinLoad()" style="width:78%;height:30px; padding:0px 0px;"></select>
