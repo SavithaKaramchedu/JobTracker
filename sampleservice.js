@@ -661,7 +661,7 @@ exports.BusinessPage = function (req, res) {
        
         let query = "CALL `procAdminListO2RSummaryAdvanceFilter`(" + Startrow + "," + EndRow + "," + iOpportunityCode + "," + iPlanningStatus + "," + iParentAccountCode + ","+ iAccountId + "," + iSalesPhaseId + "," + iSearch + "," + oldIdSearch + ",@output)";
     
-       console.log(query);
+        console.log(query);
       
         db.query(query, (err, result) => {
             if (err) {
@@ -1107,7 +1107,7 @@ exports.tiecalender = function (req, res) {
         }
        
         res.status(200).json(result);
-
+       // console.log(result);
     });
 };
 

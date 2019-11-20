@@ -1699,7 +1699,7 @@
 
            function tieinLoadsidebar(){
       	
-                setTimeout(function() {
+              setTimeout(function() {
                  dropverticalgroup();
                  tiecalenderdropdown();
                  regionalmanager();
@@ -1760,13 +1760,28 @@
                     url: url,
                     type: "GET",
                     success: function (result) {
-                       // console.log(result[0].length);
-                        if (result[0].length=="0"){
-                         //   console.log(result[0].length);
-                           tableData = "<tr><td></td><td></td><td></td><td></td><td></td><td><center>No Records Found</center></td><td></td><td></td><td></td><td></td></tr>";
-                        }
+                                             
+                        if (result[0].length==0){
+                            $("#loading").css('display', 'none');
+                            
+                         tableData = tableData + "  <tr> " +
+                            "<td >"  + "</td>" +
+                                    "<td >" + "</td>" +
+                                    "<td >" + "</td>" +
+                                    "<td >"  + "</td>" +
+                                    "<td >" +" No Records Found" + "</td>" +
+                                    "<td >"  + "</td>" +
+                                    "<td >" + "</td>" +
+                                    "<td >"  + "</td>" +
+                                    "<td >"  + "</td>" +
+                                    "<td >"  + "</td>" +
+                                   
+                                    "</tr>";
+                                    $("#tie-inTable").html(tableData);
+                                }
+
                         else{
-                       // console.log(result);
+                       
                             $("#loading").css('display', 'none');
                            
                             for (var i = 0; i < result[0].length; i++) {
@@ -1815,7 +1830,10 @@
                                     "<td >" + result[0][i].VDG + "</td>" +
                                     "<td >" + result[0][i].VDU + "</td>" +
                                     "</tr>";
-                            }
+                            
+
+                                }
+
                             $("#tie-inTable").html(tableData);
                         }
                     }
@@ -2582,7 +2600,7 @@ $.ajax({
    
                 }
             });
-       //  tieinLoad();
+       
 
         }
 
