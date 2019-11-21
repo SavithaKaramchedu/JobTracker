@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
+     
         .modal-footer {
 
             border-radius: 0 0 3px 3px;
@@ -387,6 +388,9 @@
 
         };  
     </script>
+
+
+
 
 
     <script>
@@ -751,6 +755,8 @@
     </script>
   
   <script>
+
+               
 
         function opportunityedit() {
             $("#name").prop("disabled", false);
@@ -6733,11 +6739,9 @@ background-size: 8%;'>
                             </header>
                         </div>
                         <div id="main-content" class="contact" style="overflow: auto;height:500px;">
-
                             <div class="entity-list" id="entity-list">
                                 <a id="dlink" style="display:none;"></a>
                                 <table class="table table-respnosive table table-bordered" id="myLeadTable">
-
                                     <thead class="table"
                                         style="font-weight: bold;background-color: rgb(51, 122, 183);position: relative;top: 0px;color: rgb(255, 255, 255); white-space: nowrap;">
                                         <tr>
@@ -7238,7 +7242,6 @@ background-size: 8%;'>
                                                                 </div>
                                                                 <div class="col-sm-1"></div>
                                                             </div>
-
                                                             <div class="row">
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-2">
@@ -7248,8 +7251,6 @@ background-size: 8%;'>
                                                                         disabled name="business" id="business"
                                                                         style="height: 71%;">
                                                                 </div>
-
-
                                                                 <div class="col-sm-2">City</div>
                                                                 <div class="col-sm-3">
                                                                     <input type="text" required class="form-control"
@@ -7258,8 +7259,6 @@ background-size: 8%;'>
                                                                 </div>
                                                                 <div class="col-sm-1"></div>
                                                             </div>
-
-
                                                             <div class="row">
                                                                 <div class="col-sm-1"></div>
                                                                 <div class="col-sm-2">Main Contact</div>
@@ -7312,7 +7311,6 @@ background-size: 8%;'>
                                                                 <div class="row">
                                                                     <div class="col-sm-1"></div>
                                                                     <div class="col-sm-2">Type</div>
-
                                                                     <div class="col-sm-3">
                                                                         <input type="text" required class="form-control"
                                                                             disabled name="typeb" id="typeb"
@@ -7320,12 +7318,10 @@ background-size: 8%;'>
                                                                     </div>
                                                                     <div class="col-sm-1"></div>
                                                                 </div>
-
                                                                 <br>
                                                             </div>
                                                             <!-- Modal footer -->
                                                             <div class="modal-footer">
-
                                                                 <button type="submit" id="saveBusiness"
                                                                     class="btn btn-primary" data-dismiss="modal" hidden
                                                                     onclick="">save</button>
@@ -7334,8 +7330,6 @@ background-size: 8%;'>
                                                                     hidden>cancel</button>
                                                                 <button type="submit" id="editBusiness"
                                                                     class="btn btn-primary" onclick="">Edit</button>
-
-
                                                             </div>
                                                         </form>
                                                     </div>
@@ -7685,8 +7679,8 @@ background-size: 8%;'>
 
 
                                         <div class="btn-group">
-                                            <button id="toggleSidebar" type="button" class="btn" title="Show Sidebar"><i
-                                                    class="icon-indent-right"></i></button>
+                                            <button id="toggleSidebar" type="button" onclick="tableToExcel('myrevenue&resoyrceTable', 'name', 'RevenueResource.xls')" class="btn" title="Excel" >
+                                                <i class="icon-indent-right"></i></button>
                                         </div>
                                     </div>
 
@@ -7867,7 +7861,7 @@ background-size: 8%;'>
                                                             <p id=""><span style="color: red;">*</span>Opportunity :</p>
                                                         </div>
                                                         <div class="col-sm-7">
-                                                            <p id="revenueopportunity" style="width:78%; height:22px;"></p>
+                                                            <p id="revenueopportunity" style="width:166%; height:22px;"></p>
                                                         </div>
                                                     </div>
                                                 </div>
