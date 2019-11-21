@@ -1709,8 +1709,34 @@
                  dropterritorymanager();
               //tieinLoad();
 		},1);
-       
-           }
+    }
+        function  tieinLoadclearfilter(){
+            $("#verticalgroup").val('');
+            $("#verticalunit").val('');
+            $("#regionalmanager").val('');
+            $("#territorymanager").val('');
+            $("#parentaccbybu").val('');
+            $("#searchfortiein").val('');
+            
+          setTimeout(function() {
+             dropverticalgroup();
+             tiecalenderdropdown();
+             regionalmanager();
+             parentaccountdrop();
+             lookupquarters();
+             dropdownverticalunit();
+             dropterritorymanager();
+          tieinLoad();
+    },1);
+   
+       }   
+
+       function clearinputsearch(){
+        $("#searchfortiein").val('');
+        tieinLoad();
+       }
+
+          
             function tieinLoad() {
                 
                // console.log("tieinload");
@@ -1749,7 +1775,10 @@
                             iParentAccountID = null;
                 }
                 
-
+                var salesTotal=0; 
+                var deliverytot=0;
+                var deliverysalesdiff=0;
+                var totaltieinno=0;
                  var tableData="";
                    
                  var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
@@ -1778,6 +1807,11 @@
                                    
                                     "</tr>";
                                     $("#tie-inTable").html(tableData);
+                            $("#salestotaltiein").text(salesTotal);
+                            $("#deliverytottiein").text(deliverytot);
+                            $("#delsalesdifftiein").text(deliverysalesdiff);
+                            $("#totatiein").text(totaltieinno);
+                                
                                 }
 
                         else{
@@ -1816,8 +1850,8 @@
                                 if (result[0][i].VDU == null || result[0][i].VDU == 0) {
                                     result[0][i].VDU = "";
                                 }
-                                
-                                
+                               
+                         
                                 tableData = tableData + "  <tr ondblclick='tieinmodal()'> " +
                                     "<td >" + result[0][i].AccountName + "</td>" +
                                     "<td >" + result[0][i].SalesTotal + "</td>" +
@@ -1830,11 +1864,21 @@
                                     "<td >" + result[0][i].VDG + "</td>" +
                                     "<td >" + result[0][i].VDU + "</td>" +
                                     "</tr>";
-                            
+                                     salesTotal+=parseInt(result[0][i].SalesTotal);
+                                     deliverytot+=parseInt(result[0][i].DeliveryTotal);
+                                     deliverysalesdiff+=parseInt(result[0][i].DeliverySalesDiffer);
+                                     totaltieinno+=parseInt(result[0][i].TotalTieInNo);
+                                     
 
                                 }
 
                             $("#tie-inTable").html(tableData);
+                            $("#salestotaltiein").text(salesTotal);
+                            $("#deliverytottiein").text(deliverytot);
+                            $("#delsalesdifftiein").text(deliverysalesdiff);
+                            $("#totatiein").text(totaltieinno);
+                          
+
                         }
                     }
                     });
@@ -8518,14 +8562,14 @@ background-size: 8%;'>
                                                     </div>
                                                   
                                                     <div class="col-sm-2" style="margin:2px;">
-                                                            <button type="button" onclick="tieinLoadsidebar()" style="width:78%;color: #fff;
+                                                            <button type="button" onclick="tieinLoadclearfilter()" style="width:78%;color: #fff;
                                                             background-color: #337ab7">Clear Filter</button>
                                                     </div>
                                                     <div class="col-sm-2" style="margin:2px;">
                                                             <!-- <span style="float: right !important; ">
                                                                     <a href="#" ><img src="images/export-to-excel-image.png" style="width: 27px;"></a>
                                                             </span>  -->
-                                                            <input class="form-control" type="text"  placeholder="Search" style="z-index:0;width: 78%;border-radius: 5px;height:32px;">
+                                                            <input class="form-control" id="searchfortiein" type="text"  placeholder="Search" style="z-index:0;width: 78%;border-radius: 5px;height:32px;">
                                                     </div>
                                         </div>
 
@@ -8536,19 +8580,19 @@ background-size: 8%;'>
                                     <div class="row">	
                                         <div class="col-sm-3 label-content">
                                            <label style="margin-left:20px;text-align:center;float:left !important;border: 1px solid lightgray;padding: 4px;background-color: white;width:40%;color:blue;font-size: 11px">Sales Total </label>
-                                           <b  style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>
+                                           <b id="salestotaltiein" style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>
                                         </div>
                                         <div class="col-sm-3 label-content">
                                             <label style="margin-left:20px;text-align:center;float:left !important;border: 1px solid lightgray;padding: 4px;background-color: white;width:40%;color:blue;font-size: 11px">Delivery Total </label>
-                                            <b  style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>
+                                            <b id="deliverytottiein" style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>
                                         </div>																						
                                         <div class="col-sm-3 label-content">
                                             <label style="margin-left:20px;text-align:center;float:left !important;border: 1px solid lightgray;padding: 4px;background-color: white;width:50%;color:blue;font-size: 11px">Delivery Sales Differ </label>
-                                            <b  style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>		
+                                            <b id="delsalesdifftiein" style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>		
                                         </div>																				
                                         <div class="col-sm-3 label-content">
                                             <label style="margin-left:20px;text-align:center;float:left !important;border: 1px solid lightgray;padding: 4px;background-color: white;width:40%;color:blue; font-size: 11px;">Total TieIn No. </label>
-                                            <b style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>
+                                            <b id="totatiein" style="text-align:center;float:left !important;background-color: white;padding: 4px;width:40%;border-top: 1px solid lightgray;border-right: 1px solid lightgray;border-bottom: 1px solid lightgray">00</b>
                                         </div>
                                     </div>
                                 </div>
@@ -10776,7 +10820,7 @@ background-size: 8%;'>
                         <div class="col-sm-3">
 
                             <input class="form-control" type="text" id="mySearch" placeholder="Search"
-                                style="left: 32%; position: relative;     border-radius: 5px;height: 22px;">
+                                style="left: 32%; position: relative; border-radius: 5px;height: 22px;">
 
                         </div>
 
