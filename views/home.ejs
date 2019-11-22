@@ -27,7 +27,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-     
+        .tablerowcolour:hover {
+    background:#d3d3d3;
+}
         .modal-footer {
 
             border-radius: 0 0 3px 3px;
@@ -1786,7 +1788,7 @@
                 var deliverysalesdiff=0;
                 var totaltieinno=0;
                  var tableData="";
-                   
+        
                  var url = "https://localhost:9090/tieintab/"+iBusinessunitID+","+iVerticalD+","+iCalendaryearid+","+iQuarterID+","+iRegionaHeadiD+","+iTerritoryHeadiD+","+iParentAccountID;
                  
                  $("#loading").css('display', 'block');
@@ -1795,23 +1797,12 @@
                     url: url,
                     type: "GET",
                     success: function (result) {
-                                             
+                       // console.log(result[0])
+                       $("#salesdeliverycount").text(result[0].length);
                         if (result[0].length==0){
                             $("#loading").css('display', 'none');
                             
-                         tableData = tableData + "  <tr> " +
-                            "<td >"  + "</td>" +
-                                    "<td >" + "</td>" +
-                                    "<td >" + "</td>" +
-                                    "<td >"  + "</td>" +
-                                    "<td >" +" No Records Found" + "</td>" +
-                                    "<td >"  + "</td>" +
-                                    "<td >" + "</td>" +
-                                    "<td >"  + "</td>" +
-                                    "<td >"  + "</td>" +
-                                    "<td >"  + "</td>" +
-                                   
-                                    "</tr>";
+                         tableData = "<tr><td></td><td></td><td></td><td></td><td><center>No Records Found</center></td><td></td><td></td><td></td><td></td><td></td></tr>";
                                     $("#tie-inTable").html(tableData);
                             $("#salestotaltiein").text(salesTotal);
                             $("#deliverytottiein").text(deliverytot);
@@ -1857,8 +1848,10 @@
                                     result[0][i].VDU = "";
                                 }
                                
-                         
-                                tableData = tableData + "  <tr ondblclick='tieinmodal()'> " +
+                               var accountname = "\"" + result[0][i].AccountName + "\"";
+                               var quarter = "\"" + result[0][i].QUARTER + "\"";
+                              // var accountname = "\"" + result[0][i].AccountName + "\"";
+                                tableData = tableData + "  <tr ondblclick='tieinmodal("+accountname+","+quarter+")' class='tablerowcolour'> " +
                                     "<td >" + result[0][i].AccountName + "</td>" +
                                     "<td >" + result[0][i].SalesTotal + "</td>" +
                                     "<td >" + result[0][i].DeliveryTotal + "</td>" +
@@ -1889,10 +1882,14 @@
                     }
                     });
                 }
-        function tieinmodal() {
-
-            $("#modalQuarterWise").modal();
-
+        function tieinmodal(i,j) {
+            
+            $("#modalfortiein").modal();
+           $("#accountnamequartermodal").text(i);
+           $("#quarterforquartermodal").text(j);
+          // $("#yearforquartermodal").text(k);
+           
+           
         }
 
 
@@ -8492,6 +8489,7 @@ background-size: 8%;'>
                                         <div class="btn-group">
                                             <button id="btn-list-title" class="btn  " title="">
                                                 <b>Sales and Delivery Lock-In</b>
+                                                (<span id="salesdeliverycount"></span>)
                                             </button>
 
                                         </div>
@@ -8623,7 +8621,7 @@ background-size: 8%;'>
                                             </tbody>
 
                                         </table>
-                                        <div class="modal fade" id="modalQuarterWise" style="top:6%;height:629px;width: 97%;margin-left: -48%;background-color: #626262;box-shadow: none; background: padding-box;border: none;">
+                                        <div class="modal fade" id="modalfortiein" style="top:6%;height:629px;width: 97%;margin-left: -48%;background-color: #626262;box-shadow: none; background: padding-box;border: none;">
                                             <div class="modal-dialog" style="width:112%;top:15%;">
                                             <div class="modal-content" style="width: 295%;right:97% ">
                 
@@ -8631,7 +8629,7 @@ background-size: 8%;'>
             
                                                  <div class="modal-header" id="modl_header" style="height: 40px; padding: 0px; background-color: rgb(0, 63, 118); color: rgb(255, 255, 255);">
                                                    
-                                                    <h4 class="modal-title" style="padding:6px; font-size: 16px;">Sales &amp; Delivery Lock-In for account <span id="accountnamequartermodal">ADIENT</span> for quarter <span id="quarterforquartermodal">Q1</span> - <span id="yearforquartermodal">2017</span></h4>
+                                                    <h4 class="modal-title" style="padding:6px; font-size: 16px;">Sales &amp; Delivery Lock-In for account <span id="accountnamequartermodal"></span> for quarter <span id="quarterforquartermodal">Q1</span> - <span id="yearforquartermodal">2017</span></h4>
                                                     <button type="button" class="close" data-dismiss="modal" style="color: white; opacity: 1;padding:25px;">×</button>
                                                 </div>                         
                                             
@@ -9444,6 +9442,55 @@ background-size: 8%;'>
 
 
                                         </table>
+                                    <script>
+                                        document.querySelector('#searchfortiein').addEventListener('keyup', filterTable, false);
+                                        function filterTable(event) {
+                                           
+                                                var filter = event.target.value.toUpperCase();
+                                               
+                                                var rows = document.querySelector("#mytie-inTable tbody").rows;
+                                              
+                                                count = 0;
+                                                var field = $('#searchfortiein').val();
+                                                var len = field.length;
+                                                for (var i = 0; i < rows.length; i++) {
+                                                    if (len > 0) {
+                                                        //$('#searchclearEmployee').css('display','block');
+                                                    } else if (len == 0) {
+                                                        tieinLoad();
+                                                    }
+                                                        var firstCol = rows[i].cells[0].textContent.toUpperCase();
+                                                        var secondCol = rows[i].cells[1].textContent.toUpperCase();
+                                                        var thirdCol = rows[i].cells[2].textContent.toUpperCase();
+                                                        var fourthCol = rows[i].cells[3].textContent.toUpperCase();
+                                                        var fifthCol = rows[i].cells[4].textContent.toUpperCase();
+                                                        var sixthCol = rows[i].cells[5].textContent.toUpperCase();
+                                                        var seventhCol = rows[i].cells[6].textContent.toUpperCase();
+                                                        var eighthCol = rows[i].cells[7].textContent.toUpperCase();
+                                                        var ninthCol = rows[i].cells[8].textContent.toUpperCase();
+                                                        var tenthCol = rows[i].cells[9].textContent.toUpperCase();
+
+                                                        if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1
+                                                            || fourthCol.indexOf(filter) > -1 || fifthCol.indexOf(filter) > -1 || sixthCol.indexOf(filter) > -1
+                                                            || seventhCol.indexOf(filter) > -1 || eighthCol.indexOf(filter) > -1 || ninthCol.indexOf(filter) > -1
+                                                            || tenthCol.indexOf(filter) > -1) {
+                                                            
+                                                        rows[i].style.display = "";
+                                                        count++;
+                                                    } else {
+                                                        rows[i].style.display = "none";
+                                                    }
+                                                }
+                                                if (count == 0) {
+                                                    var tableData = "";
+                                                    tableData = "<tr><td></td><td></td><td></td><td></td><td><center>No Records Found</center></td><td></td><td></td><td></td><td></td><td></td></tr>";
+
+                                                    $("#tie-inTable").html(tableData);
+                                                }
+                                                document.getElementById("salesdeliverycount").innerHTML = count;
+                                           
+                                        }
+                                      </script>
                                         <script>
                                             document.querySelector('#_globalSearch').addEventListener('keyup', filterTable, false);
                                             function filterTable(event) {
