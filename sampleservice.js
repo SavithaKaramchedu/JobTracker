@@ -79,8 +79,62 @@ exports.validateLogin = function (req, res) {
 };
 exports.getHomePage = function (req, res) {
 
-    res.render('home.ejs', {
+    res.render('index.ejs',{
         title: "Welcome to CRM Application"
+
+
+    });
+
+};
+exports.getAboutPage = function (req, res) {
+
+    res.render('about.ejs',{
+       
+
+
+    });
+
+};
+exports.getBlogPage = function (req, res) {
+
+    res.render('blog-single.ejs',{
+       
+
+
+    });
+
+};
+exports.getBlogPage = function (req, res) {
+
+    res.render('blog-single.ejs',{
+       
+
+
+    });
+
+};
+exports.getContactPage = function (req, res) {
+
+    res.render('contact.ejs',{
+       
+
+
+    });
+
+};
+exports.getPostjobPage = function (req, res) {
+
+    res.render('new-post.ejs',{
+       
+
+
+    });
+
+};
+exports.getNewpostPage = function (req, res) {
+
+    res.render('job-post.ejs',{
+       
 
 
     });

@@ -48,6 +48,71 @@
       ]
     },
     {
+      "route": "/about",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getAboutPage",
+      "description": "Routes to the about page of the web application",
+      "examples": [
+        {
+          "param": "/about"
+        }
+      ]
+    },
+    {
+      "route": "/blog",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getBlogPage",
+      "description": "Routes to the blog page of the web application",
+      "examples": [
+        {
+          "param": "/blog"
+        }
+      ]
+    },
+    {
+      "route": "/contact",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getContactPage",
+      "description": "Routes to the contact page of the web application",
+      "examples": [
+        {
+          "param": "/contact"
+        }
+      ]
+    },
+    {
+      "route": "/postjob",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getPostjobPage",
+      "description": "Routes to the post a job page of the web application",
+      "examples": [
+        {
+          "param": "/postjob"
+        }
+      ]
+    },
+    {
+      "route": "/newpost",
+      "type": "get",
+      "configured": true,
+      "routeclass": "./sampleservice.js",
+      "routefunction": "getNewpostPage",
+      "description": "Routes to the new a job page of the web application",
+      "examples": [
+        {
+          "param": "/newpost"
+        }
+      ]
+    },
+    {
       "route": "/logout",
       "type": "get",
       "configured": true,
