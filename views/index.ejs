@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>JobPortal - Free Bootstrap 4 Template by Colorlib</title>
+    <title>JobPortal</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">   
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
+    <link rel="stylesheet" href="css/animate.css">   
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-
     <link rel="stylesheet" href="css/aos.css">
-
     <link rel="stylesheet" href="css/ionicons.min.css">
-
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
-        
+    <link rel="stylesheet" href="css/jquery.timepicker.css">       
     <link rel="stylesheet" href="fonts/flaticon.css">
     <link rel="stylesheet" href="fonts/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css">
+<!-- 	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
+  <script>
+	$(document).ready(function(){        
+		$(".btn").click(function(){
+		
+			$("#myCollapsible").collapse('toggle');
+		});
+	});
+	</script>
   <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -108,14 +116,71 @@
 			              			<div class="col-md">
 			              				<div class="form-group">
 			              					<div class="form-field">
-								                <input type="submit" value="Search" class="form-control btn btn-primary">
+												<input type="submit" id="button" value="New Job" class="form-control btn btn-primary toggle-btn">
+												
 								              </div>
-							              </div>
-			              			</div>
-			              		</div>
-			              	</form>
-			              </div>
+										  </div>
+										  
+									  </div>
+									  
+								  </div>
+								  
 
+
+
+								<div id="myCollapsible" class="collapse hide">
+									<br>
+									<div class="row">
+										<div class="col-lg-12"></div>
+									</div>
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+											<div class="card">
+												<h5 class="card-header">New Job</h5>
+												<div class="card-body">
+													<form id="validationform" data-parsley-validate="" novalidate="">
+														<div class="form-group row">
+															<label class="col-12 col-sm-3 col-form-label text-sm-right">Job I'd</label>
+															<div class="col-12 col-sm-8 col-lg-6">
+																<input type="text" required="" placeholder="" class="form-control" >
+															</div>
+														</div>
+														<div class="form-group row">
+															<label class="col-12 col-sm-3 col-form-label text-sm-right">Role :</label>
+															<div class="col-12 col-sm-8 col-lg-6">
+																<input type="text" required=""  class="form-control">
+															</div>
+														</div>
+										
+														<div class="form-group row">
+															<label class="col-12 col-sm-3 col-form-label text-sm-right">Description :</label>
+															<div class="col-12 col-sm-8 col-lg-6">
+																<textarea required="" class="form-control" style="margin-bottom: 12px;"></textarea>
+															</div>
+														</div>
+														<div class="form-group row">
+																<label class="col-12 col-sm-3 col-form-label text-sm-right">Skills :</label>
+																<div class="col-12 col-sm-8 col-lg-6">
+																	<textarea required="" class="form-control"></textarea>
+																</div>
+															</div>
+															<br>
+														<div class="form-group row text-right">
+															<div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+																<button type="submit" class="btn btn-space btn-primary">Submit</button>
+																<button type="submit" class="btn btn-space btn-primary">Cancel</button>
+																
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+								</div>
+						    </form>
+					    </div>
+							  
+							
+						
 			              <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
 			              	<form action="#" class="search-job">
 			              		<div class="row">
@@ -170,7 +235,7 @@
         </div>
       </div>
     </div>
-
+	
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -192,3 +257,7 @@
     
   </body>
 </html>
+
+
+
+
